@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: playbox-gitops-root
+  namespace: playbox-system
+data:
+  marker: playbox-gitops-root
