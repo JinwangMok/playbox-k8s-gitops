@@ -1,5 +1,5 @@
 {
-  "resourceCount": 64,
+  "resourceCount": 181,
   "resources": [
     {
       "apiVersion": "v1",
@@ -12,8 +12,43 @@
       "apiVersion": "v1",
       "kind": "Namespace",
       "namespace": "",
+      "name": "monitoring",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Namespace",
+      "namespace": "",
       "name": "playbox-system",
       "pruneFalse": false
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Namespace",
+      "namespace": "",
+      "name": "sops-system",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "storage.k8s.io/v1",
+      "kind": "StorageClass",
+      "namespace": "",
+      "name": "playbox-worker3-local",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "apiextensions.k8s.io/v1",
+      "kind": "CustomResourceDefinition",
+      "namespace": "",
+      "name": "alertmanagerconfigs.monitoring.coreos.com",
+      "pruneFalse": true
+    },
+    {
+      "apiVersion": "apiextensions.k8s.io/v1",
+      "kind": "CustomResourceDefinition",
+      "namespace": "",
+      "name": "alertmanagers.monitoring.coreos.com",
+      "pruneFalse": true
     },
     {
       "apiVersion": "apiextensions.k8s.io/v1",
@@ -34,6 +69,83 @@
       "kind": "CustomResourceDefinition",
       "namespace": "",
       "name": "appprojects.argoproj.io",
+      "pruneFalse": true
+    },
+    {
+      "apiVersion": "apiextensions.k8s.io/v1",
+      "kind": "CustomResourceDefinition",
+      "namespace": "",
+      "name": "globalsopssecrets.addons.projectcapsule.dev",
+      "pruneFalse": true
+    },
+    {
+      "apiVersion": "apiextensions.k8s.io/v1",
+      "kind": "CustomResourceDefinition",
+      "namespace": "",
+      "name": "podmonitors.monitoring.coreos.com",
+      "pruneFalse": true
+    },
+    {
+      "apiVersion": "apiextensions.k8s.io/v1",
+      "kind": "CustomResourceDefinition",
+      "namespace": "",
+      "name": "probes.monitoring.coreos.com",
+      "pruneFalse": true
+    },
+    {
+      "apiVersion": "apiextensions.k8s.io/v1",
+      "kind": "CustomResourceDefinition",
+      "namespace": "",
+      "name": "prometheusagents.monitoring.coreos.com",
+      "pruneFalse": true
+    },
+    {
+      "apiVersion": "apiextensions.k8s.io/v1",
+      "kind": "CustomResourceDefinition",
+      "namespace": "",
+      "name": "prometheuses.monitoring.coreos.com",
+      "pruneFalse": true
+    },
+    {
+      "apiVersion": "apiextensions.k8s.io/v1",
+      "kind": "CustomResourceDefinition",
+      "namespace": "",
+      "name": "prometheusrules.monitoring.coreos.com",
+      "pruneFalse": true
+    },
+    {
+      "apiVersion": "apiextensions.k8s.io/v1",
+      "kind": "CustomResourceDefinition",
+      "namespace": "",
+      "name": "scrapeconfigs.monitoring.coreos.com",
+      "pruneFalse": true
+    },
+    {
+      "apiVersion": "apiextensions.k8s.io/v1",
+      "kind": "CustomResourceDefinition",
+      "namespace": "",
+      "name": "servicemonitors.monitoring.coreos.com",
+      "pruneFalse": true
+    },
+    {
+      "apiVersion": "apiextensions.k8s.io/v1",
+      "kind": "CustomResourceDefinition",
+      "namespace": "",
+      "name": "sopsproviders.addons.projectcapsule.dev",
+      "pruneFalse": true
+    },
+    {
+      "apiVersion": "apiextensions.k8s.io/v1",
+      "kind": "CustomResourceDefinition",
+      "namespace": "",
+      "name": "sopssecrets.addons.projectcapsule.dev",
+      "pruneFalse": true
+    },
+    {
+      "apiVersion": "apiextensions.k8s.io/v1",
+      "kind": "CustomResourceDefinition",
+      "namespace": "",
+      "name": "thanosrulers.monitoring.coreos.com",
       "pruneFalse": true
     },
     {
@@ -86,6 +198,48 @@
       "pruneFalse": true
     },
     {
+      "apiVersion": "v1",
+      "kind": "ServiceAccount",
+      "namespace": "monitoring",
+      "name": "playbox-monitoring-grafana",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "ServiceAccount",
+      "namespace": "monitoring",
+      "name": "playbox-monitoring-kube-state-metrics",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "ServiceAccount",
+      "namespace": "monitoring",
+      "name": "playbox-monitoring-operator",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "ServiceAccount",
+      "namespace": "monitoring",
+      "name": "playbox-monitoring-prometheus",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "ServiceAccount",
+      "namespace": "monitoring",
+      "name": "playbox-monitoring-prometheus-node-exporter",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "ServiceAccount",
+      "namespace": "",
+      "name": "sops-operator",
+      "pruneFalse": false
+    },
+    {
       "apiVersion": "rbac.authorization.k8s.io/v1",
       "kind": "Role",
       "namespace": "argocd",
@@ -129,6 +283,13 @@
     },
     {
       "apiVersion": "rbac.authorization.k8s.io/v1",
+      "kind": "Role",
+      "namespace": "",
+      "name": "sops-operator",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "rbac.authorization.k8s.io/v1",
       "kind": "ClusterRole",
       "namespace": "",
       "name": "argocd-application-controller",
@@ -147,6 +308,41 @@
       "namespace": "",
       "name": "argocd-server",
       "pruneFalse": true
+    },
+    {
+      "apiVersion": "rbac.authorization.k8s.io/v1",
+      "kind": "ClusterRole",
+      "namespace": "",
+      "name": "playbox-monitoring-grafana-clusterrole",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "rbac.authorization.k8s.io/v1",
+      "kind": "ClusterRole",
+      "namespace": "",
+      "name": "playbox-monitoring-kube-state-metrics",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "rbac.authorization.k8s.io/v1",
+      "kind": "ClusterRole",
+      "namespace": "",
+      "name": "playbox-monitoring-operator",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "rbac.authorization.k8s.io/v1",
+      "kind": "ClusterRole",
+      "namespace": "",
+      "name": "playbox-monitoring-prometheus",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "rbac.authorization.k8s.io/v1",
+      "kind": "ClusterRole",
+      "namespace": "",
+      "name": "sops-operator-controller",
+      "pruneFalse": false
     },
     {
       "apiVersion": "rbac.authorization.k8s.io/v1",
@@ -192,6 +388,13 @@
     },
     {
       "apiVersion": "rbac.authorization.k8s.io/v1",
+      "kind": "RoleBinding",
+      "namespace": "sops-system",
+      "name": "sops-operator",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "rbac.authorization.k8s.io/v1",
       "kind": "ClusterRoleBinding",
       "namespace": "",
       "name": "argocd-application-controller",
@@ -210,6 +413,41 @@
       "namespace": "",
       "name": "argocd-server",
       "pruneFalse": true
+    },
+    {
+      "apiVersion": "rbac.authorization.k8s.io/v1",
+      "kind": "ClusterRoleBinding",
+      "namespace": "",
+      "name": "playbox-monitoring-grafana-clusterrolebinding",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "rbac.authorization.k8s.io/v1",
+      "kind": "ClusterRoleBinding",
+      "namespace": "",
+      "name": "playbox-monitoring-kube-state-metrics",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "rbac.authorization.k8s.io/v1",
+      "kind": "ClusterRoleBinding",
+      "namespace": "",
+      "name": "playbox-monitoring-operator",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "rbac.authorization.k8s.io/v1",
+      "kind": "ClusterRoleBinding",
+      "namespace": "",
+      "name": "playbox-monitoring-prometheus",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "rbac.authorization.k8s.io/v1",
+      "kind": "ClusterRoleBinding",
+      "namespace": "",
+      "name": "sops-operator-controller",
+      "pruneFalse": false
     },
     {
       "apiVersion": "v1",
@@ -259,6 +497,195 @@
       "namespace": "argocd",
       "name": "argocd-tls-certs-cm",
       "pruneFalse": true
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "ConfigMap",
+      "namespace": "monitoring",
+      "name": "playbox-monitoring-apiserver",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "ConfigMap",
+      "namespace": "monitoring",
+      "name": "playbox-monitoring-cluster-total",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "ConfigMap",
+      "namespace": "monitoring",
+      "name": "playbox-monitoring-grafana",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "ConfigMap",
+      "namespace": "monitoring",
+      "name": "playbox-monitoring-grafana-config-dashboards",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "ConfigMap",
+      "namespace": "monitoring",
+      "name": "playbox-monitoring-grafana-datasource",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "ConfigMap",
+      "namespace": "monitoring",
+      "name": "playbox-monitoring-grafana-overview",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "ConfigMap",
+      "namespace": "monitoring",
+      "name": "playbox-monitoring-k8s-coredns",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "ConfigMap",
+      "namespace": "monitoring",
+      "name": "playbox-monitoring-k8s-resources-cluster",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "ConfigMap",
+      "namespace": "monitoring",
+      "name": "playbox-monitoring-k8s-resources-multicluster",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "ConfigMap",
+      "namespace": "monitoring",
+      "name": "playbox-monitoring-k8s-resources-namespace",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "ConfigMap",
+      "namespace": "monitoring",
+      "name": "playbox-monitoring-k8s-resources-node",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "ConfigMap",
+      "namespace": "monitoring",
+      "name": "playbox-monitoring-k8s-resources-nodes-overview",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "ConfigMap",
+      "namespace": "monitoring",
+      "name": "playbox-monitoring-k8s-resources-pod",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "ConfigMap",
+      "namespace": "monitoring",
+      "name": "playbox-monitoring-k8s-resources-workload",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "ConfigMap",
+      "namespace": "monitoring",
+      "name": "playbox-monitoring-k8s-resources-workloads-namespace",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "ConfigMap",
+      "namespace": "monitoring",
+      "name": "playbox-monitoring-kubelet",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "ConfigMap",
+      "namespace": "monitoring",
+      "name": "playbox-monitoring-namespace-by-pod",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "ConfigMap",
+      "namespace": "monitoring",
+      "name": "playbox-monitoring-namespace-by-workload",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "ConfigMap",
+      "namespace": "monitoring",
+      "name": "playbox-monitoring-node-cluster-rsrc-use",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "ConfigMap",
+      "namespace": "monitoring",
+      "name": "playbox-monitoring-node-rsrc-use",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "ConfigMap",
+      "namespace": "monitoring",
+      "name": "playbox-monitoring-nodes",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "ConfigMap",
+      "namespace": "monitoring",
+      "name": "playbox-monitoring-nodes-aix",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "ConfigMap",
+      "namespace": "monitoring",
+      "name": "playbox-monitoring-nodes-darwin",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "ConfigMap",
+      "namespace": "monitoring",
+      "name": "playbox-monitoring-persistentvolumesusage",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "ConfigMap",
+      "namespace": "monitoring",
+      "name": "playbox-monitoring-pod-total",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "ConfigMap",
+      "namespace": "monitoring",
+      "name": "playbox-monitoring-prometheus",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "ConfigMap",
+      "namespace": "monitoring",
+      "name": "playbox-monitoring-workload-total",
+      "pruneFalse": false
     },
     {
       "apiVersion": "v1",
@@ -338,6 +765,76 @@
       "pruneFalse": true
     },
     {
+      "apiVersion": "v1",
+      "kind": "Service",
+      "namespace": "kube-system",
+      "name": "playbox-monitoring-coredns",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Service",
+      "namespace": "monitoring",
+      "name": "playbox-monitoring-grafana",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Service",
+      "namespace": "monitoring",
+      "name": "playbox-monitoring-grafana-headless",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Service",
+      "namespace": "monitoring",
+      "name": "playbox-monitoring-kube-state-metrics",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Service",
+      "namespace": "monitoring",
+      "name": "playbox-monitoring-operator",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Service",
+      "namespace": "monitoring",
+      "name": "playbox-monitoring-prometheus",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Service",
+      "namespace": "monitoring",
+      "name": "playbox-monitoring-prometheus-node-exporter",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Service",
+      "namespace": "",
+      "name": "sops-operator-metrics",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "PersistentVolume",
+      "namespace": "",
+      "name": "playbox-monitoring-grafana",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "PersistentVolume",
+      "namespace": "",
+      "name": "playbox-monitoring-prometheus",
+      "pruneFalse": false
+    },
+    {
       "apiVersion": "apps/v1",
       "kind": "Deployment",
       "namespace": "argocd",
@@ -381,10 +878,66 @@
     },
     {
       "apiVersion": "apps/v1",
+      "kind": "Deployment",
+      "namespace": "monitoring",
+      "name": "playbox-monitoring-kube-state-metrics",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "apps/v1",
+      "kind": "Deployment",
+      "namespace": "monitoring",
+      "name": "playbox-monitoring-operator",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "apps/v1",
+      "kind": "Deployment",
+      "namespace": "",
+      "name": "sops-operator",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "apps/v1",
       "kind": "StatefulSet",
       "namespace": "argocd",
       "name": "argocd-application-controller",
       "pruneFalse": true
+    },
+    {
+      "apiVersion": "apps/v1",
+      "kind": "StatefulSet",
+      "namespace": "monitoring",
+      "name": "playbox-monitoring-grafana",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "addons.projectcapsule.dev/v1alpha1",
+      "kind": "SopsProvider",
+      "namespace": "",
+      "name": "playbox-platform",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "addons.projectcapsule.dev/v1alpha1",
+      "kind": "SopsSecret",
+      "namespace": "monitoring",
+      "name": "monitoring-grafana-admin",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "addons.projectcapsule.dev/v1alpha1",
+      "kind": "SopsSecret",
+      "namespace": "sops-system",
+      "name": "playbox-sops-canary",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "apps/v1",
+      "kind": "DaemonSet",
+      "namespace": "monitoring",
+      "name": "playbox-monitoring-prometheus-node-exporter",
+      "pruneFalse": false
     },
     {
       "apiVersion": "argoproj.io/v1alpha1",
@@ -398,6 +951,272 @@
       "kind": "CiliumClusterwideNetworkPolicy",
       "namespace": "",
       "name": "playbox-host-firewall",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "monitoring.coreos.com/v1",
+      "kind": "Prometheus",
+      "namespace": "monitoring",
+      "name": "playbox-monitoring",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "monitoring.coreos.com/v1",
+      "kind": "PrometheusRule",
+      "namespace": "monitoring",
+      "name": "playbox-monitoring-config-reloaders",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "monitoring.coreos.com/v1",
+      "kind": "PrometheusRule",
+      "namespace": "monitoring",
+      "name": "playbox-monitoring-general.rules",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "monitoring.coreos.com/v1",
+      "kind": "PrometheusRule",
+      "namespace": "monitoring",
+      "name": "playbox-monitoring-k8s.rules.container-cpu-usage-seconds-total",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "monitoring.coreos.com/v1",
+      "kind": "PrometheusRule",
+      "namespace": "monitoring",
+      "name": "playbox-monitoring-k8s.rules.container-memory-cache",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "monitoring.coreos.com/v1",
+      "kind": "PrometheusRule",
+      "namespace": "monitoring",
+      "name": "playbox-monitoring-k8s.rules.container-memory-rss",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "monitoring.coreos.com/v1",
+      "kind": "PrometheusRule",
+      "namespace": "monitoring",
+      "name": "playbox-monitoring-k8s.rules.container-memory-swap",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "monitoring.coreos.com/v1",
+      "kind": "PrometheusRule",
+      "namespace": "monitoring",
+      "name": "playbox-monitoring-k8s.rules.container-memory-working-set-bytes",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "monitoring.coreos.com/v1",
+      "kind": "PrometheusRule",
+      "namespace": "monitoring",
+      "name": "playbox-monitoring-k8s.rules.container-resource",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "monitoring.coreos.com/v1",
+      "kind": "PrometheusRule",
+      "namespace": "monitoring",
+      "name": "playbox-monitoring-k8s.rules.pod-owner",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "monitoring.coreos.com/v1",
+      "kind": "PrometheusRule",
+      "namespace": "monitoring",
+      "name": "playbox-monitoring-kube-apiserver-availability.rules",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "monitoring.coreos.com/v1",
+      "kind": "PrometheusRule",
+      "namespace": "monitoring",
+      "name": "playbox-monitoring-kube-apiserver-burnrate.rules",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "monitoring.coreos.com/v1",
+      "kind": "PrometheusRule",
+      "namespace": "monitoring",
+      "name": "playbox-monitoring-kube-apiserver-histogram.rules",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "monitoring.coreos.com/v1",
+      "kind": "PrometheusRule",
+      "namespace": "monitoring",
+      "name": "playbox-monitoring-kube-apiserver-slos",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "monitoring.coreos.com/v1",
+      "kind": "PrometheusRule",
+      "namespace": "monitoring",
+      "name": "playbox-monitoring-kube-prometheus-general.rules",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "monitoring.coreos.com/v1",
+      "kind": "PrometheusRule",
+      "namespace": "monitoring",
+      "name": "playbox-monitoring-kube-prometheus-node-recording.rules",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "monitoring.coreos.com/v1",
+      "kind": "PrometheusRule",
+      "namespace": "monitoring",
+      "name": "playbox-monitoring-kube-state-metrics",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "monitoring.coreos.com/v1",
+      "kind": "PrometheusRule",
+      "namespace": "monitoring",
+      "name": "playbox-monitoring-kubelet.rules",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "monitoring.coreos.com/v1",
+      "kind": "PrometheusRule",
+      "namespace": "monitoring",
+      "name": "playbox-monitoring-kubernetes-apps",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "monitoring.coreos.com/v1",
+      "kind": "PrometheusRule",
+      "namespace": "monitoring",
+      "name": "playbox-monitoring-kubernetes-resources",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "monitoring.coreos.com/v1",
+      "kind": "PrometheusRule",
+      "namespace": "monitoring",
+      "name": "playbox-monitoring-kubernetes-storage",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "monitoring.coreos.com/v1",
+      "kind": "PrometheusRule",
+      "namespace": "monitoring",
+      "name": "playbox-monitoring-kubernetes-system",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "monitoring.coreos.com/v1",
+      "kind": "PrometheusRule",
+      "namespace": "monitoring",
+      "name": "playbox-monitoring-kubernetes-system-apiserver",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "monitoring.coreos.com/v1",
+      "kind": "PrometheusRule",
+      "namespace": "monitoring",
+      "name": "playbox-monitoring-kubernetes-system-kubelet",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "monitoring.coreos.com/v1",
+      "kind": "PrometheusRule",
+      "namespace": "monitoring",
+      "name": "playbox-monitoring-node-exporter",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "monitoring.coreos.com/v1",
+      "kind": "PrometheusRule",
+      "namespace": "monitoring",
+      "name": "playbox-monitoring-node-exporter.rules",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "monitoring.coreos.com/v1",
+      "kind": "PrometheusRule",
+      "namespace": "monitoring",
+      "name": "playbox-monitoring-node-network",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "monitoring.coreos.com/v1",
+      "kind": "PrometheusRule",
+      "namespace": "monitoring",
+      "name": "playbox-monitoring-node.rules",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "monitoring.coreos.com/v1",
+      "kind": "PrometheusRule",
+      "namespace": "monitoring",
+      "name": "playbox-monitoring-prometheus",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "monitoring.coreos.com/v1",
+      "kind": "PrometheusRule",
+      "namespace": "monitoring",
+      "name": "playbox-monitoring-prometheus-operator",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "monitoring.coreos.com/v1",
+      "kind": "ServiceMonitor",
+      "namespace": "monitoring",
+      "name": "playbox-monitoring-apiserver",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "monitoring.coreos.com/v1",
+      "kind": "ServiceMonitor",
+      "namespace": "monitoring",
+      "name": "playbox-monitoring-coredns",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "monitoring.coreos.com/v1",
+      "kind": "ServiceMonitor",
+      "namespace": "monitoring",
+      "name": "playbox-monitoring-grafana",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "monitoring.coreos.com/v1",
+      "kind": "ServiceMonitor",
+      "namespace": "monitoring",
+      "name": "playbox-monitoring-kube-state-metrics",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "monitoring.coreos.com/v1",
+      "kind": "ServiceMonitor",
+      "namespace": "monitoring",
+      "name": "playbox-monitoring-kubelet",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "monitoring.coreos.com/v1",
+      "kind": "ServiceMonitor",
+      "namespace": "monitoring",
+      "name": "playbox-monitoring-operator",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "monitoring.coreos.com/v1",
+      "kind": "ServiceMonitor",
+      "namespace": "monitoring",
+      "name": "playbox-monitoring-prometheus",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "monitoring.coreos.com/v1",
+      "kind": "ServiceMonitor",
+      "namespace": "monitoring",
+      "name": "playbox-monitoring-prometheus-node-exporter",
       "pruneFalse": false
     },
     {
@@ -451,9 +1270,16 @@
     }
   ],
   "workloadImages": {
+    "docker.io/grafana/grafana:13.2.0": 1,
     "ghcr.io/dexidp/dex:v2.45.1": 1,
+    "ghcr.io/peak-scale/sops-operator:0.10.1@sha256:1da9b716b79210f51b1c757b4d5c3bab57df9fdc74e67f2fa274d33603492fd4": 1,
     "public.ecr.aws/docker/library/redis:8.2.3-alpine": 1,
-    "quay.io/argoproj/argocd:v3.5.2": 5
+    "quay.io/argoproj/argocd:v3.5.2": 5,
+    "quay.io/kiwigrid/k8s-sidecar:2.10.1": 2,
+    "quay.io/prometheus-operator/prometheus-operator:v0.93.1": 1,
+    "quay.io/prometheus/node-exporter:v1.12.1-distroless": 1,
+    "quay.io/prometheus/prometheus:v3.14.0-distroless": 1,
+    "registry.k8s.io/kube-state-metrics/kube-state-metrics:v2.20.0": 1
   },
   "initImages": {
     "quay.io/argoproj/argocd:v3.5.2": 3

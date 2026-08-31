@@ -1,0 +1,23 @@
+crds:
+  install: false
+image:
+  registry: ghcr.io
+  repository: peak-scale/sops-operator
+  tag: 0.10.1@sha256:1da9b716b79210f51b1c757b4d5c3bab57df9fdc74e67f2fa274d33603492fd4
+  pullPolicy: IfNotPresent
+args:
+  logLevel: 2
+  pprof: false
+replicaCount: 1
+resources:
+  requests:
+    cpu: 25m
+    memory: 64Mi
+  limits:
+    cpu: 250m
+    memory: 256Mi
+monitoring:
+  enabled: false
+rbac:
+  secretsRole:
+    create: false

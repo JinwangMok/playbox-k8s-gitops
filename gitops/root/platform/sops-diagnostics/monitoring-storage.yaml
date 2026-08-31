@@ -1,0 +1,66 @@
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: playbox-worker3-local
+  annotations:
+    argocd.argoproj.io/sync-wave: "-8"
+provisioner: kubernetes.io/no-provisioner
+volumeBindingMode: WaitForFirstConsumer
+reclaimPolicy: Retain
+allowVolumeExpansion: false
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: playbox-monitoring-prometheus
+  annotations:
+    argocd.argoproj.io/sync-wave: "-7"
+  labels:
+    app.kubernetes.io/part-of: playbox-platform
+    playbox.dev/storage-purpose: prometheus
+spec:
+  capacity:
+    storage: 20Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: playbox-worker3-local
+  local:
+    path: /var/lib/playbox-monitoring/prometheus
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+        - matchExpressions:
+            - key: kubernetes.io/hostname
+              operator: In
+              values:
+                - playbox-worker3
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: playbox-monitoring-grafana
+  annotations:
+    argocd.argoproj.io/sync-wave: "-7"
+  labels:
+    app.kubernetes.io/part-of: playbox-platform
+    playbox.dev/storage-purpose: grafana
+spec:
+  capacity:
+    storage: 1Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: playbox-worker3-local
+  local:
+    path: /var/lib/playbox-monitoring/grafana
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+        - matchExpressions:
+            - key: kubernetes.io/hostname
+              operator: In
+              values:
+                - playbox-worker3

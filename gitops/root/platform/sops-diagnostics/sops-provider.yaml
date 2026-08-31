@@ -1,0 +1,19 @@
+apiVersion: addons.projectcapsule.dev/v1alpha1
+kind: SopsProvider
+metadata:
+  name: playbox-platform
+  annotations:
+    argocd.argoproj.io/sync-wave: "-7"
+spec:
+  keys:
+    - namespaceSelector:
+        matchLabels:
+          playbox.dev/sops-key-domain: platform
+      matchLabels:
+        playbox.dev/sops-key: platform
+  sops:
+    - namespaceSelector:
+        matchLabels:
+          playbox.dev/sops-domain: platform
+      matchLabels:
+        playbox.dev/sops-domain: platform

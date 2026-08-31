@@ -1,0 +1,33 @@
+apiVersion: addons.projectcapsule.dev/v1alpha1
+kind: SopsSecret
+metadata:
+    name: playbox-sops-canary
+    namespace: sops-system
+    annotations:
+        argocd.argoproj.io/sync-wave: "-2"
+    labels:
+        app.kubernetes.io/part-of: playbox-platform
+        playbox.dev/sops-domain: platform
+spec:
+    secrets:
+        - name: playbox-sops-canary
+          labels:
+            app.kubernetes.io/part-of: playbox-platform
+          stringData:
+            value: ENC[AES256_GCM,data:WRfWSguQfHI31RYOCX1qtHygFyme1BTELm94UR5ikcIBAG0TWGZT9E9gtA==,iv:peEUqUMHGCUktUusr4Soaa40TJinBrSWvJ8UPEYYxgw=,tag:FH2Dk0gYuiYf5YMQj3S+YQ==,type:str]
+sops:
+    age:
+        - enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSB1TC9QUUZ2NnBKakN2RGpI
+            eHRQSEh5TG9ERHNZbCtIcHVKQ3lWR09uY1RVCmRZbkJaNWlJblBDYS9WbXlCczJF
+            TFZ0Vm1ZU1dCcEozbWtxbkc5d01OYXMKLS0tIHZQUVllTENzWHAwckszUlQ0VXdm
+            QmhxVnlpOUJTbUVDRzhDZUo5eDZmUGsKfNnP7+hxwEJWZWNJa6ZnIuyYS0Kw/6/7
+            b810WoUDHEQVYISXhFmmEr4Q+YJIuq9cpE3J+zPfR5StpLetHGM0gg==
+            -----END AGE ENCRYPTED FILE-----
+          recipient: age1jt0q594ve7543n5n6k24l8egq5cx9swx2n9zj9dvj544txh5dcvqrkj77u
+    encrypted_regex: ^(data|stringData)$
+    lastmodified: "2026-08-31T16:16:29Z"
+    mac: ENC[AES256_GCM,data:xfEUPUj/c+i1XCQLYgbZ/mxkJm4CTyZMmV6Yvfon5rH66WBgwZB2hHKJbXX2k8vFJ6izZYp1jb4HZ7SHWqH7Qia47WBB2KCrujkk0jI9+UYdsVuP3KBrS73sz0ygQ/qW9eM+9ZmvSFsBhPieR9z149Cprkye/DcKyY6teiNhyxE=,iv:aHsHB7PRpGOo/y/HazBoJTJcwE+8rJnXTxdKqnROLK4=,tag:iqJ2if427igKdVZcYoCwIw==,type:str]
+    mac_only_encrypted: true
+    version: 3.13.3

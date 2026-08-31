@@ -1,0 +1,12 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - namespaces.yaml
+  - sops-operator.yaml
+  - sops-provider.yaml
+  - monitoring-storage.yaml
+  - kube-prometheus-crds-a.yaml
+  - kube-prometheus-crds-b.yaml
+  - kube-prometheus-stack.yaml
+  - grafana-admin.enc.yaml
+  - sops-canary.enc.yaml
