@@ -1,0 +1,109 @@
+crds:
+  create: false
+alloy:
+  configMap:
+    create: true
+    content: |
+      local.file_match "kubernetes_audit" {
+        path_targets = [{
+          "__path__" = "/var/log/kubernetes/audit/audit.log",
+          "job" = "kubernetes-audit",
+          "node" = "playbox-cp0",
+        }]
+      }
+
+      loki.source.file "kubernetes_audit" {
+        targets = local.file_match.kubernetes_audit.targets
+        forward_to = [loki.process.kubernetes_audit.receiver]
+        tail_from_end = false
+      }
+
+      loki.process "kubernetes_audit" {
+        stage.json {
+          expressions = {
+            audit_id = "auditID",
+            verb = "verb",
+            username = "user.username",
+            resource = "objectRef.resource",
+            namespace = "objectRef.namespace",
+            response_code = "responseStatus.code",
+          }
+        }
+        stage.labels {
+          values = {
+            verb = "",
+            resource = "",
+            response_code = "",
+          }
+        }
+        stage.static_labels {
+          values = {
+            cluster = "playbox",
+            source = "kubernetes-audit",
+            node = "playbox-cp0",
+          }
+        }
+        forward_to = [loki.write.playbox.receiver]
+      }
+
+      loki.write "playbox" {
+        endpoint {
+          url = "http://playbox-loki.security-observability.svc.cluster.local:3100/loki/api/v1/push"
+        }
+      }
+  enableReporting: false
+  mounts:
+    extra:
+      - name: audit-log
+        mountPath: /var/log/kubernetes/audit
+        readOnly: true
+      - name: alloy-storage
+        mountPath: /tmp/alloy
+  securityContext:
+    allowPrivilegeEscalation: false
+    readOnlyRootFilesystem: true
+    runAsNonRoot: false
+    runAsUser: 0
+    seccompProfile:
+      type: RuntimeDefault
+    capabilities:
+      drop:
+        - ALL
+  resources:
+    requests:
+      cpu: 25m
+      memory: 64Mi
+    limits:
+      cpu: 500m
+      memory: 256Mi
+rbac:
+  create: false
+serviceAccount:
+  create: true
+  automountServiceAccountToken: false
+controller:
+  type: deployment
+  replicas: 1
+  nodeSelector:
+    kubernetes.io/hostname: playbox-cp0
+  tolerations:
+    - key: node-role.kubernetes.io/control-plane
+      operator: Exists
+      effect: NoSchedule
+  volumes:
+    extra:
+      - name: audit-log
+        hostPath:
+          path: /var/log/kubernetes/audit
+          type: Directory
+      - name: alloy-storage
+        emptyDir: {}
+  podDisruptionBudget:
+    enabled: false
+service:
+  enabled: true
+  type: ClusterIP
+serviceMonitor:
+  enabled: true
+  additionalLabels:
+    release: playbox-monitoring

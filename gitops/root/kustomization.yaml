@@ -7,3 +7,4 @@ resources:
   - network
   - platform/sops-diagnostics
   - storage/rook-ceph
+  - security/observability
