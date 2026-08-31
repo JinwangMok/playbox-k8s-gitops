@@ -42,18 +42,12 @@ patches:
           return hs
         resource.customizations.health.ceph.rook.io_CephBlockPool: |
           hs = {status = "Progressing", message = "Ceph block pool is reconciling"}
-          if obj.status ~= nil and obj.status.conditions ~= nil then
-            for _, condition in ipairs(obj.status.conditions) do
-              if condition.type == "Ready" and condition.status == "True" and obj.status.observedGeneration == obj.metadata.generation then
-                hs.status = "Healthy"
-                hs.message = condition.message or "Ceph block pool is Ready"
-                return hs
-              end
-              if condition.type == "Ready" and condition.status == "False" then
-                hs.status = "Degraded"
-                hs.message = condition.message or "Ceph block pool is not Ready"
-              end
-            end
+          if obj.status ~= nil and obj.status.observedGeneration == obj.metadata.generation and obj.status.phase == "Ready" then
+            hs.status = "Healthy"
+            hs.message = "Ceph block pool is Ready"
+          elseif obj.status ~= nil and obj.status.phase == "Failure" then
+            hs.status = "Degraded"
+            hs.message = obj.status.message or "Ceph block pool reconciliation failed"
           end
           return hs
   - target:
