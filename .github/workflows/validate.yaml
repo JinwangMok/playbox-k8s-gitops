@@ -1,0 +1,35 @@
+name: validate
+
+on:
+  pull_request:
+    paths:
+      - gitops/root/**
+      - .github/workflows/validate.yaml
+  push:
+    branches:
+      - main
+    paths:
+      - gitops/root/**
+      - .github/workflows/validate.yaml
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+      - name: Render exact reviewed root
+        shell: bash
+        run: |
+          set -euo pipefail
+          kubectl_url=https://dl.k8s.io/release/v1.37.0/bin/linux/amd64/kubectl
+          kubectl_sha=6129359f4e1f3848a5572ccb0b26cf28b8ca08cef38c95a765b2f64a2c961a2f
+          curl --fail --silent --show-error --location "$kubectl_url" --output "$RUNNER_TEMP/kubectl"
+          printf '%s  %s\n' "$kubectl_sha" "$RUNNER_TEMP/kubectl" | sha256sum --check --strict
+          chmod 0700 "$RUNNER_TEMP/kubectl"
+          test "$(sha256sum gitops/root/argocd/install.yaml | cut -d' ' -f1)" = 9a87f2b3e14c278f12501eb0ef5c3955b27cf05370ca425381c6a908cf85a5c5
+          "$RUNNER_TEMP/kubectl" kustomize gitops/root > "$RUNNER_TEMP/root.yaml"
+          test "$(sha256sum "$RUNNER_TEMP/root.yaml" | cut -d' ' -f1)" = 6bd6d6c19f9dec783a3e53856c16f2dc2542cb4e260a4810c0dc787afb87b441
+          git diff --check
