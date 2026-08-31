@@ -1,0 +1,2313 @@
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: ceph-csi
+  labels:
+    helm.sh/chart: ceph-csi-operator-1.0.4
+    app.kubernetes.io/name: ceph-csi
+    app.kubernetes.io/instance: rook-ceph
+    app.kubernetes.io/version: v1.0.4
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/part-of: playbox-platform
+  annotations:
+    argocd.argoproj.io/sync-wave: '-8'
+  namespace: rook-ceph
+automountServiceAccountToken: true
+---
+kind: ServiceAccount
+apiVersion: v1
+metadata:
+  name: rook-ceph-osd
+  namespace: rook-ceph
+  labels:
+    operator: rook
+    storage-backend: ceph
+    app.kubernetes.io/name: rook-ceph
+    app.kubernetes.io/instance: rook-ceph
+    app.kubernetes.io/version: v1.20.6
+    app.kubernetes.io/part-of: playbox-platform
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/created-by: helm
+    helm.sh/chart: rook-ceph-v1.20.6
+  annotations:
+    argocd.argoproj.io/sync-wave: '-8'
+---
+kind: ServiceAccount
+apiVersion: v1
+metadata:
+  name: rook-ceph-mgr
+  namespace: rook-ceph
+  labels:
+    operator: rook
+    storage-backend: ceph
+    app.kubernetes.io/name: rook-ceph
+    app.kubernetes.io/instance: rook-ceph
+    app.kubernetes.io/version: v1.20.6
+    app.kubernetes.io/part-of: playbox-platform
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/created-by: helm
+    helm.sh/chart: rook-ceph-v1.20.6
+  annotations:
+    argocd.argoproj.io/sync-wave: '-8'
+---
+kind: ServiceAccount
+apiVersion: v1
+metadata:
+  name: rook-ceph-cmd-reporter
+  namespace: rook-ceph
+  labels:
+    operator: rook
+    storage-backend: ceph
+    app.kubernetes.io/name: rook-ceph
+    app.kubernetes.io/instance: rook-ceph
+    app.kubernetes.io/version: v1.20.6
+    app.kubernetes.io/part-of: playbox-platform
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/created-by: helm
+    helm.sh/chart: rook-ceph-v1.20.6
+  annotations:
+    argocd.argoproj.io/sync-wave: '-8'
+---
+kind: ServiceAccount
+apiVersion: v1
+metadata:
+  name: rook-ceph-purge-osd
+  namespace: rook-ceph
+  labels:
+    operator: rook
+    storage-backend: ceph
+    app.kubernetes.io/name: rook-ceph
+    app.kubernetes.io/instance: rook-ceph
+    app.kubernetes.io/version: v1.20.6
+    app.kubernetes.io/part-of: playbox-platform
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/created-by: helm
+    helm.sh/chart: rook-ceph-v1.20.6
+  annotations:
+    argocd.argoproj.io/sync-wave: '-8'
+---
+kind: ServiceAccount
+apiVersion: v1
+metadata:
+  name: rook-ceph-rgw
+  namespace: rook-ceph
+  labels:
+    operator: rook
+    storage-backend: ceph
+    app.kubernetes.io/name: rook-ceph
+    app.kubernetes.io/instance: rook-ceph
+    app.kubernetes.io/version: v1.20.6
+    app.kubernetes.io/part-of: playbox-platform
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/created-by: helm
+    helm.sh/chart: rook-ceph-v1.20.6
+  annotations:
+    argocd.argoproj.io/sync-wave: '-8'
+---
+kind: ServiceAccount
+apiVersion: v1
+metadata:
+  name: rook-ceph-default
+  namespace: rook-ceph
+  labels:
+    operator: rook
+    storage-backend: ceph
+    app.kubernetes.io/name: rook-ceph
+    app.kubernetes.io/instance: rook-ceph
+    app.kubernetes.io/version: v1.20.6
+    app.kubernetes.io/part-of: playbox-platform
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/created-by: helm
+    helm.sh/chart: rook-ceph-v1.20.6
+  annotations:
+    argocd.argoproj.io/sync-wave: '-8'
+---
+kind: ServiceAccount
+apiVersion: v1
+metadata:
+  name: rook-ceph-nvmeof
+  namespace: rook-ceph
+  labels:
+    operator: rook
+    storage-backend: ceph
+    app.kubernetes.io/name: rook-ceph
+    app.kubernetes.io/instance: rook-ceph
+    app.kubernetes.io/version: v1.20.6
+    app.kubernetes.io/part-of: playbox-platform
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/created-by: helm
+    helm.sh/chart: rook-ceph-v1.20.6
+  annotations:
+    argocd.argoproj.io/sync-wave: '-8'
+---
+kind: ServiceAccount
+apiVersion: v1
+metadata:
+  name: rook-ceph-system
+  namespace: rook-ceph
+  labels:
+    operator: rook
+    storage-backend: ceph
+    app.kubernetes.io/name: rook-ceph
+    app.kubernetes.io/instance: rook-ceph
+    app.kubernetes.io/version: v1.20.6
+    app.kubernetes.io/part-of: playbox-platform
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/created-by: helm
+    helm.sh/chart: rook-ceph-v1.20.6
+  annotations:
+    argocd.argoproj.io/sync-wave: '-8'
+---
+kind: ServiceAccount
+apiVersion: v1
+metadata:
+  name: objectstorage-provisioner
+  namespace: rook-ceph
+  labels:
+    app.kubernetes.io/part-of: playbox-platform
+    app.kubernetes.io/component: driver-ceph
+    app.kubernetes.io/name: cosi-driver-ceph
+  annotations:
+    argocd.argoproj.io/sync-wave: '-8'
+---
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: rook-ceph-operator-config
+  namespace: rook-ceph
+  labels:
+    operator: rook
+    storage-backend: ceph
+    app.kubernetes.io/name: rook-ceph
+    app.kubernetes.io/instance: rook-ceph
+    app.kubernetes.io/version: v1.20.6
+    app.kubernetes.io/part-of: playbox-platform
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/created-by: helm
+    helm.sh/chart: rook-ceph-v1.20.6
+  annotations:
+    argocd.argoproj.io/sync-wave: '-8'
+data:
+  ROOK_LOG_LEVEL: INFO
+  ROOK_CEPH_COMMANDS_TIMEOUT_SECONDS: '15'
+  ROOK_OBC_WATCH_OPERATOR_NAMESPACE: 'true'
+  ROOK_OBC_ALLOW_ADDITIONAL_CONFIG_FIELDS: maxObjects,maxSize
+  ROOK_CEPH_ALLOW_LOOP_DEVICES: 'false'
+  ROOK_CEPH_MON_RUN_AS_ROOT: 'false'
+  ROOK_DELETE_UNUSED_CRUSH_RULES: 'true'
+  ROOK_ENABLE_DISCOVERY_DAEMON: 'false'
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: rook-csi-operator-image-set-configmap
+  namespace: rook-ceph
+  labels:
+    operator: rook
+    storage-backend: ceph
+    app.kubernetes.io/name: rook-ceph
+    app.kubernetes.io/instance: rook-ceph
+    app.kubernetes.io/version: v1.20.6
+    app.kubernetes.io/part-of: playbox-platform
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/created-by: helm
+    helm.sh/chart: rook-ceph-v1.20.6
+  annotations:
+    argocd.argoproj.io/sync-wave: '-8'
+data:
+  provisioner: registry.k8s.io/sig-storage/csi-provisioner:v6.2.0
+  attacher: registry.k8s.io/sig-storage/csi-attacher:v4.12.0
+  resizer: registry.k8s.io/sig-storage/csi-resizer:v2.1.0
+  snapshotter: registry.k8s.io/sig-storage/csi-snapshotter:v8.5.0
+  registrar: registry.k8s.io/sig-storage/csi-node-driver-registrar:v2.17.0
+  plugin: quay.io/cephcsi/cephcsi:v3.17.0
+  addons: quay.io/csiaddons/k8s-sidecar:v0.14.0
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: ceph-csi-cephconnection-viewer-role
+  labels:
+    helm.sh/chart: ceph-csi-operator-1.0.4
+    app.kubernetes.io/name: ceph-csi
+    app.kubernetes.io/instance: rook-ceph
+    app.kubernetes.io/version: v1.0.4
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/part-of: playbox-platform
+  annotations:
+    argocd.argoproj.io/sync-wave: '-8'
+rules:
+- apiGroups:
+  - csi.ceph.io
+  resources:
+  - cephconnections
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - csi.ceph.io
+  resources:
+  - cephconnections/status
+  verbs:
+  - get
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: ceph-csi-cephconnections-editor-role
+  labels:
+    helm.sh/chart: ceph-csi-operator-1.0.4
+    app.kubernetes.io/name: ceph-csi
+    app.kubernetes.io/instance: rook-ceph
+    app.kubernetes.io/version: v1.0.4
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/part-of: playbox-platform
+  annotations:
+    argocd.argoproj.io/sync-wave: '-8'
+rules:
+- apiGroups:
+  - csi.ceph.io
+  resources:
+  - cephconnections
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - csi.ceph.io
+  resources:
+  - cephconnections/status
+  verbs:
+  - get
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: ceph-csi-clientprofile-viewer-role
+  labels:
+    helm.sh/chart: ceph-csi-operator-1.0.4
+    app.kubernetes.io/name: ceph-csi
+    app.kubernetes.io/instance: rook-ceph
+    app.kubernetes.io/version: v1.0.4
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/part-of: playbox-platform
+  annotations:
+    argocd.argoproj.io/sync-wave: '-8'
+rules:
+- apiGroups:
+  - csi.ceph.io
+  resources:
+  - clientprofiles
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - csi.ceph.io
+  resources:
+  - clientprofiles/status
+  verbs:
+  - get
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: ceph-csi-clientprofilemapping-editor-role
+  labels:
+    helm.sh/chart: ceph-csi-operator-1.0.4
+    app.kubernetes.io/name: ceph-csi
+    app.kubernetes.io/instance: rook-ceph
+    app.kubernetes.io/version: v1.0.4
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/part-of: playbox-platform
+  annotations:
+    argocd.argoproj.io/sync-wave: '-8'
+rules:
+- apiGroups:
+  - csi.ceph.io
+  resources:
+  - clientprofilemappings
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - csi.ceph.io
+  resources:
+  - clientprofilemappings/status
+  verbs:
+  - get
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: ceph-csi-clientprofilemapping-viewer-role
+  labels:
+    helm.sh/chart: ceph-csi-operator-1.0.4
+    app.kubernetes.io/name: ceph-csi
+    app.kubernetes.io/instance: rook-ceph
+    app.kubernetes.io/version: v1.0.4
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/part-of: playbox-platform
+  annotations:
+    argocd.argoproj.io/sync-wave: '-8'
+rules:
+- apiGroups:
+  - csi.ceph.io
+  resources:
+  - clientprofilemappings
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - csi.ceph.io
+  resources:
+  - clientprofilemappings/status
+  verbs:
+  - get
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: ceph-csi-clientprofiles-editor-role
+  labels:
+    helm.sh/chart: ceph-csi-operator-1.0.4
+    app.kubernetes.io/name: ceph-csi
+    app.kubernetes.io/instance: rook-ceph
+    app.kubernetes.io/version: v1.0.4
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/part-of: playbox-platform
+  annotations:
+    argocd.argoproj.io/sync-wave: '-8'
+rules:
+- apiGroups:
+  - csi.ceph.io
+  resources:
+  - clientprofiles
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - csi.ceph.io
+  resources:
+  - clientprofiles/status
+  verbs:
+  - get
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: ceph-csi-driver-editor-role
+  labels:
+    helm.sh/chart: ceph-csi-operator-1.0.4
+    app.kubernetes.io/name: ceph-csi
+    app.kubernetes.io/instance: rook-ceph
+    app.kubernetes.io/version: v1.0.4
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/part-of: playbox-platform
+  annotations:
+    argocd.argoproj.io/sync-wave: '-8'
+rules:
+- apiGroups:
+  - csi.ceph.io
+  resources:
+  - drivers
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - csi.ceph.io
+  resources:
+  - drivers/status
+  verbs:
+  - get
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: ceph-csi-driver-viewer-role
+  labels:
+    helm.sh/chart: ceph-csi-operator-1.0.4
+    app.kubernetes.io/name: ceph-csi
+    app.kubernetes.io/instance: rook-ceph
+    app.kubernetes.io/version: v1.0.4
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/part-of: playbox-platform
+  annotations:
+    argocd.argoproj.io/sync-wave: '-8'
+rules:
+- apiGroups:
+  - csi.ceph.io
+  resources:
+  - drivers
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - csi.ceph.io
+  resources:
+  - drivers/status
+  verbs:
+  - get
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: ceph-csi-manager-role
+  labels:
+    helm.sh/chart: ceph-csi-operator-1.0.4
+    app.kubernetes.io/name: ceph-csi
+    app.kubernetes.io/instance: rook-ceph
+    app.kubernetes.io/version: v1.0.4
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/part-of: playbox-platform
+  annotations:
+    argocd.argoproj.io/sync-wave: '-8'
+rules:
+- apiGroups:
+  - ''
+  resources:
+  - configmaps
+  - services
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - ''
+  resources:
+  - nodes
+  verbs:
+  - list
+  - watch
+- apiGroups:
+  - apps
+  resources:
+  - daemonsets
+  - deployments
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - cbt.storage.k8s.io
+  resources:
+  - snapshotmetadataservices
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - csi.ceph.io
+  resources:
+  - cephconnections
+  verbs:
+  - delete
+  - get
+  - list
+  - update
+  - watch
+- apiGroups:
+  - csi.ceph.io
+  resources:
+  - clientprofilemappings
+  - clientprofiles
+  - drivers
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - csi.ceph.io
+  resources:
+  - clientprofilemappings/finalizers
+  - clientprofiles/finalizers
+  - drivers/finalizers
+  verbs:
+  - update
+- apiGroups:
+  - csi.ceph.io
+  resources:
+  - clientprofilemappings/status
+  - clientprofiles/status
+  - drivers/status
+  verbs:
+  - get
+  - patch
+  - update
+- apiGroups:
+  - csi.ceph.io
+  resources:
+  - operatorconfigs
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - storage.k8s.io
+  resources:
+  - csidrivers
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: ceph-csi-metrics-auth-role
+  labels:
+    helm.sh/chart: ceph-csi-operator-1.0.4
+    app.kubernetes.io/name: ceph-csi
+    app.kubernetes.io/instance: rook-ceph
+    app.kubernetes.io/version: v1.0.4
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/part-of: playbox-platform
+  annotations:
+    argocd.argoproj.io/sync-wave: '-8'
+rules:
+- apiGroups:
+  - authentication.k8s.io
+  resources:
+  - tokenreviews
+  verbs:
+  - create
+- apiGroups:
+  - authorization.k8s.io
+  resources:
+  - subjectaccessreviews
+  verbs:
+  - create
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: ceph-csi-metrics-reader
+  labels:
+    helm.sh/chart: ceph-csi-operator-1.0.4
+    app.kubernetes.io/name: ceph-csi
+    app.kubernetes.io/instance: rook-ceph
+    app.kubernetes.io/version: v1.0.4
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/part-of: playbox-platform
+  annotations:
+    argocd.argoproj.io/sync-wave: '-8'
+rules:
+- nonResourceURLs:
+  - /metrics
+  verbs:
+  - get
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: ceph-csi-operatorconfig-editor-role
+  labels:
+    helm.sh/chart: ceph-csi-operator-1.0.4
+    app.kubernetes.io/name: ceph-csi
+    app.kubernetes.io/instance: rook-ceph
+    app.kubernetes.io/version: v1.0.4
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/part-of: playbox-platform
+  annotations:
+    argocd.argoproj.io/sync-wave: '-8'
+rules:
+- apiGroups:
+  - csi.ceph.io
+  resources:
+  - operatorconfigs
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - csi.ceph.io
+  resources:
+  - operatorconfigs/status
+  verbs:
+  - get
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: ceph-csi-operatorconfig-viewer-role
+  labels:
+    helm.sh/chart: ceph-csi-operator-1.0.4
+    app.kubernetes.io/name: ceph-csi
+    app.kubernetes.io/instance: rook-ceph
+    app.kubernetes.io/version: v1.0.4
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/part-of: playbox-platform
+  annotations:
+    argocd.argoproj.io/sync-wave: '-8'
+rules:
+- apiGroups:
+  - csi.ceph.io
+  resources:
+  - operatorconfigs
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - csi.ceph.io
+  resources:
+  - operatorconfigs/status
+  verbs:
+  - get
+---
+kind: ClusterRole
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: rook-ceph-system
+  labels:
+    operator: rook
+    storage-backend: ceph
+    app.kubernetes.io/name: rook-ceph
+    app.kubernetes.io/instance: rook-ceph
+    app.kubernetes.io/version: v1.20.6
+    app.kubernetes.io/part-of: playbox-platform
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/created-by: helm
+    helm.sh/chart: rook-ceph-v1.20.6
+  annotations:
+    argocd.argoproj.io/sync-wave: '-8'
+rules:
+- apiGroups:
+  - ''
+  resources:
+  - pods
+  - pods/log
+  verbs:
+  - get
+  - list
+- apiGroups:
+  - ''
+  resources:
+  - pods/exec
+  verbs:
+  - create
+- apiGroups:
+  - csiaddons.openshift.io
+  resources:
+  - networkfences
+  verbs:
+  - create
+  - get
+  - update
+  - delete
+  - watch
+  - list
+  - deletecollection
+- apiGroups:
+  - apiextensions.k8s.io
+  resources:
+  - customresourcedefinitions
+  verbs:
+  - get
+- apiGroups:
+  - csi.ceph.io
+  resources:
+  - cephconnections
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - update
+  - watch
+- apiGroups:
+  - csi.ceph.io
+  resources:
+  - clientprofiles
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - update
+  - watch
+- apiGroups:
+  - csi.ceph.io
+  resources:
+  - operatorconfigs
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - update
+  - watch
+- apiGroups:
+  - csi.ceph.io
+  resources:
+  - drivers
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - update
+  - watch
+---
+kind: ClusterRole
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: rook-ceph-cluster-mgmt
+  labels:
+    operator: rook
+    storage-backend: ceph
+    app.kubernetes.io/name: rook-ceph
+    app.kubernetes.io/instance: rook-ceph
+    app.kubernetes.io/version: v1.20.6
+    app.kubernetes.io/part-of: playbox-platform
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/created-by: helm
+    helm.sh/chart: rook-ceph-v1.20.6
+  annotations:
+    argocd.argoproj.io/sync-wave: '-8'
+rules:
+- apiGroups:
+  - ''
+  - apps
+  - extensions
+  resources:
+  - secrets
+  - pods
+  - pods/log
+  - services
+  - configmaps
+  - deployments
+  - daemonsets
+  verbs:
+  - get
+  - list
+  - watch
+  - patch
+  - create
+  - update
+  - delete
+---
+kind: ClusterRole
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: rook-ceph-global
+  labels:
+    operator: rook
+    storage-backend: ceph
+    app.kubernetes.io/name: rook-ceph
+    app.kubernetes.io/instance: rook-ceph
+    app.kubernetes.io/version: v1.20.6
+    app.kubernetes.io/part-of: playbox-platform
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/created-by: helm
+    helm.sh/chart: rook-ceph-v1.20.6
+  annotations:
+    argocd.argoproj.io/sync-wave: '-8'
+rules:
+- apiGroups:
+  - ''
+  resources:
+  - pods
+  - nodes
+  - secrets
+  - configmaps
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - ''
+  - discovery.k8s.io
+  resources:
+  - events
+  - persistentvolumes
+  - persistentvolumeclaims
+  - endpoints
+  - services
+  - endpointslices
+  - endpointslices/restricted
+  verbs:
+  - get
+  - list
+  - watch
+  - patch
+  - create
+  - update
+  - delete
+- apiGroups:
+  - events.k8s.io
+  resources:
+  - events
+  verbs:
+  - create
+  - patch
+  - update
+- apiGroups:
+  - storage.k8s.io
+  resources:
+  - storageclasses
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - batch
+  resources:
+  - jobs
+  - cronjobs
+  verbs:
+  - get
+  - list
+  - watch
+  - create
+  - update
+  - delete
+  - deletecollection
+- apiGroups:
+  - ceph.rook.io
+  resources:
+  - cephclients
+  - cephclusters
+  - cephblockpools
+  - cephfilesystems
+  - cephnfses
+  - cephnvmeofgateways
+  - cephobjectstores
+  - cephobjectstoreusers
+  - cephobjectstoreaccounts
+  - cephobjectrealms
+  - cephobjectzonegroups
+  - cephobjectzones
+  - cephbuckettopics
+  - cephbucketnotifications
+  - cephrbdmirrors
+  - cephfilesystemmirrors
+  - cephfilesystemsubvolumegroups
+  - cephblockpoolradosnamespaces
+  - cephcosidrivers
+  verbs:
+  - get
+  - list
+  - watch
+  - update
+- apiGroups:
+  - ceph.rook.io
+  resources:
+  - cephclients/status
+  - cephclusters/status
+  - cephblockpools/status
+  - cephfilesystems/status
+  - cephnfses/status
+  - cephnvmeofgateways/status
+  - cephobjectstores/status
+  - cephobjectstoreusers/status
+  - cephobjectstoreaccounts/status
+  - cephobjectrealms/status
+  - cephobjectzonegroups/status
+  - cephobjectzones/status
+  - cephbuckettopics/status
+  - cephbucketnotifications/status
+  - cephrbdmirrors/status
+  - cephfilesystemmirrors/status
+  - cephfilesystemsubvolumegroups/status
+  - cephblockpoolradosnamespaces/status
+  verbs:
+  - update
+- apiGroups:
+  - ceph.rook.io
+  resources:
+  - cephclients/finalizers
+  - cephclusters/finalizers
+  - cephblockpools/finalizers
+  - cephfilesystems/finalizers
+  - cephnfses/finalizers
+  - cephnvmeofgateways/finalizers
+  - cephobjectstores/finalizers
+  - cephobjectstoreusers/finalizers
+  - cephobjectstoreaccounts/finalizers
+  - cephobjectrealms/finalizers
+  - cephobjectzonegroups/finalizers
+  - cephobjectzones/finalizers
+  - cephbuckettopics/finalizers
+  - cephbucketnotifications/finalizers
+  - cephrbdmirrors/finalizers
+  - cephfilesystemmirrors/finalizers
+  - cephfilesystemsubvolumegroups/finalizers
+  - cephblockpoolradosnamespaces/finalizers
+  verbs:
+  - update
+- apiGroups:
+  - policy
+  - apps
+  - extensions
+  resources:
+  - poddisruptionbudgets
+  - deployments
+  - replicasets
+  verbs:
+  - get
+  - list
+  - watch
+  - create
+  - update
+  - delete
+  - deletecollection
+- apiGroups:
+  - apps
+  resources:
+  - deployments/finalizers
+  verbs:
+  - update
+- apiGroups:
+  - healthchecking.openshift.io
+  resources:
+  - machinedisruptionbudgets
+  verbs:
+  - get
+  - list
+  - watch
+  - create
+  - update
+  - delete
+- apiGroups:
+  - machine.openshift.io
+  resources:
+  - machines
+  verbs:
+  - get
+  - list
+  - watch
+  - create
+  - update
+  - delete
+- apiGroups:
+  - storage.k8s.io
+  resources:
+  - csidrivers
+  verbs:
+  - create
+  - delete
+  - get
+  - update
+- apiGroups:
+  - k8s.cni.cncf.io
+  resources:
+  - network-attachment-definitions
+  verbs:
+  - get
+---
+kind: ClusterRole
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: rook-ceph-mgr-cluster
+  labels:
+    operator: rook
+    storage-backend: ceph
+    app.kubernetes.io/name: rook-ceph
+    app.kubernetes.io/instance: rook-ceph
+    app.kubernetes.io/version: v1.20.6
+    app.kubernetes.io/part-of: playbox-platform
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/created-by: helm
+    helm.sh/chart: rook-ceph-v1.20.6
+  annotations:
+    argocd.argoproj.io/sync-wave: '-8'
+rules:
+- apiGroups:
+  - ''
+  resources:
+  - configmaps
+  - nodes
+  - persistentvolumes
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - ''
+  resources:
+  - events
+  verbs:
+  - create
+  - patch
+  - list
+  - get
+  - watch
+- apiGroups:
+  - events.k8s.io
+  resources:
+  - events
+  verbs:
+  - create
+  - patch
+  - update
+- apiGroups:
+  - storage.k8s.io
+  resources:
+  - storageclasses
+  verbs:
+  - get
+  - list
+  - watch
+---
+kind: ClusterRole
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: rook-ceph-mgr-system
+  labels:
+    operator: rook
+    storage-backend: ceph
+    app.kubernetes.io/name: rook-ceph
+    app.kubernetes.io/instance: rook-ceph
+    app.kubernetes.io/version: v1.20.6
+    app.kubernetes.io/part-of: playbox-platform
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/created-by: helm
+    helm.sh/chart: rook-ceph-v1.20.6
+  annotations:
+    argocd.argoproj.io/sync-wave: '-8'
+rules:
+- apiGroups:
+  - ''
+  resources:
+  - configmaps
+  verbs:
+  - get
+  - list
+  - watch
+---
+kind: ClusterRole
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: rook-ceph-object-bucket
+  labels:
+    operator: rook
+    storage-backend: ceph
+    app.kubernetes.io/name: rook-ceph
+    app.kubernetes.io/instance: rook-ceph
+    app.kubernetes.io/version: v1.20.6
+    app.kubernetes.io/part-of: playbox-platform
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/created-by: helm
+    helm.sh/chart: rook-ceph-v1.20.6
+  annotations:
+    argocd.argoproj.io/sync-wave: '-8'
+rules:
+- apiGroups:
+  - ''
+  resources:
+  - secrets
+  - configmaps
+  verbs:
+  - get
+  - create
+  - update
+  - delete
+- apiGroups:
+  - storage.k8s.io
+  resources:
+  - storageclasses
+  verbs:
+  - get
+- apiGroups:
+  - objectbucket.io
+  resources:
+  - objectbucketclaims
+  verbs:
+  - list
+  - watch
+  - get
+  - update
+- apiGroups:
+  - objectbucket.io
+  resources:
+  - objectbuckets
+  verbs:
+  - list
+  - watch
+  - get
+  - create
+  - update
+  - delete
+- apiGroups:
+  - objectbucket.io
+  resources:
+  - objectbucketclaims/status
+  - objectbuckets/status
+  verbs:
+  - update
+- apiGroups:
+  - objectbucket.io
+  resources:
+  - objectbucketclaims/finalizers
+  - objectbuckets/finalizers
+  verbs:
+  - update
+---
+kind: ClusterRole
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: rook-ceph-osd
+  labels:
+    operator: rook
+    storage-backend: ceph
+    app.kubernetes.io/name: rook-ceph
+    app.kubernetes.io/instance: rook-ceph
+    app.kubernetes.io/version: v1.20.6
+    app.kubernetes.io/part-of: playbox-platform
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/created-by: helm
+    helm.sh/chart: rook-ceph-v1.20.6
+  annotations:
+    argocd.argoproj.io/sync-wave: '-8'
+rules:
+- apiGroups:
+  - ''
+  resources:
+  - nodes
+  verbs:
+  - get
+  - list
+---
+kind: ClusterRole
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: objectstorage-provisioner-role
+  labels:
+    app.kubernetes.io/part-of: playbox-platform
+    app.kubernetes.io/component: driver-ceph
+    app.kubernetes.io/name: cosi-driver-ceph
+  annotations:
+    argocd.argoproj.io/sync-wave: '-8'
+rules:
+- apiGroups:
+  - objectstorage.k8s.io
+  resources:
+  - buckets
+  - bucketaccesses
+  - bucketclaims
+  - bucketaccessclasses
+  - buckets/status
+  - bucketaccesses/status
+  - bucketclaims/status
+  - bucketaccessclasses/status
+  verbs:
+  - get
+  - list
+  - watch
+  - update
+  - create
+  - delete
+- apiGroups:
+  - coordination.k8s.io
+  resources:
+  - leases
+  verbs:
+  - get
+  - watch
+  - list
+  - delete
+  - update
+  - create
+- apiGroups:
+  - ''
+  resources:
+  - secrets
+  - events
+  verbs:
+  - get
+  - delete
+  - update
+  - create
+- apiGroups:
+  - events.k8s.io
+  resources:
+  - events
+  verbs:
+  - create
+  - patch
+  - update
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: ceph-csi-manager-rolebinding
+  labels:
+    helm.sh/chart: ceph-csi-operator-1.0.4
+    app.kubernetes.io/name: ceph-csi
+    app.kubernetes.io/instance: rook-ceph
+    app.kubernetes.io/version: v1.0.4
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/part-of: playbox-platform
+  annotations:
+    argocd.argoproj.io/sync-wave: '-8'
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: ceph-csi-manager-role
+subjects:
+- kind: ServiceAccount
+  name: ceph-csi
+  namespace: rook-ceph
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: ceph-csi-metrics-auth-rolebinding
+  labels:
+    helm.sh/chart: ceph-csi-operator-1.0.4
+    app.kubernetes.io/name: ceph-csi
+    app.kubernetes.io/instance: rook-ceph
+    app.kubernetes.io/version: v1.0.4
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/part-of: playbox-platform
+  annotations:
+    argocd.argoproj.io/sync-wave: '-8'
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: ceph-csi-metrics-auth-role
+subjects:
+- kind: ServiceAccount
+  name: ceph-csi
+  namespace: rook-ceph
+---
+kind: ClusterRoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: rook-ceph-mgr-cluster
+  labels:
+    operator: rook
+    storage-backend: ceph
+    app.kubernetes.io/name: rook-ceph
+    app.kubernetes.io/instance: rook-ceph
+    app.kubernetes.io/version: v1.20.6
+    app.kubernetes.io/part-of: playbox-platform
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/created-by: helm
+    helm.sh/chart: rook-ceph-v1.20.6
+  annotations:
+    argocd.argoproj.io/sync-wave: '-8'
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: rook-ceph-mgr-cluster
+subjects:
+- kind: ServiceAccount
+  name: rook-ceph-mgr
+  namespace: rook-ceph
+---
+kind: ClusterRoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: rook-ceph-osd
+  labels:
+    operator: rook
+    storage-backend: ceph
+    app.kubernetes.io/name: rook-ceph
+    app.kubernetes.io/instance: rook-ceph
+    app.kubernetes.io/version: v1.20.6
+    app.kubernetes.io/part-of: playbox-platform
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/created-by: helm
+    helm.sh/chart: rook-ceph-v1.20.6
+  annotations:
+    argocd.argoproj.io/sync-wave: '-8'
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: rook-ceph-osd
+subjects:
+- kind: ServiceAccount
+  name: rook-ceph-osd
+  namespace: rook-ceph
+---
+kind: ClusterRoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: rook-ceph-system
+  labels:
+    operator: rook
+    storage-backend: ceph
+    app.kubernetes.io/name: rook-ceph
+    app.kubernetes.io/instance: rook-ceph
+    app.kubernetes.io/version: v1.20.6
+    app.kubernetes.io/part-of: playbox-platform
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/created-by: helm
+    helm.sh/chart: rook-ceph-v1.20.6
+  annotations:
+    argocd.argoproj.io/sync-wave: '-8'
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: rook-ceph-system
+subjects:
+- kind: ServiceAccount
+  name: rook-ceph-system
+  namespace: rook-ceph
+---
+kind: ClusterRoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: rook-ceph-global
+  labels:
+    operator: rook
+    storage-backend: ceph
+    app.kubernetes.io/name: rook-ceph
+    app.kubernetes.io/instance: rook-ceph
+    app.kubernetes.io/version: v1.20.6
+    app.kubernetes.io/part-of: playbox-platform
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/created-by: helm
+    helm.sh/chart: rook-ceph-v1.20.6
+  annotations:
+    argocd.argoproj.io/sync-wave: '-8'
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: rook-ceph-global
+subjects:
+- kind: ServiceAccount
+  name: rook-ceph-system
+  namespace: rook-ceph
+---
+kind: ClusterRoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: rook-ceph-object-bucket
+  labels:
+    operator: rook
+    storage-backend: ceph
+    app.kubernetes.io/name: rook-ceph
+    app.kubernetes.io/instance: rook-ceph
+    app.kubernetes.io/version: v1.20.6
+    app.kubernetes.io/part-of: playbox-platform
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/created-by: helm
+    helm.sh/chart: rook-ceph-v1.20.6
+  annotations:
+    argocd.argoproj.io/sync-wave: '-8'
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: rook-ceph-object-bucket
+subjects:
+- kind: ServiceAccount
+  name: rook-ceph-system
+  namespace: rook-ceph
+---
+kind: ClusterRoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: objectstorage-provisioner-role-binding
+  labels:
+    app.kubernetes.io/part-of: playbox-platform
+    app.kubernetes.io/component: driver-ceph
+    app.kubernetes.io/name: cosi-driver-ceph
+  annotations:
+    argocd.argoproj.io/sync-wave: '-8'
+subjects:
+- kind: ServiceAccount
+  name: objectstorage-provisioner
+  namespace: rook-ceph
+roleRef:
+  kind: ClusterRole
+  name: objectstorage-provisioner-role
+  apiGroup: rbac.authorization.k8s.io
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: ceph-csi-leader-election-role
+  namespace: rook-ceph
+  labels:
+    helm.sh/chart: ceph-csi-operator-1.0.4
+    app.kubernetes.io/name: ceph-csi
+    app.kubernetes.io/instance: rook-ceph
+    app.kubernetes.io/version: v1.0.4
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/part-of: playbox-platform
+  annotations:
+    argocd.argoproj.io/sync-wave: '-8'
+rules:
+- apiGroups:
+  - ''
+  resources:
+  - configmaps
+  verbs:
+  - get
+  - list
+  - watch
+  - create
+  - update
+  - patch
+  - delete
+- apiGroups:
+  - coordination.k8s.io
+  resources:
+  - leases
+  verbs:
+  - get
+  - list
+  - watch
+  - create
+  - update
+  - patch
+  - delete
+- apiGroups:
+  - ''
+  resources:
+  - events
+  verbs:
+  - create
+  - patch
+---
+kind: Role
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: rook-ceph-osd
+  namespace: rook-ceph
+  labels:
+    operator: rook
+    storage-backend: ceph
+    app.kubernetes.io/name: rook-ceph
+    app.kubernetes.io/instance: rook-ceph
+    app.kubernetes.io/version: v1.20.6
+    app.kubernetes.io/part-of: playbox-platform
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/created-by: helm
+    helm.sh/chart: rook-ceph-v1.20.6
+  annotations:
+    argocd.argoproj.io/sync-wave: '-8'
+rules:
+- apiGroups:
+  - ''
+  resources:
+  - secrets
+  verbs:
+  - get
+  - update
+- apiGroups:
+  - ''
+  resources:
+  - configmaps
+  verbs:
+  - get
+  - list
+  - watch
+  - create
+  - update
+  - delete
+- apiGroups:
+  - ceph.rook.io
+  resources:
+  - cephclusters
+  - cephclusters/finalizers
+  verbs:
+  - get
+  - list
+  - create
+  - update
+  - delete
+---
+kind: Role
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: rook-ceph-mgr
+  namespace: rook-ceph
+  labels:
+    operator: rook
+    storage-backend: ceph
+    app.kubernetes.io/name: rook-ceph
+    app.kubernetes.io/instance: rook-ceph
+    app.kubernetes.io/version: v1.20.6
+    app.kubernetes.io/part-of: playbox-platform
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/created-by: helm
+    helm.sh/chart: rook-ceph-v1.20.6
+  annotations:
+    argocd.argoproj.io/sync-wave: '-8'
+rules:
+- apiGroups:
+  - ''
+  resources:
+  - pods
+  - services
+  - pods/log
+  verbs:
+  - get
+  - list
+  - watch
+  - create
+  - update
+  - delete
+- apiGroups:
+  - batch
+  resources:
+  - jobs
+  verbs:
+  - get
+  - list
+  - watch
+  - create
+  - update
+  - delete
+- apiGroups:
+  - ceph.rook.io
+  resources:
+  - cephclients
+  - cephclusters
+  - cephclusters/finalizers
+  - cephblockpools
+  - cephfilesystems
+  - cephnfses
+  - cephnvmeofgateways
+  - cephobjectstores
+  - cephobjectstoreusers
+  - cephobjectrealms
+  - cephobjectzonegroups
+  - cephobjectzones
+  - cephbuckettopics
+  - cephbucketnotifications
+  - cephrbdmirrors
+  - cephfilesystemmirrors
+  - cephfilesystemsubvolumegroups
+  - cephblockpoolradosnamespaces
+  - cephcosidrivers
+  verbs:
+  - get
+  - list
+  - watch
+  - create
+  - update
+  - delete
+  - patch
+- apiGroups:
+  - apps
+  resources:
+  - deployments/scale
+  - deployments
+  verbs:
+  - patch
+  - delete
+- apiGroups:
+  - ''
+  resources:
+  - persistentvolumeclaims
+  verbs:
+  - delete
+---
+kind: Role
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: rook-ceph-cmd-reporter
+  namespace: rook-ceph
+  labels:
+    operator: rook
+    storage-backend: ceph
+    app.kubernetes.io/name: rook-ceph
+    app.kubernetes.io/instance: rook-ceph
+    app.kubernetes.io/version: v1.20.6
+    app.kubernetes.io/part-of: playbox-platform
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/created-by: helm
+    helm.sh/chart: rook-ceph-v1.20.6
+  annotations:
+    argocd.argoproj.io/sync-wave: '-8'
+rules:
+- apiGroups:
+  - ''
+  resources:
+  - pods
+  - configmaps
+  verbs:
+  - get
+  - list
+  - watch
+  - create
+  - update
+  - delete
+---
+kind: Role
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: rook-ceph-purge-osd
+  namespace: rook-ceph
+  labels:
+    operator: rook
+    storage-backend: ceph
+    app.kubernetes.io/name: rook-ceph
+    app.kubernetes.io/instance: rook-ceph
+    app.kubernetes.io/version: v1.20.6
+    app.kubernetes.io/part-of: playbox-platform
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/created-by: helm
+    helm.sh/chart: rook-ceph-v1.20.6
+  annotations:
+    argocd.argoproj.io/sync-wave: '-8'
+rules:
+- apiGroups:
+  - ''
+  resources:
+  - configmaps
+  verbs:
+  - get
+- apiGroups:
+  - apps
+  resources:
+  - deployments
+  verbs:
+  - get
+  - delete
+- apiGroups:
+  - batch
+  resources:
+  - jobs
+  verbs:
+  - get
+  - list
+  - delete
+- apiGroups:
+  - ''
+  resources:
+  - persistentvolumeclaims
+  verbs:
+  - get
+  - update
+  - delete
+  - list
+---
+kind: Role
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: rook-ceph-monitoring
+  namespace: rook-ceph
+  labels:
+    operator: rook
+    storage-backend: ceph
+    app.kubernetes.io/name: rook-ceph
+    app.kubernetes.io/instance: rook-ceph
+    app.kubernetes.io/version: v1.20.6
+    app.kubernetes.io/part-of: playbox-platform
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/created-by: helm
+    helm.sh/chart: rook-ceph-v1.20.6
+  annotations:
+    argocd.argoproj.io/sync-wave: '-8'
+rules:
+- apiGroups:
+  - monitoring.coreos.com
+  resources:
+  - servicemonitors
+  verbs:
+  - get
+  - list
+  - watch
+  - create
+  - update
+  - delete
+---
+kind: Role
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: rook-ceph-monitoring-mgr
+  namespace: rook-ceph
+  labels:
+    operator: rook
+    storage-backend: ceph
+    app.kubernetes.io/name: rook-ceph
+    app.kubernetes.io/instance: rook-ceph
+    app.kubernetes.io/version: v1.20.6
+    app.kubernetes.io/part-of: playbox-platform
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/created-by: helm
+    helm.sh/chart: rook-ceph-v1.20.6
+  annotations:
+    argocd.argoproj.io/sync-wave: '-8'
+rules:
+- apiGroups:
+  - monitoring.coreos.com
+  resources:
+  - servicemonitors
+  verbs:
+  - get
+  - list
+  - create
+  - update
+---
+kind: Role
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: rook-ceph-system
+  namespace: rook-ceph
+  labels:
+    operator: rook
+    storage-backend: ceph
+    app.kubernetes.io/name: rook-ceph
+    app.kubernetes.io/instance: rook-ceph
+    app.kubernetes.io/version: v1.20.6
+    app.kubernetes.io/part-of: playbox-platform
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/created-by: helm
+    helm.sh/chart: rook-ceph-v1.20.6
+  annotations:
+    argocd.argoproj.io/sync-wave: '-8'
+rules:
+- apiGroups:
+  - ''
+  resources:
+  - pods
+  - configmaps
+  - services
+  verbs:
+  - get
+  - list
+  - watch
+  - patch
+  - create
+  - update
+  - delete
+- apiGroups:
+  - apps
+  - extensions
+  resources:
+  - daemonsets
+  - statefulsets
+  - deployments
+  verbs:
+  - get
+  - list
+  - watch
+  - create
+  - update
+  - delete
+  - deletecollection
+- apiGroups:
+  - batch
+  resources:
+  - cronjobs
+  verbs:
+  - delete
+- apiGroups:
+  - cert-manager.io
+  resources:
+  - certificates
+  - issuers
+  verbs:
+  - get
+  - create
+  - delete
+- apiGroups:
+  - multicluster.x-k8s.io
+  resources:
+  - serviceexports
+  verbs:
+  - get
+  - create
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: ceph-csi-leader-election-rolebinding
+  namespace: rook-ceph
+  labels:
+    helm.sh/chart: ceph-csi-operator-1.0.4
+    app.kubernetes.io/name: ceph-csi
+    app.kubernetes.io/instance: rook-ceph
+    app.kubernetes.io/version: v1.0.4
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/part-of: playbox-platform
+  annotations:
+    argocd.argoproj.io/sync-wave: '-8'
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: ceph-csi-leader-election-role
+subjects:
+- kind: ServiceAccount
+  name: ceph-csi
+  namespace: rook-ceph
+---
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: rook-ceph-cluster-mgmt
+  namespace: rook-ceph
+  labels:
+    operator: rook
+    storage-backend: ceph
+    app.kubernetes.io/name: rook-ceph
+    app.kubernetes.io/instance: rook-ceph
+    app.kubernetes.io/version: v1.20.6
+    app.kubernetes.io/part-of: playbox-platform
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/created-by: helm
+    helm.sh/chart: rook-ceph-v1.20.6
+  annotations:
+    argocd.argoproj.io/sync-wave: '-8'
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: rook-ceph-cluster-mgmt
+subjects:
+- kind: ServiceAccount
+  name: rook-ceph-system
+  namespace: rook-ceph
+---
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: rook-ceph-osd
+  namespace: rook-ceph
+  labels:
+    operator: rook
+    storage-backend: ceph
+    app.kubernetes.io/name: rook-ceph
+    app.kubernetes.io/instance: rook-ceph
+    app.kubernetes.io/version: v1.20.6
+    app.kubernetes.io/part-of: playbox-platform
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/created-by: helm
+    helm.sh/chart: rook-ceph-v1.20.6
+  annotations:
+    argocd.argoproj.io/sync-wave: '-8'
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: rook-ceph-osd
+subjects:
+- kind: ServiceAccount
+  name: rook-ceph-osd
+  namespace: rook-ceph
+---
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: rook-ceph-mgr
+  namespace: rook-ceph
+  labels:
+    operator: rook
+    storage-backend: ceph
+    app.kubernetes.io/name: rook-ceph
+    app.kubernetes.io/instance: rook-ceph
+    app.kubernetes.io/version: v1.20.6
+    app.kubernetes.io/part-of: playbox-platform
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/created-by: helm
+    helm.sh/chart: rook-ceph-v1.20.6
+  annotations:
+    argocd.argoproj.io/sync-wave: '-8'
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: rook-ceph-mgr
+subjects:
+- kind: ServiceAccount
+  name: rook-ceph-mgr
+  namespace: rook-ceph
+---
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: rook-ceph-mgr-system
+  namespace: rook-ceph
+  labels:
+    operator: rook
+    storage-backend: ceph
+    app.kubernetes.io/name: rook-ceph
+    app.kubernetes.io/instance: rook-ceph
+    app.kubernetes.io/version: v1.20.6
+    app.kubernetes.io/part-of: playbox-platform
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/created-by: helm
+    helm.sh/chart: rook-ceph-v1.20.6
+  annotations:
+    argocd.argoproj.io/sync-wave: '-8'
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: rook-ceph-mgr-system
+subjects:
+- kind: ServiceAccount
+  name: rook-ceph-mgr
+  namespace: rook-ceph
+---
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: rook-ceph-cmd-reporter
+  namespace: rook-ceph
+  labels:
+    operator: rook
+    storage-backend: ceph
+    app.kubernetes.io/name: rook-ceph
+    app.kubernetes.io/instance: rook-ceph
+    app.kubernetes.io/version: v1.20.6
+    app.kubernetes.io/part-of: playbox-platform
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/created-by: helm
+    helm.sh/chart: rook-ceph-v1.20.6
+  annotations:
+    argocd.argoproj.io/sync-wave: '-8'
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: rook-ceph-cmd-reporter
+subjects:
+- kind: ServiceAccount
+  name: rook-ceph-cmd-reporter
+  namespace: rook-ceph
+---
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: rook-ceph-purge-osd
+  namespace: rook-ceph
+  labels:
+    operator: rook
+    storage-backend: ceph
+    app.kubernetes.io/name: rook-ceph
+    app.kubernetes.io/instance: rook-ceph
+    app.kubernetes.io/version: v1.20.6
+    app.kubernetes.io/part-of: playbox-platform
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/created-by: helm
+    helm.sh/chart: rook-ceph-v1.20.6
+  annotations:
+    argocd.argoproj.io/sync-wave: '-8'
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: rook-ceph-purge-osd
+subjects:
+- kind: ServiceAccount
+  name: rook-ceph-purge-osd
+  namespace: rook-ceph
+---
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: rook-ceph-monitoring
+  namespace: rook-ceph
+  labels:
+    operator: rook
+    storage-backend: ceph
+    app.kubernetes.io/name: rook-ceph
+    app.kubernetes.io/instance: rook-ceph
+    app.kubernetes.io/version: v1.20.6
+    app.kubernetes.io/part-of: playbox-platform
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/created-by: helm
+    helm.sh/chart: rook-ceph-v1.20.6
+  annotations:
+    argocd.argoproj.io/sync-wave: '-8'
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: rook-ceph-monitoring
+subjects:
+- kind: ServiceAccount
+  name: rook-ceph-system
+  namespace: rook-ceph
+---
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: rook-ceph-monitoring-mgr
+  namespace: rook-ceph
+  labels:
+    operator: rook
+    storage-backend: ceph
+    app.kubernetes.io/name: rook-ceph
+    app.kubernetes.io/instance: rook-ceph
+    app.kubernetes.io/version: v1.20.6
+    app.kubernetes.io/part-of: playbox-platform
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/created-by: helm
+    helm.sh/chart: rook-ceph-v1.20.6
+  annotations:
+    argocd.argoproj.io/sync-wave: '-8'
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: rook-ceph-monitoring-mgr
+subjects:
+- kind: ServiceAccount
+  name: rook-ceph-mgr
+  namespace: rook-ceph
+---
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: rook-ceph-system
+  namespace: rook-ceph
+  labels:
+    operator: rook
+    storage-backend: ceph
+    app.kubernetes.io/name: rook-ceph
+    app.kubernetes.io/instance: rook-ceph
+    app.kubernetes.io/version: v1.20.6
+    app.kubernetes.io/part-of: playbox-platform
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/created-by: helm
+    helm.sh/chart: rook-ceph-v1.20.6
+  annotations:
+    argocd.argoproj.io/sync-wave: '-8'
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: rook-ceph-system
+subjects:
+- kind: ServiceAccount
+  name: rook-ceph-system
+  namespace: rook-ceph
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ceph-csi-controller-manager
+  namespace: rook-ceph
+  labels:
+    control-plane: controller-manager
+    helm.sh/chart: ceph-csi-operator-1.0.4
+    app.kubernetes.io/name: ceph-csi
+    app.kubernetes.io/instance: rook-ceph
+    app.kubernetes.io/version: v1.0.4
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/part-of: playbox-platform
+  annotations:
+    argocd.argoproj.io/sync-wave: '-7'
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      control-plane: ceph-csi-op-controller-manager
+      app.kubernetes.io/name: ceph-csi
+      app.kubernetes.io/instance: rook-ceph
+  template:
+    metadata:
+      labels:
+        control-plane: ceph-csi-op-controller-manager
+        app.kubernetes.io/name: ceph-csi
+        app.kubernetes.io/instance: rook-ceph
+      annotations:
+        kubectl.kubernetes.io/default-container: manager
+    spec:
+      containers:
+      - args:
+        - --leader-elect
+        command:
+        - /manager
+        env:
+        - name: OPERATOR_NAMESPACE
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace
+        - name: CSI_SERVICE_ACCOUNT_PREFIX
+          value: ''
+        - name: WATCH_NAMESPACE
+          value: ''
+        - name: KUBERNETES_CLUSTER_DOMAIN
+          value: cluster.local
+        image: quay.io/cephcsi/ceph-csi-operator:v1.0.4
+        livenessProbe:
+          httpGet:
+            path: /healthz
+            port: 8081
+          initialDelaySeconds: 15
+          periodSeconds: 20
+        name: manager
+        readinessProbe:
+          httpGet:
+            path: /readyz
+            port: 8081
+          initialDelaySeconds: 5
+          periodSeconds: 10
+        resources:
+          limits:
+            cpu: 500m
+            memory: 128Mi
+          requests:
+            cpu: 10m
+            memory: 64Mi
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - ALL
+          readOnlyRootFilesystem: true
+      imagePullSecrets: []
+      nodeSelector: {}
+      priorityClassName: null
+      securityContext:
+        runAsNonRoot: true
+      serviceAccountName: ceph-csi
+      terminationGracePeriodSeconds: 10
+      tolerations: []
+      topologySpreadConstraints: []
+---
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: rook-ceph-operator
+  namespace: rook-ceph
+  labels:
+    operator: rook
+    storage-backend: ceph
+    app.kubernetes.io/name: rook-ceph
+    app.kubernetes.io/instance: rook-ceph
+    app.kubernetes.io/version: v1.20.6
+    app.kubernetes.io/part-of: playbox-platform
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/created-by: helm
+    helm.sh/chart: rook-ceph-v1.20.6
+  annotations:
+    argocd.argoproj.io/sync-wave: '-7'
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: rook-ceph-operator
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: rook-ceph-operator
+        helm.sh/chart: rook-ceph-v1.20.6
+    spec:
+      tolerations:
+      - effect: NoExecute
+        key: node.kubernetes.io/unreachable
+        operator: Exists
+        tolerationSeconds: 5
+      containers:
+      - name: rook-ceph-operator
+        image: docker.io/rook/ceph:v1.20.6
+        imagePullPolicy: IfNotPresent
+        args:
+        - ceph
+        - operator
+        securityContext:
+          capabilities:
+            drop:
+            - ALL
+          runAsGroup: 2016
+          runAsNonRoot: true
+          runAsUser: 2016
+        volumeMounts:
+        - mountPath: /var/lib/rook
+          name: rook-config
+        - mountPath: /etc/ceph
+          name: default-config-dir
+        env:
+        - name: ROOK_CURRENT_NAMESPACE_ONLY
+          value: 'true'
+        - name: ROOK_RECONCILE_CONCURRENT_CLUSTERS
+          value: '1'
+        - name: ROOK_HOSTPATH_REQUIRES_PRIVILEGED
+          value: 'false'
+        - name: ROOK_DISABLE_DEVICE_HOTPLUG
+          value: 'false'
+        - name: ROOK_DISCOVER_DEVICES_INTERVAL
+          value: 60m
+        - name: ROOK_UNREACHABLE_NODE_TOLERATION_SECONDS
+          value: '5'
+        - name: NODE_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: spec.nodeName
+        - name: POD_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
+        - name: POD_NAMESPACE
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace
+        resources:
+          limits:
+            cpu: '1'
+            memory: 512Mi
+          requests:
+            cpu: 100m
+            memory: 128Mi
+      serviceAccountName: rook-ceph-system
+      volumes:
+      - name: rook-config
+        emptyDir: {}
+      - name: default-config-dir
+        emptyDir: {}
+---
+kind: ServiceMonitor
+apiVersion: monitoring.coreos.com/v1
+metadata:
+  name: csi-metrics
+  namespace: rook-ceph
+  labels:
+    operator: rook
+    storage-backend: ceph
+    app.kubernetes.io/name: rook-ceph
+    app.kubernetes.io/instance: rook-ceph
+    app.kubernetes.io/version: v1.20.6
+    app.kubernetes.io/part-of: playbox-platform
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/created-by: helm
+    helm.sh/chart: rook-ceph-v1.20.6
+  annotations:
+    argocd.argoproj.io/sync-wave: '-6'
+spec:
+  namespaceSelector:
+    matchNames:
+    - rook-ceph
+  selector:
+    matchLabels:
+      app: csi-metrics
+  endpoints:
+  - port: csi-http-metrics
+    path: /metrics
+    interval: 5s

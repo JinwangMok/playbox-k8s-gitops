@@ -1,5 +1,5 @@
 {
-  "resourceCount": 181,
+  "resourceCount": 274,
   "resources": [
     {
       "apiVersion": "v1",
@@ -26,8 +26,22 @@
       "apiVersion": "v1",
       "kind": "Namespace",
       "namespace": "",
+      "name": "rook-ceph",
+      "pruneFalse": true
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Namespace",
+      "namespace": "",
       "name": "sops-system",
       "pruneFalse": false
+    },
+    {
+      "apiVersion": "storage.k8s.io/v1",
+      "kind": "StorageClass",
+      "namespace": "",
+      "name": "playbox-ceph-block",
+      "pruneFalse": true
     },
     {
       "apiVersion": "storage.k8s.io/v1",
@@ -75,7 +89,189 @@
       "apiVersion": "apiextensions.k8s.io/v1",
       "kind": "CustomResourceDefinition",
       "namespace": "",
+      "name": "cephblockpoolradosnamespaces.ceph.rook.io",
+      "pruneFalse": true
+    },
+    {
+      "apiVersion": "apiextensions.k8s.io/v1",
+      "kind": "CustomResourceDefinition",
+      "namespace": "",
+      "name": "cephblockpools.ceph.rook.io",
+      "pruneFalse": true
+    },
+    {
+      "apiVersion": "apiextensions.k8s.io/v1",
+      "kind": "CustomResourceDefinition",
+      "namespace": "",
+      "name": "cephbucketnotifications.ceph.rook.io",
+      "pruneFalse": true
+    },
+    {
+      "apiVersion": "apiextensions.k8s.io/v1",
+      "kind": "CustomResourceDefinition",
+      "namespace": "",
+      "name": "cephbuckettopics.ceph.rook.io",
+      "pruneFalse": true
+    },
+    {
+      "apiVersion": "apiextensions.k8s.io/v1",
+      "kind": "CustomResourceDefinition",
+      "namespace": "",
+      "name": "cephclients.ceph.rook.io",
+      "pruneFalse": true
+    },
+    {
+      "apiVersion": "apiextensions.k8s.io/v1",
+      "kind": "CustomResourceDefinition",
+      "namespace": "",
+      "name": "cephclusters.ceph.rook.io",
+      "pruneFalse": true
+    },
+    {
+      "apiVersion": "apiextensions.k8s.io/v1",
+      "kind": "CustomResourceDefinition",
+      "namespace": "",
+      "name": "cephconnections.csi.ceph.io",
+      "pruneFalse": true
+    },
+    {
+      "apiVersion": "apiextensions.k8s.io/v1",
+      "kind": "CustomResourceDefinition",
+      "namespace": "",
+      "name": "cephcosidrivers.ceph.rook.io",
+      "pruneFalse": true
+    },
+    {
+      "apiVersion": "apiextensions.k8s.io/v1",
+      "kind": "CustomResourceDefinition",
+      "namespace": "",
+      "name": "cephfilesystemmirrors.ceph.rook.io",
+      "pruneFalse": true
+    },
+    {
+      "apiVersion": "apiextensions.k8s.io/v1",
+      "kind": "CustomResourceDefinition",
+      "namespace": "",
+      "name": "cephfilesystems.ceph.rook.io",
+      "pruneFalse": true
+    },
+    {
+      "apiVersion": "apiextensions.k8s.io/v1",
+      "kind": "CustomResourceDefinition",
+      "namespace": "",
+      "name": "cephfilesystemsubvolumegroups.ceph.rook.io",
+      "pruneFalse": true
+    },
+    {
+      "apiVersion": "apiextensions.k8s.io/v1",
+      "kind": "CustomResourceDefinition",
+      "namespace": "",
+      "name": "cephnfses.ceph.rook.io",
+      "pruneFalse": true
+    },
+    {
+      "apiVersion": "apiextensions.k8s.io/v1",
+      "kind": "CustomResourceDefinition",
+      "namespace": "",
+      "name": "cephnvmeofgateways.ceph.rook.io",
+      "pruneFalse": true
+    },
+    {
+      "apiVersion": "apiextensions.k8s.io/v1",
+      "kind": "CustomResourceDefinition",
+      "namespace": "",
+      "name": "cephobjectrealms.ceph.rook.io",
+      "pruneFalse": true
+    },
+    {
+      "apiVersion": "apiextensions.k8s.io/v1",
+      "kind": "CustomResourceDefinition",
+      "namespace": "",
+      "name": "cephobjectstoreaccounts.ceph.rook.io",
+      "pruneFalse": true
+    },
+    {
+      "apiVersion": "apiextensions.k8s.io/v1",
+      "kind": "CustomResourceDefinition",
+      "namespace": "",
+      "name": "cephobjectstores.ceph.rook.io",
+      "pruneFalse": true
+    },
+    {
+      "apiVersion": "apiextensions.k8s.io/v1",
+      "kind": "CustomResourceDefinition",
+      "namespace": "",
+      "name": "cephobjectstoreusers.ceph.rook.io",
+      "pruneFalse": true
+    },
+    {
+      "apiVersion": "apiextensions.k8s.io/v1",
+      "kind": "CustomResourceDefinition",
+      "namespace": "",
+      "name": "cephobjectzonegroups.ceph.rook.io",
+      "pruneFalse": true
+    },
+    {
+      "apiVersion": "apiextensions.k8s.io/v1",
+      "kind": "CustomResourceDefinition",
+      "namespace": "",
+      "name": "cephobjectzones.ceph.rook.io",
+      "pruneFalse": true
+    },
+    {
+      "apiVersion": "apiextensions.k8s.io/v1",
+      "kind": "CustomResourceDefinition",
+      "namespace": "",
+      "name": "cephrbdmirrors.ceph.rook.io",
+      "pruneFalse": true
+    },
+    {
+      "apiVersion": "apiextensions.k8s.io/v1",
+      "kind": "CustomResourceDefinition",
+      "namespace": "",
+      "name": "clientprofilemappings.csi.ceph.io",
+      "pruneFalse": true
+    },
+    {
+      "apiVersion": "apiextensions.k8s.io/v1",
+      "kind": "CustomResourceDefinition",
+      "namespace": "",
+      "name": "clientprofiles.csi.ceph.io",
+      "pruneFalse": true
+    },
+    {
+      "apiVersion": "apiextensions.k8s.io/v1",
+      "kind": "CustomResourceDefinition",
+      "namespace": "",
+      "name": "drivers.csi.ceph.io",
+      "pruneFalse": true
+    },
+    {
+      "apiVersion": "apiextensions.k8s.io/v1",
+      "kind": "CustomResourceDefinition",
+      "namespace": "",
       "name": "globalsopssecrets.addons.projectcapsule.dev",
+      "pruneFalse": true
+    },
+    {
+      "apiVersion": "apiextensions.k8s.io/v1",
+      "kind": "CustomResourceDefinition",
+      "namespace": "",
+      "name": "objectbucketclaims.objectbucket.io",
+      "pruneFalse": true
+    },
+    {
+      "apiVersion": "apiextensions.k8s.io/v1",
+      "kind": "CustomResourceDefinition",
+      "namespace": "",
+      "name": "objectbuckets.objectbucket.io",
+      "pruneFalse": true
+    },
+    {
+      "apiVersion": "apiextensions.k8s.io/v1",
+      "kind": "CustomResourceDefinition",
+      "namespace": "",
+      "name": "operatorconfigs.csi.ceph.io",
       "pruneFalse": true
     },
     {
@@ -235,6 +431,76 @@
     {
       "apiVersion": "v1",
       "kind": "ServiceAccount",
+      "namespace": "rook-ceph",
+      "name": "ceph-csi",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "ServiceAccount",
+      "namespace": "rook-ceph",
+      "name": "objectstorage-provisioner",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "ServiceAccount",
+      "namespace": "rook-ceph",
+      "name": "rook-ceph-cmd-reporter",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "ServiceAccount",
+      "namespace": "rook-ceph",
+      "name": "rook-ceph-default",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "ServiceAccount",
+      "namespace": "rook-ceph",
+      "name": "rook-ceph-mgr",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "ServiceAccount",
+      "namespace": "rook-ceph",
+      "name": "rook-ceph-nvmeof",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "ServiceAccount",
+      "namespace": "rook-ceph",
+      "name": "rook-ceph-osd",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "ServiceAccount",
+      "namespace": "rook-ceph",
+      "name": "rook-ceph-purge-osd",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "ServiceAccount",
+      "namespace": "rook-ceph",
+      "name": "rook-ceph-rgw",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "ServiceAccount",
+      "namespace": "rook-ceph",
+      "name": "rook-ceph-system",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "ServiceAccount",
       "namespace": "sops-system",
       "name": "sops-operator",
       "pruneFalse": false
@@ -291,6 +557,62 @@
     {
       "apiVersion": "rbac.authorization.k8s.io/v1",
       "kind": "Role",
+      "namespace": "rook-ceph",
+      "name": "ceph-csi-leader-election-role",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "rbac.authorization.k8s.io/v1",
+      "kind": "Role",
+      "namespace": "rook-ceph",
+      "name": "rook-ceph-cmd-reporter",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "rbac.authorization.k8s.io/v1",
+      "kind": "Role",
+      "namespace": "rook-ceph",
+      "name": "rook-ceph-mgr",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "rbac.authorization.k8s.io/v1",
+      "kind": "Role",
+      "namespace": "rook-ceph",
+      "name": "rook-ceph-monitoring",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "rbac.authorization.k8s.io/v1",
+      "kind": "Role",
+      "namespace": "rook-ceph",
+      "name": "rook-ceph-monitoring-mgr",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "rbac.authorization.k8s.io/v1",
+      "kind": "Role",
+      "namespace": "rook-ceph",
+      "name": "rook-ceph-osd",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "rbac.authorization.k8s.io/v1",
+      "kind": "Role",
+      "namespace": "rook-ceph",
+      "name": "rook-ceph-purge-osd",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "rbac.authorization.k8s.io/v1",
+      "kind": "Role",
+      "namespace": "rook-ceph",
+      "name": "rook-ceph-system",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "rbac.authorization.k8s.io/v1",
+      "kind": "Role",
       "namespace": "sops-system",
       "name": "sops-operator",
       "pruneFalse": false
@@ -320,6 +642,104 @@
       "apiVersion": "rbac.authorization.k8s.io/v1",
       "kind": "ClusterRole",
       "namespace": "",
+      "name": "ceph-csi-cephconnection-viewer-role",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "rbac.authorization.k8s.io/v1",
+      "kind": "ClusterRole",
+      "namespace": "",
+      "name": "ceph-csi-cephconnections-editor-role",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "rbac.authorization.k8s.io/v1",
+      "kind": "ClusterRole",
+      "namespace": "",
+      "name": "ceph-csi-clientprofile-viewer-role",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "rbac.authorization.k8s.io/v1",
+      "kind": "ClusterRole",
+      "namespace": "",
+      "name": "ceph-csi-clientprofilemapping-editor-role",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "rbac.authorization.k8s.io/v1",
+      "kind": "ClusterRole",
+      "namespace": "",
+      "name": "ceph-csi-clientprofilemapping-viewer-role",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "rbac.authorization.k8s.io/v1",
+      "kind": "ClusterRole",
+      "namespace": "",
+      "name": "ceph-csi-clientprofiles-editor-role",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "rbac.authorization.k8s.io/v1",
+      "kind": "ClusterRole",
+      "namespace": "",
+      "name": "ceph-csi-driver-editor-role",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "rbac.authorization.k8s.io/v1",
+      "kind": "ClusterRole",
+      "namespace": "",
+      "name": "ceph-csi-driver-viewer-role",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "rbac.authorization.k8s.io/v1",
+      "kind": "ClusterRole",
+      "namespace": "",
+      "name": "ceph-csi-manager-role",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "rbac.authorization.k8s.io/v1",
+      "kind": "ClusterRole",
+      "namespace": "",
+      "name": "ceph-csi-metrics-auth-role",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "rbac.authorization.k8s.io/v1",
+      "kind": "ClusterRole",
+      "namespace": "",
+      "name": "ceph-csi-metrics-reader",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "rbac.authorization.k8s.io/v1",
+      "kind": "ClusterRole",
+      "namespace": "",
+      "name": "ceph-csi-operatorconfig-editor-role",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "rbac.authorization.k8s.io/v1",
+      "kind": "ClusterRole",
+      "namespace": "",
+      "name": "ceph-csi-operatorconfig-viewer-role",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "rbac.authorization.k8s.io/v1",
+      "kind": "ClusterRole",
+      "namespace": "",
+      "name": "objectstorage-provisioner-role",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "rbac.authorization.k8s.io/v1",
+      "kind": "ClusterRole",
+      "namespace": "",
       "name": "playbox-monitoring-kube-state-metrics",
       "pruneFalse": false
     },
@@ -335,6 +755,55 @@
       "kind": "ClusterRole",
       "namespace": "",
       "name": "playbox-monitoring-prometheus",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "rbac.authorization.k8s.io/v1",
+      "kind": "ClusterRole",
+      "namespace": "",
+      "name": "rook-ceph-cluster-mgmt",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "rbac.authorization.k8s.io/v1",
+      "kind": "ClusterRole",
+      "namespace": "",
+      "name": "rook-ceph-global",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "rbac.authorization.k8s.io/v1",
+      "kind": "ClusterRole",
+      "namespace": "",
+      "name": "rook-ceph-mgr-cluster",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "rbac.authorization.k8s.io/v1",
+      "kind": "ClusterRole",
+      "namespace": "",
+      "name": "rook-ceph-mgr-system",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "rbac.authorization.k8s.io/v1",
+      "kind": "ClusterRole",
+      "namespace": "",
+      "name": "rook-ceph-object-bucket",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "rbac.authorization.k8s.io/v1",
+      "kind": "ClusterRole",
+      "namespace": "",
+      "name": "rook-ceph-osd",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "rbac.authorization.k8s.io/v1",
+      "kind": "ClusterRole",
+      "namespace": "",
+      "name": "rook-ceph-system",
       "pruneFalse": false
     },
     {
@@ -396,6 +865,76 @@
     {
       "apiVersion": "rbac.authorization.k8s.io/v1",
       "kind": "RoleBinding",
+      "namespace": "rook-ceph",
+      "name": "ceph-csi-leader-election-rolebinding",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "rbac.authorization.k8s.io/v1",
+      "kind": "RoleBinding",
+      "namespace": "rook-ceph",
+      "name": "rook-ceph-cluster-mgmt",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "rbac.authorization.k8s.io/v1",
+      "kind": "RoleBinding",
+      "namespace": "rook-ceph",
+      "name": "rook-ceph-cmd-reporter",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "rbac.authorization.k8s.io/v1",
+      "kind": "RoleBinding",
+      "namespace": "rook-ceph",
+      "name": "rook-ceph-mgr",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "rbac.authorization.k8s.io/v1",
+      "kind": "RoleBinding",
+      "namespace": "rook-ceph",
+      "name": "rook-ceph-mgr-system",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "rbac.authorization.k8s.io/v1",
+      "kind": "RoleBinding",
+      "namespace": "rook-ceph",
+      "name": "rook-ceph-monitoring",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "rbac.authorization.k8s.io/v1",
+      "kind": "RoleBinding",
+      "namespace": "rook-ceph",
+      "name": "rook-ceph-monitoring-mgr",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "rbac.authorization.k8s.io/v1",
+      "kind": "RoleBinding",
+      "namespace": "rook-ceph",
+      "name": "rook-ceph-osd",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "rbac.authorization.k8s.io/v1",
+      "kind": "RoleBinding",
+      "namespace": "rook-ceph",
+      "name": "rook-ceph-purge-osd",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "rbac.authorization.k8s.io/v1",
+      "kind": "RoleBinding",
+      "namespace": "rook-ceph",
+      "name": "rook-ceph-system",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "rbac.authorization.k8s.io/v1",
+      "kind": "RoleBinding",
       "namespace": "sops-system",
       "name": "sops-operator",
       "pruneFalse": false
@@ -425,6 +964,27 @@
       "apiVersion": "rbac.authorization.k8s.io/v1",
       "kind": "ClusterRoleBinding",
       "namespace": "",
+      "name": "ceph-csi-manager-rolebinding",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "rbac.authorization.k8s.io/v1",
+      "kind": "ClusterRoleBinding",
+      "namespace": "",
+      "name": "ceph-csi-metrics-auth-rolebinding",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "rbac.authorization.k8s.io/v1",
+      "kind": "ClusterRoleBinding",
+      "namespace": "",
+      "name": "objectstorage-provisioner-role-binding",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "rbac.authorization.k8s.io/v1",
+      "kind": "ClusterRoleBinding",
+      "namespace": "",
       "name": "playbox-monitoring-kube-state-metrics",
       "pruneFalse": false
     },
@@ -440,6 +1000,41 @@
       "kind": "ClusterRoleBinding",
       "namespace": "",
       "name": "playbox-monitoring-prometheus",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "rbac.authorization.k8s.io/v1",
+      "kind": "ClusterRoleBinding",
+      "namespace": "",
+      "name": "rook-ceph-global",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "rbac.authorization.k8s.io/v1",
+      "kind": "ClusterRoleBinding",
+      "namespace": "",
+      "name": "rook-ceph-mgr-cluster",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "rbac.authorization.k8s.io/v1",
+      "kind": "ClusterRoleBinding",
+      "namespace": "",
+      "name": "rook-ceph-object-bucket",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "rbac.authorization.k8s.io/v1",
+      "kind": "ClusterRoleBinding",
+      "namespace": "",
+      "name": "rook-ceph-osd",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "rbac.authorization.k8s.io/v1",
+      "kind": "ClusterRoleBinding",
+      "namespace": "",
+      "name": "rook-ceph-system",
       "pruneFalse": false
     },
     {
@@ -696,6 +1291,20 @@
     },
     {
       "apiVersion": "v1",
+      "kind": "ConfigMap",
+      "namespace": "rook-ceph",
+      "name": "rook-ceph-operator-config",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "ConfigMap",
+      "namespace": "rook-ceph",
+      "name": "rook-csi-operator-image-set-configmap",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "v1",
       "kind": "Secret",
       "namespace": "argocd",
       "name": "argocd-notifications-secret",
@@ -893,6 +1502,20 @@
     {
       "apiVersion": "apps/v1",
       "kind": "Deployment",
+      "namespace": "rook-ceph",
+      "name": "ceph-csi-controller-manager",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "apps/v1",
+      "kind": "Deployment",
+      "namespace": "rook-ceph",
+      "name": "rook-ceph-operator",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "apps/v1",
+      "kind": "Deployment",
       "namespace": "sops-system",
       "name": "sops-operator",
       "pruneFalse": false
@@ -944,6 +1567,20 @@
       "kind": "Application",
       "namespace": "argocd",
       "name": "playbox-root",
+      "pruneFalse": true
+    },
+    {
+      "apiVersion": "ceph.rook.io/v1",
+      "kind": "CephBlockPool",
+      "namespace": "rook-ceph",
+      "name": "playbox-block",
+      "pruneFalse": true
+    },
+    {
+      "apiVersion": "ceph.rook.io/v1",
+      "kind": "CephCluster",
+      "namespace": "rook-ceph",
+      "name": "rook-ceph",
       "pruneFalse": true
     },
     {
@@ -1165,6 +1802,13 @@
     },
     {
       "apiVersion": "monitoring.coreos.com/v1",
+      "kind": "PrometheusRule",
+      "namespace": "monitoring",
+      "name": "prometheus-ceph-rules",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "monitoring.coreos.com/v1",
       "kind": "ServiceMonitor",
       "namespace": "monitoring",
       "name": "playbox-monitoring-apiserver",
@@ -1220,6 +1864,13 @@
       "pruneFalse": false
     },
     {
+      "apiVersion": "monitoring.coreos.com/v1",
+      "kind": "ServiceMonitor",
+      "namespace": "rook-ceph",
+      "name": "csi-metrics",
+      "pruneFalse": false
+    },
+    {
       "apiVersion": "networking.k8s.io/v1",
       "kind": "NetworkPolicy",
       "namespace": "argocd",
@@ -1271,10 +1922,13 @@
   ],
   "workloadImages": {
     "docker.io/grafana/grafana:13.2.0": 1,
+    "docker.io/rook/ceph:v1.20.6": 1,
     "ghcr.io/dexidp/dex:v2.45.1": 1,
     "ghcr.io/peak-scale/sops-operator:0.10.1@sha256:1da9b716b79210f51b1c757b4d5c3bab57df9fdc74e67f2fa274d33603492fd4": 1,
     "public.ecr.aws/docker/library/redis:8.2.3-alpine": 1,
     "quay.io/argoproj/argocd:v3.5.2": 5,
+    "quay.io/ceph/ceph:v20.2.4-20260818": 1,
+    "quay.io/cephcsi/ceph-csi-operator:v1.0.4": 1,
     "quay.io/kiwigrid/k8s-sidecar:2.10.1": 2,
     "quay.io/prometheus-operator/prometheus-operator:v0.93.1": 1,
     "quay.io/prometheus/node-exporter:v1.12.1-distroless": 1,

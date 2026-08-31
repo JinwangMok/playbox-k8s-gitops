@@ -6,3 +6,4 @@ resources:
   - argocd
   - network
   - platform/sops-diagnostics
+  - storage/rook-ceph
