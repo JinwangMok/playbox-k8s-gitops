@@ -1,0 +1,67 @@
+apiVersion: csi.ceph.io/v1
+kind: OperatorConfig
+metadata:
+  name: ceph-csi-operator-config
+  namespace: rook-ceph
+  annotations:
+    argocd.argoproj.io/sync-wave: "-6"
+    argocd.argoproj.io/sync-options: Prune=false
+    argocd.argoproj.io/tracking-id: playbox-root:csi.ceph.io/OperatorConfig:rook-ceph/ceph-csi-operator-config
+  labels:
+    app.kubernetes.io/part-of: playbox-platform
+spec:
+  driverSpecDefaults:
+    log:
+      verbosity: 0
+    imageSet:
+      name: rook-csi-operator-image-set-configmap
+    enableMetadata: true
+    generateOMapInfo: false
+    fsGroupPolicy: File
+    deployCsiAddons: false
+    cephFsClientType: kernel
+    nodePlugin:
+      priorityClassName: system-node-critical
+      kubeletDirPath: /var/lib/kubelet
+      enableSeLinuxHostMount: false
+    controllerPlugin:
+      priorityClassName: system-cluster-critical
+      deploymentStrategy:
+        type: Recreate
+---
+apiVersion: csi.ceph.io/v1
+kind: Driver
+metadata:
+  name: rook-ceph.rbd.csi.ceph.com
+  namespace: rook-ceph
+  annotations:
+    argocd.argoproj.io/sync-wave: "-6"
+    argocd.argoproj.io/sync-options: Prune=false
+    argocd.argoproj.io/tracking-id: playbox-root:csi.ceph.io/Driver:rook-ceph/rook-ceph.rbd.csi.ceph.com
+  labels:
+    app.kubernetes.io/part-of: playbox-platform
+spec:
+  fsGroupPolicy: File
+  nodePlugin:
+    updateStrategy:
+      type: RollingUpdate
+  controllerPlugin: {}
+---
+apiVersion: csi.ceph.io/v1
+kind: Driver
+metadata:
+  name: rook-ceph.cephfs.csi.ceph.com
+  namespace: rook-ceph
+  annotations:
+    argocd.argoproj.io/sync-wave: "-6"
+    argocd.argoproj.io/sync-options: Prune=false
+    argocd.argoproj.io/tracking-id: playbox-root:csi.ceph.io/Driver:rook-ceph/rook-ceph.cephfs.csi.ceph.com
+  labels:
+    app.kubernetes.io/part-of: playbox-platform
+spec:
+  fsGroupPolicy: File
+  cephFsClientType: kernel
+  nodePlugin:
+    updateStrategy:
+      type: RollingUpdate
+  controllerPlugin: {}
