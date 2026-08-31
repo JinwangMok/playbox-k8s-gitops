@@ -31,7 +31,7 @@ jobs:
           chmod 0700 "$RUNNER_TEMP/kubectl"
           test "$(sha256sum gitops/root/argocd/install.yaml | cut -d' ' -f1)" = 9a87f2b3e14c278f12501eb0ef5c3955b27cf05370ca425381c6a908cf85a5c5
           "$RUNNER_TEMP/kubectl" kustomize gitops/root > "$RUNNER_TEMP/root.yaml"
-          test "$(sha256sum "$RUNNER_TEMP/root.yaml" | cut -d' ' -f1)" = 380b1812b2c8f142df5c2db8566d94497712523df17a3ce59fa1eb7778e6f8c9
+          test "$(sha256sum "$RUNNER_TEMP/root.yaml" | cut -d' ' -f1)" = 5713076b2cb1832ad0869ffb8f945e7f805a880d4503e1d4c5265d7e7f4aa38a
           test "$(python -c 'import json; x=json.load(open("gitops/root/inventory.json")); print(x["resourceCount"] if len(x["resources"]) == x["resourceCount"] else "invalid")')" = 274
           sops_url=https://github.com/getsops/sops/releases/download/v3.13.3/sops-v3.13.3.linux.amd64
           sops_sha=e5bec3346a873ae91d871550f3e698c1aad962aff462a080e40f25fde17fef6b

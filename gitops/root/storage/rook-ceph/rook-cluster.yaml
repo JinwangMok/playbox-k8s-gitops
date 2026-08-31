@@ -5,7 +5,7 @@ metadata:
   name: playbox-ceph-block
   annotations:
     storageclass.kubernetes.io/is-default-class: 'false'
-    argocd.argoproj.io/sync-wave: '-4'
+    argocd.argoproj.io/sync-wave: '-3'
     argocd.argoproj.io/sync-options: Prune=false
   labels:
     app.kubernetes.io/part-of: playbox-platform
@@ -13,7 +13,15 @@ provisioner: rook-ceph.rbd.csi.ceph.com
 parameters:
   pool: playbox-block
   clusterID: rook-ceph
+  csi.storage.k8s.io/controller-expand-secret-name: rook-csi-rbd-provisioner
+  csi.storage.k8s.io/controller-expand-secret-namespace: rook-ceph
+  csi.storage.k8s.io/controller-publish-secret-name: rook-csi-rbd-provisioner
+  csi.storage.k8s.io/controller-publish-secret-namespace: rook-ceph
   csi.storage.k8s.io/fstype: ext4
+  csi.storage.k8s.io/node-stage-secret-name: rook-csi-rbd-node
+  csi.storage.k8s.io/node-stage-secret-namespace: rook-ceph
+  csi.storage.k8s.io/provisioner-secret-name: rook-csi-rbd-provisioner
+  csi.storage.k8s.io/provisioner-secret-namespace: rook-ceph
   imageFeatures: layering,exclusive-lock,object-map,fast-diff,deep-flatten
   imageFormat: '2'
 reclaimPolicy: Delete
