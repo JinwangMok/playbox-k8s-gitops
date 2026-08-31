@@ -1,0 +1,127 @@
+apiVersion: barmancloud.cnpg.io/v1
+kind: ObjectStore
+metadata:
+  name: playbox-postgres-backup
+  namespace: database
+  annotations:
+    argocd.argoproj.io/sync-wave: "-1"
+    argocd.argoproj.io/sync-options: Prune=false
+    argocd.argoproj.io/tracking-id: playbox-root:barmancloud.cnpg.io/ObjectStore:database/playbox-postgres-backup
+  labels:
+    app.kubernetes.io/part-of: playbox-platform
+spec:
+  retentionPolicy: 7d
+  instanceSidecarConfiguration:
+    env:
+      - name: AWS_REQUEST_CHECKSUM_CALCULATION
+        value: when_required
+      - name: AWS_RESPONSE_CHECKSUM_VALIDATION
+        value: when_required
+    resources:
+      requests:
+        cpu: 25m
+        memory: 64Mi
+      limits:
+        cpu: 500m
+        memory: 256Mi
+  configuration:
+    destinationPath: s3://playbox-postgres-backup/cnpg
+    endpointURL: https://192.168.88.2:8333
+    endpointCA:
+      name: playbox-postgres-backup
+      key: ca.crt
+    s3Credentials:
+      accessKeyId:
+        name: playbox-postgres-backup
+        key: ACCESS_KEY_ID
+      secretAccessKey:
+        name: playbox-postgres-backup
+        key: ACCESS_SECRET_KEY
+    data:
+      compression: gzip
+      immediateCheckpoint: true
+      jobs: 2
+    wal:
+      compression: gzip
+      maxParallel: 2
+---
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: playbox-postgres
+  namespace: database
+  annotations:
+    argocd.argoproj.io/sync-wave: "0"
+    argocd.argoproj.io/sync-options: Prune=false
+    argocd.argoproj.io/tracking-id: playbox-root:postgresql.cnpg.io/Cluster:database/playbox-postgres
+  labels:
+    app.kubernetes.io/part-of: playbox-platform
+spec:
+  instances: 1
+  imageName: ghcr.io/cloudnative-pg/postgresql:18.6
+  enableSuperuserAccess: false
+  primaryUpdateStrategy: unsupervised
+  bootstrap:
+    initdb:
+      database: app
+      owner: app
+      encoding: UTF8
+      dataChecksums: true
+  postgresql:
+    parameters:
+      max_connections: "100"
+      shared_buffers: 256MB
+  storage:
+    storageClass: playbox-ceph-block
+    size: 20Gi
+  resources:
+    requests:
+      cpu: 100m
+      memory: 512Mi
+    limits:
+      cpu: "2"
+      memory: 2Gi
+  plugins:
+    - name: barman-cloud.cloudnative-pg.io
+      isWALArchiver: true
+      parameters:
+        barmanObjectName: playbox-postgres-backup
+---
+apiVersion: monitoring.coreos.com/v1
+kind: PodMonitor
+metadata:
+  name: playbox-postgres
+  namespace: database
+  annotations:
+    argocd.argoproj.io/sync-wave: "1"
+    argocd.argoproj.io/tracking-id: playbox-root:monitoring.coreos.com/PodMonitor:database/playbox-postgres
+  labels:
+    app.kubernetes.io/part-of: playbox-platform
+    release: playbox-monitoring
+spec:
+  selector:
+    matchLabels:
+      cnpg.io/cluster: playbox-postgres
+  podMetricsEndpoints:
+    - port: metrics
+---
+apiVersion: postgresql.cnpg.io/v1
+kind: ScheduledBackup
+metadata:
+  name: playbox-postgres-daily
+  namespace: database
+  annotations:
+    argocd.argoproj.io/sync-wave: "1"
+    argocd.argoproj.io/sync-options: Prune=false
+    argocd.argoproj.io/tracking-id: playbox-root:postgresql.cnpg.io/ScheduledBackup:database/playbox-postgres-daily
+  labels:
+    app.kubernetes.io/part-of: playbox-platform
+spec:
+  schedule: "0 0 3 * * *"
+  immediate: true
+  backupOwnerReference: self
+  cluster:
+    name: playbox-postgres
+  method: plugin
+  pluginConfiguration:
+    name: barman-cloud.cloudnative-pg.io

@@ -8,3 +8,4 @@ resources:
   - platform/sops-diagnostics
   - storage/rook-ceph
   - security/observability
+  - data/postgresql
