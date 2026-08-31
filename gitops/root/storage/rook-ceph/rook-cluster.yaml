@@ -5,6 +5,7 @@ metadata:
   name: playbox-ceph-block
   annotations:
     storageclass.kubernetes.io/is-default-class: 'false'
+    argocd.argoproj.io/tracking-id: playbox-root:storage.k8s.io/StorageClass:rook-ceph/playbox-ceph-block
     argocd.argoproj.io/sync-wave: '-3'
     argocd.argoproj.io/sync-options: Prune=false
   labels:
@@ -36,6 +37,7 @@ metadata:
   name: playbox-block
   namespace: rook-ceph
   annotations:
+    argocd.argoproj.io/tracking-id: playbox-root:ceph.rook.io/CephBlockPool:rook-ceph/playbox-block
     argocd.argoproj.io/sync-wave: '-4'
     argocd.argoproj.io/sync-options: Prune=false
   labels:
@@ -54,6 +56,7 @@ metadata:
   name: rook-ceph
   namespace: rook-ceph
   annotations:
+    argocd.argoproj.io/tracking-id: playbox-root:ceph.rook.io/CephCluster:rook-ceph/rook-ceph
     argocd.argoproj.io/sync-wave: '-5'
     argocd.argoproj.io/sync-options: Prune=false
   labels:
@@ -186,8 +189,12 @@ spec:
         memory: 50Mi
   security:
     cephx:
+      allowedCiphers:
+      - aes256k
       csi:
-        keyType: aes
+        keyGeneration: 2
+        keyRotationPolicy: KeyGeneration
+        keyType: aes256k
   skipUpgradeChecks: false
   storage:
     config:
@@ -217,6 +224,7 @@ metadata:
   name: prometheus-ceph-rules
   namespace: monitoring
   annotations:
+    argocd.argoproj.io/tracking-id: playbox-root:monitoring.coreos.com/PrometheusRule:monitoring/prometheus-ceph-rules
     argocd.argoproj.io/sync-wave: '-4'
 spec:
   groups:

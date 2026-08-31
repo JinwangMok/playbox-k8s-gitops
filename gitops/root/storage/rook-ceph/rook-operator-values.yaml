@@ -15,6 +15,9 @@ monitoring:
   enabled: true
 csi:
   installCsiOperator: true
+  cephcsi:
+    repository: quay.io/cephcsi/cephcsi
+    tag: v3.17.1
   serviceMonitor:
     enabled: true
     namespace: rook-ceph
