@@ -1,0 +1,354 @@
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: playbox-loki
+  namespace: security-observability
+  labels:
+    helm.sh/chart: loki-18.11.7
+    app.kubernetes.io/name: loki
+    app.kubernetes.io/instance: playbox-loki
+    app.kubernetes.io/version: 3.7.7
+    app.kubernetes.io/part-of: playbox-platform
+  annotations:
+    argocd.argoproj.io/sync-wave: '-1'
+    argocd.argoproj.io/tracking-id: playbox-root:/ServiceAccount:security-observability/playbox-loki
+automountServiceAccountToken: false
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: loki
+  namespace: security-observability
+  labels:
+    helm.sh/chart: loki-18.11.7
+    app.kubernetes.io/name: loki
+    app.kubernetes.io/instance: playbox-loki
+    app.kubernetes.io/version: 3.7.7
+    app.kubernetes.io/part-of: playbox-platform
+  annotations:
+    argocd.argoproj.io/sync-wave: '-1'
+    argocd.argoproj.io/tracking-id: playbox-root:/ConfigMap:security-observability/loki
+data:
+  config.yaml: "\nanalytics:\n  reporting_enabled: false\nauth_enabled: false\nbloom_build:\n  builder:\n    planner_address: \"\"\n  enabled: false\nbloom_gateway:\n  client:\n    addresses: \"\"\n  enabled: false\ncommon:\n  compactor_grpc_address: 'playbox-loki.security-observability.svc.cluster.local:9095'\n  path_prefix: /var/loki\n  replication_factor: 1\n  storage:\n    filesystem:\n      chunks_directory: /var/loki/chunks\n      rules_directory: /var/loki/rules\ncompactor:\n  delete_request_store: filesystem\n  retention_enabled: true\nfrontend:\n  scheduler_address: \"\"\n  tail_proxy_url: \"\"\nfrontend_worker:\n  scheduler_address: \"\"\nindex_gateway:\n  mode: simple\ningester:\n  wal:\n    flush_on_shutdown: true\nlimits_config:\n  max_cache_freshness_per_query: 10m\n  query_timeout: 300s\n  reject_old_samples: true\n  reject_old_samples_max_age: 168h\n  retention_period: 168h\n  split_queries_by_interval: 15m\n  volume_enabled: false\nmemberlist:\n  abort_if_cluster_join_fails:\
+    \ true\n  advertise_port: 7946\n  bind_port: 7946\n  join_members:\n  - playbox-loki-memberlist.security-observability.svc.cluster.local\n  max_join_backoff: 1m\n  max_join_retries: 10\n  min_join_backoff: 1s\n  rejoin_interval: 90s\npattern_ingester:\n  enabled: false\nquery_range:\n  align_queries_with_step: true\nruler:\n  storage:\n    type: local\n  wal:\n    dir: /var/loki/ruler-wal\nruntime_config:\n  file: /etc/loki/runtime-config/runtime-config.yaml\nschema_config:\n  configs:\n  - from: \"2024-04-01\"\n    index:\n      period: 24h\n      prefix: index_\n    object_store: filesystem\n    schema: v13\n    store: tsdb\nserver:\n  graceful_shutdown_timeout: 5s\n  grpc_listen_port: 9095\n  grpc_server_max_concurrent_streams: 1000\n  grpc_server_max_recv_msg_size: 104857600\n  grpc_server_max_send_msg_size: 104857600\n  grpc_server_min_time_between_pings: 10s\n  grpc_server_ping_without_stream_allowed: true\n  http_listen_port: 3100\n  http_server_idle_timeout: 30s\n  http_server_read_timeout:\
+    \ 10m0s\n  http_server_write_timeout: 10m0s\n  log_level: info\nstorage_config:\n  bloom_shipper:\n    working_directory: /var/loki/data/bloomshipper\n  boltdb_shipper:\n    index_gateway_client:\n      server_address: \"\"\n  hedging:\n    at: 250ms\n    max_per_second: 20\n    up_to: 3\n  tsdb_shipper:\n    index_gateway_client:\n      server_address: \"\"\n  use_thanos_objstore: false\ntracing:\n  enabled: false\n"
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: loki-runtime
+  namespace: security-observability
+  labels:
+    helm.sh/chart: loki-18.11.7
+    app.kubernetes.io/name: loki
+    app.kubernetes.io/instance: playbox-loki
+    app.kubernetes.io/version: 3.7.7
+    app.kubernetes.io/part-of: playbox-platform
+  annotations:
+    argocd.argoproj.io/sync-wave: '-1'
+    argocd.argoproj.io/tracking-id: playbox-root:/ConfigMap:security-observability/loki-runtime
+data:
+  runtime-config.yaml: '{}
+
+    '
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: playbox-loki
+  namespace: security-observability
+  labels:
+    helm.sh/chart: loki-18.11.7
+    app.kubernetes.io/name: loki
+    app.kubernetes.io/instance: playbox-loki
+    app.kubernetes.io/version: 3.7.7
+    app.kubernetes.io/component: single-binary
+    app.kubernetes.io/part-of: playbox-platform
+  annotations:
+    argocd.argoproj.io/sync-wave: '-1'
+    argocd.argoproj.io/tracking-id: playbox-root:/Service:security-observability/playbox-loki
+spec:
+  type: ClusterIP
+  publishNotReadyAddresses: true
+  ports:
+  - name: http-metrics
+    port: 3100
+    targetPort: http-metrics
+    protocol: TCP
+  - name: grpc
+    port: 9095
+    targetPort: grpc
+    protocol: TCP
+  - name: grpclb
+    port: 9096
+    targetPort: grpc
+    protocol: TCP
+  selector:
+    app.kubernetes.io/name: loki
+    app.kubernetes.io/instance: playbox-loki
+    app.kubernetes.io/component: single-binary
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: playbox-loki-headless
+  namespace: security-observability
+  labels:
+    helm.sh/chart: loki-18.11.7
+    app.kubernetes.io/name: loki
+    app.kubernetes.io/instance: playbox-loki
+    app.kubernetes.io/version: 3.7.7
+    app.kubernetes.io/component: single-binary
+    prometheus.io/service-monitor: 'false'
+    variant: headless
+    app.kubernetes.io/part-of: playbox-platform
+  annotations:
+    argocd.argoproj.io/sync-wave: '-1'
+    argocd.argoproj.io/tracking-id: playbox-root:/Service:security-observability/playbox-loki-headless
+spec:
+  clusterIP: None
+  type: ClusterIP
+  publishNotReadyAddresses: true
+  ports:
+  - name: http-metrics
+    port: 3100
+    targetPort: http-metrics
+    protocol: TCP
+  - name: grpc
+    port: 9095
+    targetPort: grpc
+    protocol: TCP
+  - name: grpclb
+    port: 9096
+    targetPort: grpc
+    protocol: TCP
+  selector:
+    app.kubernetes.io/name: loki
+    app.kubernetes.io/instance: playbox-loki
+    app.kubernetes.io/component: single-binary
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: playbox-loki-memberlist
+  namespace: security-observability
+  labels:
+    helm.sh/chart: loki-18.11.7
+    app.kubernetes.io/name: loki
+    app.kubernetes.io/instance: playbox-loki
+    app.kubernetes.io/version: 3.7.7
+    app.kubernetes.io/part-of: playbox-platform
+  annotations:
+    argocd.argoproj.io/sync-wave: '-1'
+    argocd.argoproj.io/tracking-id: playbox-root:/Service:security-observability/playbox-loki-memberlist
+spec:
+  type: ClusterIP
+  clusterIP: None
+  ports:
+  - name: tcp
+    port: 7946
+    targetPort: http-memberlist
+    protocol: TCP
+  publishNotReadyAddresses: true
+  selector:
+    app.kubernetes.io/name: loki
+    app.kubernetes.io/instance: playbox-loki
+    app.kubernetes.io/part-of: memberlist
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: playbox-loki
+  namespace: security-observability
+  labels:
+    helm.sh/chart: loki-18.11.7
+    app.kubernetes.io/name: loki
+    app.kubernetes.io/instance: playbox-loki
+    app.kubernetes.io/version: 3.7.7
+    app.kubernetes.io/component: single-binary
+    app.kubernetes.io/part-of: playbox-platform
+  annotations:
+    argocd.argoproj.io/sync-wave: '-1'
+    argocd.argoproj.io/tracking-id: playbox-root:apps/StatefulSet:security-observability/playbox-loki
+spec:
+  replicas: 1
+  podManagementPolicy: Parallel
+  updateStrategy:
+    rollingUpdate:
+      partition: 0
+  serviceName: playbox-loki-headless
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: loki
+      app.kubernetes.io/instance: playbox-loki
+      app.kubernetes.io/component: single-binary
+  template:
+    metadata:
+      annotations:
+        checksum/config: 5be19e369333548a0eaa0656fd902dbefa4badac6e07035d8526a70af8302ff6
+        storage/size: 20Gi
+        kubectl.kubernetes.io/default-container: loki
+      labels:
+        helm.sh/chart: loki-18.11.7
+        app.kubernetes.io/name: loki
+        app.kubernetes.io/instance: playbox-loki
+        app.kubernetes.io/version: 3.7.7
+        app.kubernetes.io/component: single-binary
+        app.kubernetes.io/part-of: memberlist
+    spec:
+      serviceAccountName: playbox-loki
+      enableServiceLinks: true
+      automountServiceAccountToken: false
+      securityContext:
+        fsGroup: 10001
+        fsGroupChangePolicy: OnRootMismatch
+        runAsGroup: 10001
+        runAsNonRoot: true
+        runAsUser: 10001
+        seccompProfile:
+          type: RuntimeDefault
+      terminationGracePeriodSeconds: 30
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchLabels:
+                app.kubernetes.io/component: single-binary
+                app.kubernetes.io/instance: playbox-loki
+                app.kubernetes.io/name: loki
+            topologyKey: kubernetes.io/hostname
+      volumes:
+      - name: temp
+        emptyDir: {}
+      - name: config
+        configMap:
+          name: loki
+          items:
+          - key: config.yaml
+            path: config.yaml
+      - name: runtime-config
+        configMap:
+          name: loki-runtime
+      containers:
+      - name: loki
+        image: docker.io/grafana/loki:3.7.7
+        imagePullPolicy: IfNotPresent
+        args:
+        - -config.file=/etc/loki/config/config.yaml
+        - -config.expand-env=true
+        - -memberlist.advertise-addr=$(POD_IP)
+        - -target=all
+        ports:
+        - name: http-metrics
+          containerPort: 3100
+          protocol: TCP
+        - name: grpc
+          containerPort: 9095
+          protocol: TCP
+        - name: http-memberlist
+          containerPort: 7946
+          protocol: TCP
+        env:
+        - name: GOMEMLIMIT
+          value: 1740MiB
+        - name: GOGC
+          value: '80'
+        - name: POD_IP
+          valueFrom:
+            fieldRef:
+              fieldPath: status.podIP
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - ALL
+          readOnlyRootFilesystem: true
+          seccompProfile:
+            type: RuntimeDefault
+        livenessProbe:
+          failureThreshold: 10
+          httpGet:
+            path: /loki/api/v1/status/buildinfo
+            port: http-metrics
+          periodSeconds: 30
+          successThreshold: 1
+          timeoutSeconds: 1
+        readinessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /ready
+            port: http-metrics
+          initialDelaySeconds: 15
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 1
+        volumeMounts:
+        - name: config
+          mountPath: /etc/loki/config
+        - name: runtime-config
+          mountPath: /etc/loki/runtime-config
+        - name: storage
+          mountPath: /var/loki
+        - name: temp
+          mountPath: /tmp
+        resources:
+          limits:
+            cpu: '2'
+            memory: 2Gi
+          requests:
+            cpu: 100m
+            memory: 512Mi
+  volumeClaimTemplates:
+  - apiVersion: v1
+    kind: PersistentVolumeClaim
+    metadata:
+      name: storage
+    spec:
+      storageClassName: playbox-ceph-block
+      accessModes:
+      - ReadWriteOnce
+      resources:
+        requests:
+          storage: 20Gi
+---
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: playbox-loki
+  namespace: security-observability
+  labels:
+    helm.sh/chart: loki-18.11.7
+    app.kubernetes.io/name: loki
+    app.kubernetes.io/instance: playbox-loki
+    app.kubernetes.io/version: 3.7.7
+    release: playbox-monitoring
+    app.kubernetes.io/part-of: playbox-platform
+  annotations:
+    argocd.argoproj.io/sync-wave: '-1'
+    argocd.argoproj.io/tracking-id: playbox-root:monitoring.coreos.com/ServiceMonitor:security-observability/playbox-loki
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: loki
+      app.kubernetes.io/instance: playbox-loki
+    matchExpressions:
+    - key: prometheus.io/service-monitor
+      operator: NotIn
+      values:
+      - 'false'
+  endpoints:
+  - port: http-metrics
+    path: /metrics
+    interval: 15s
+    relabelings:
+    - sourceLabels:
+      - job
+      action: replace
+      replacement: security-observability/$1
+      targetLabel: job
+    - action: replace
+      replacement: playbox-loki
+      targetLabel: app_instance
+    scheme: http

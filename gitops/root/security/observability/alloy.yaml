@@ -1,0 +1,224 @@
+---
+apiVersion: v1
+kind: ServiceAccount
+automountServiceAccountToken: false
+metadata:
+  name: playbox-alloy
+  namespace: security-observability
+  labels:
+    helm.sh/chart: alloy-1.12.1
+    app.kubernetes.io/name: alloy
+    app.kubernetes.io/instance: playbox-alloy
+    app.kubernetes.io/version: v1.19.2
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/part-of: playbox-platform
+    app.kubernetes.io/component: rbac
+  annotations:
+    argocd.argoproj.io/sync-wave: '0'
+    argocd.argoproj.io/tracking-id: playbox-root:/ServiceAccount:security-observability/playbox-alloy
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: playbox-alloy
+  namespace: security-observability
+  labels:
+    helm.sh/chart: alloy-1.12.1
+    app.kubernetes.io/name: alloy
+    app.kubernetes.io/instance: playbox-alloy
+    app.kubernetes.io/version: v1.19.2
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/part-of: playbox-platform
+    app.kubernetes.io/component: config
+  annotations:
+    argocd.argoproj.io/sync-wave: '0'
+    argocd.argoproj.io/tracking-id: playbox-root:/ConfigMap:security-observability/playbox-alloy
+data:
+  config.alloy: "local.file_match \"kubernetes_audit\" {\n  path_targets = [{\n    \"__path__\" = \"/var/log/kubernetes/audit/audit.log\",\n    \"job\" = \"kubernetes-audit\",\n    \"node\" = \"playbox-cp0\",\n  }]\n}\n\nloki.source.file \"kubernetes_audit\" {\n  targets = local.file_match.kubernetes_audit.targets\n  forward_to = [loki.process.kubernetes_audit.receiver]\n  tail_from_end = false\n}\n\nloki.process \"kubernetes_audit\" {\n  stage.json {\n    expressions = {\n      audit_id = \"auditID\",\n      verb = \"verb\",\n      username = \"user.username\",\n      resource = \"objectRef.resource\",\n      namespace = \"objectRef.namespace\",\n      response_code = \"responseStatus.code\",\n    }\n  }\n  stage.labels {\n    values = {\n      verb = \"\",\n      resource = \"\",\n      response_code = \"\",\n    }\n  }\n  stage.static_labels {\n    values = {\n      cluster = \"playbox\",\n      source = \"kubernetes-audit\",\n      node = \"playbox-cp0\",\n    }\n  }\n  forward_to =\
+    \ [loki.write.playbox.receiver]\n}\n\nloki.write \"playbox\" {\n  endpoint {\n    url = \"http://playbox-loki.security-observability.svc.cluster.local:3100/loki/api/v1/push\"\n  }\n}"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: playbox-alloy
+  namespace: security-observability
+  labels:
+    helm.sh/chart: alloy-1.12.1
+    app.kubernetes.io/name: alloy
+    app.kubernetes.io/instance: playbox-alloy
+    app.kubernetes.io/version: v1.19.2
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/part-of: playbox-platform
+    app.kubernetes.io/component: networking
+  annotations:
+    argocd.argoproj.io/sync-wave: '0'
+    argocd.argoproj.io/tracking-id: playbox-root:/Service:security-observability/playbox-alloy
+spec:
+  type: ClusterIP
+  selector:
+    app.kubernetes.io/name: alloy
+    app.kubernetes.io/instance: playbox-alloy
+  internalTrafficPolicy: Cluster
+  ports:
+  - name: http-metrics
+    port: 12345
+    targetPort: 12345
+    protocol: TCP
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: playbox-alloy
+  namespace: security-observability
+  labels:
+    helm.sh/chart: alloy-1.12.1
+    app.kubernetes.io/name: alloy
+    app.kubernetes.io/instance: playbox-alloy
+    app.kubernetes.io/version: v1.19.2
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/part-of: playbox-platform
+  annotations:
+    argocd.argoproj.io/sync-wave: '0'
+    argocd.argoproj.io/tracking-id: playbox-root:apps/Deployment:security-observability/playbox-alloy
+spec:
+  replicas: 1
+  minReadySeconds: 10
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: alloy
+      app.kubernetes.io/instance: playbox-alloy
+  template:
+    metadata:
+      annotations:
+        kubectl.kubernetes.io/default-container: alloy
+      labels:
+        app.kubernetes.io/name: alloy
+        app.kubernetes.io/instance: playbox-alloy
+    spec:
+      serviceAccountName: playbox-alloy
+      containers:
+      - name: alloy
+        image: docker.io/grafana/alloy:v1.19.2
+        imagePullPolicy: IfNotPresent
+        args:
+        - run
+        - /etc/alloy/config.alloy
+        - --storage.path=/tmp/alloy
+        - --server.http.listen-addr=0.0.0.0:12345
+        - --server.http.ui-path-prefix=/
+        - --disable-reporting
+        - --stability.level=generally-available
+        env:
+        - name: ALLOY_DEPLOY_MODE
+          value: helm
+        - name: HOSTNAME
+          valueFrom:
+            fieldRef:
+              fieldPath: spec.nodeName
+        - name: K8S_NODE_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: spec.nodeName
+        ports:
+        - containerPort: 12345
+          name: http-metrics
+        readinessProbe:
+          httpGet:
+            path: /-/ready
+            port: 12345
+            scheme: HTTP
+          initialDelaySeconds: 10
+          timeoutSeconds: 1
+        resources:
+          limits:
+            cpu: 500m
+            memory: 256Mi
+          requests:
+            cpu: 25m
+            memory: 64Mi
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - ALL
+          readOnlyRootFilesystem: true
+          runAsNonRoot: false
+          runAsUser: 0
+          seccompProfile:
+            type: RuntimeDefault
+        volumeMounts:
+        - name: config
+          mountPath: /etc/alloy
+        - mountPath: /var/log/kubernetes/audit
+          name: audit-log
+          readOnly: true
+        - mountPath: /tmp/alloy
+          name: alloy-storage
+      - name: config-reloader
+        image: quay.io/prometheus-operator/prometheus-config-reloader:v0.91.0@sha256:7d9e4eea5f1139e602508871f422b0116c60e87c662f3dcd234d5ab60cd0d8c1
+        imagePullPolicy: IfNotPresent
+        args:
+        - --watched-dir=/etc/alloy
+        - --reload-url=http://localhost:12345/-/reload
+        volumeMounts:
+        - name: config
+          mountPath: /etc/alloy
+        resources:
+          requests:
+            cpu: 10m
+            memory: 50Mi
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - ALL
+          readOnlyRootFilesystem: true
+          runAsGroup: 65534
+          runAsNonRoot: true
+          runAsUser: 65534
+          seccompProfile:
+            type: RuntimeDefault
+      dnsPolicy: ClusterFirst
+      nodeSelector:
+        kubernetes.io/hostname: playbox-cp0
+      tolerations:
+      - effect: NoSchedule
+        key: node-role.kubernetes.io/control-plane
+        operator: Exists
+      volumes:
+      - name: config
+        configMap:
+          name: playbox-alloy
+      - hostPath:
+          path: /var/log/kubernetes/audit
+          type: Directory
+        name: audit-log
+      - emptyDir: {}
+        name: alloy-storage
+---
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: playbox-alloy
+  namespace: security-observability
+  labels:
+    helm.sh/chart: alloy-1.12.1
+    app.kubernetes.io/name: alloy
+    app.kubernetes.io/instance: playbox-alloy
+    app.kubernetes.io/version: v1.19.2
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/part-of: playbox-platform
+    app.kubernetes.io/component: metrics
+    release: playbox-monitoring
+  annotations:
+    argocd.argoproj.io/sync-wave: '0'
+    argocd.argoproj.io/tracking-id: playbox-root:monitoring.coreos.com/ServiceMonitor:security-observability/playbox-alloy
+spec:
+  endpoints:
+  - port: http-metrics
+    scheme: http
+    honorLabels: true
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: alloy
+      app.kubernetes.io/instance: playbox-alloy

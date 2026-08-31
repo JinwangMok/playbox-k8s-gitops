@@ -1,5 +1,5 @@
 {
-  "resourceCount": 297,
+  "resourceCount": 312,
   "resources": [
     {
       "apiVersion": "v1",
@@ -27,6 +27,13 @@
       "kind": "Namespace",
       "namespace": "",
       "name": "rook-ceph",
+      "pruneFalse": true
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Namespace",
+      "namespace": "",
+      "name": "security-observability",
       "pruneFalse": true
     },
     {
@@ -524,6 +531,20 @@
       "kind": "ServiceAccount",
       "namespace": "rook-ceph",
       "name": "rook-ceph-system",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "ServiceAccount",
+      "namespace": "security-observability",
+      "name": "playbox-alloy",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "ServiceAccount",
+      "namespace": "security-observability",
+      "name": "playbox-loki",
       "pruneFalse": false
     },
     {
@@ -1237,6 +1258,13 @@
       "apiVersion": "v1",
       "kind": "ConfigMap",
       "namespace": "monitoring",
+      "name": "playbox-loki-datasource",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "ConfigMap",
+      "namespace": "monitoring",
       "name": "playbox-monitoring-apiserver",
       "pruneFalse": false
     },
@@ -1445,6 +1473,27 @@
     },
     {
       "apiVersion": "v1",
+      "kind": "ConfigMap",
+      "namespace": "security-observability",
+      "name": "loki",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "ConfigMap",
+      "namespace": "security-observability",
+      "name": "loki-runtime",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "ConfigMap",
+      "namespace": "security-observability",
+      "name": "playbox-alloy",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "v1",
       "kind": "Secret",
       "namespace": "argocd",
       "name": "argocd-notifications-secret",
@@ -1565,6 +1614,34 @@
     {
       "apiVersion": "v1",
       "kind": "Service",
+      "namespace": "security-observability",
+      "name": "playbox-alloy",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Service",
+      "namespace": "security-observability",
+      "name": "playbox-loki",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Service",
+      "namespace": "security-observability",
+      "name": "playbox-loki-headless",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Service",
+      "namespace": "security-observability",
+      "name": "playbox-loki-memberlist",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Service",
       "namespace": "sops-system",
       "name": "sops-operator-metrics",
       "pruneFalse": false
@@ -1656,6 +1733,13 @@
     {
       "apiVersion": "apps/v1",
       "kind": "Deployment",
+      "namespace": "security-observability",
+      "name": "playbox-alloy",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "apps/v1",
+      "kind": "Deployment",
       "namespace": "sops-system",
       "name": "sops-operator",
       "pruneFalse": false
@@ -1672,6 +1756,13 @@
       "kind": "StatefulSet",
       "namespace": "monitoring",
       "name": "playbox-monitoring-grafana",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "apps/v1",
+      "kind": "StatefulSet",
+      "namespace": "security-observability",
+      "name": "playbox-loki",
       "pruneFalse": false
     },
     {
@@ -2032,6 +2123,20 @@
       "pruneFalse": false
     },
     {
+      "apiVersion": "monitoring.coreos.com/v1",
+      "kind": "ServiceMonitor",
+      "namespace": "security-observability",
+      "name": "playbox-alloy",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "monitoring.coreos.com/v1",
+      "kind": "ServiceMonitor",
+      "namespace": "security-observability",
+      "name": "playbox-loki",
+      "pruneFalse": false
+    },
+    {
       "apiVersion": "networking.k8s.io/v1",
       "kind": "NetworkPolicy",
       "namespace": "argocd",
@@ -2082,7 +2187,9 @@
     }
   ],
   "workloadImages": {
+    "docker.io/grafana/alloy:v1.19.2": 1,
     "docker.io/grafana/grafana:13.2.0": 1,
+    "docker.io/grafana/loki:3.7.7": 1,
     "docker.io/rook/ceph:v1.20.6": 1,
     "ghcr.io/dexidp/dex:v2.45.1": 1,
     "ghcr.io/peak-scale/sops-operator:0.10.1@sha256:1da9b716b79210f51b1c757b4d5c3bab57df9fdc74e67f2fa274d33603492fd4": 1,
@@ -2091,6 +2198,7 @@
     "quay.io/ceph/ceph:v20.2.4-20260818": 1,
     "quay.io/cephcsi/ceph-csi-operator:v1.0.4": 1,
     "quay.io/kiwigrid/k8s-sidecar:2.10.1": 2,
+    "quay.io/prometheus-operator/prometheus-config-reloader:v0.91.0@sha256:7d9e4eea5f1139e602508871f422b0116c60e87c662f3dcd234d5ab60cd0d8c1": 1,
     "quay.io/prometheus-operator/prometheus-operator:v0.93.1": 1,
     "quay.io/prometheus/node-exporter:v1.12.1-distroless": 1,
     "quay.io/prometheus/prometheus:v3.14.0-distroless": 1,
