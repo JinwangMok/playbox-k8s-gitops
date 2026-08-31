@@ -31,5 +31,5 @@ jobs:
           chmod 0700 "$RUNNER_TEMP/kubectl"
           test "$(sha256sum gitops/root/argocd/install.yaml | cut -d' ' -f1)" = 9a87f2b3e14c278f12501eb0ef5c3955b27cf05370ca425381c6a908cf85a5c5
           "$RUNNER_TEMP/kubectl" kustomize gitops/root > "$RUNNER_TEMP/root.yaml"
-          test "$(sha256sum "$RUNNER_TEMP/root.yaml" | cut -d' ' -f1)" = 6bd6d6c19f9dec783a3e53856c16f2dc2542cb4e260a4810c0dc787afb87b441
+          test "$(sha256sum "$RUNNER_TEMP/root.yaml" | cut -d' ' -f1)" = 400130602df731ed402d4405d83d7a1ca1d0cca1a11e051d56597717338701c7
           git diff --check
