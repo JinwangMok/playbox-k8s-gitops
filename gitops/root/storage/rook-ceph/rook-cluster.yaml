@@ -189,12 +189,8 @@ spec:
         memory: 50Mi
   security:
     cephx:
-      allowedCiphers:
-      - aes256k
       csi:
-        keyGeneration: 2
-        keyRotationPolicy: KeyGeneration
-        keyType: aes256k
+        keyType: aes
   skipUpgradeChecks: false
   storage:
     config:

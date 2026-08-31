@@ -18,14 +18,6 @@ cephClusterSpec:
   continueUpgradeAfterChecksEvenIfNotHealthy: false
   waitTimeoutForHealthyOSDInMinutes: 10
   upgradeOSDRequiresHealthyPGs: false
-  security:
-    cephx:
-      allowedCiphers:
-        - aes256k
-      csi:
-        keyRotationPolicy: KeyGeneration
-        keyGeneration: 2
-        keyType: aes256k
   cleanupPolicy:
     confirmation: ""
     sanitizeDisks:
