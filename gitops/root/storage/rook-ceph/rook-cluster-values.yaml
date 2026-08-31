@@ -1,0 +1,105 @@
+operatorNamespace: rook-ceph
+clusterName: rook-ceph
+kubeVersion: v1.37.0
+cephImage:
+  repository: quay.io/ceph/ceph
+  tag: v20.2.4-20260818
+  allowUnsupported: false
+toolbox:
+  enabled: false
+monitoring:
+  enabled: true
+  metricsDisabled: false
+  createPrometheusRules: true
+  rulesNamespaceOverride: monitoring
+cephClusterSpec:
+  dataDirHostPath: /var/lib/rook
+  skipUpgradeChecks: false
+  continueUpgradeAfterChecksEvenIfNotHealthy: false
+  waitTimeoutForHealthyOSDInMinutes: 10
+  upgradeOSDRequiresHealthyPGs: false
+  cleanupPolicy:
+    confirmation: ""
+    sanitizeDisks:
+      method: quick
+      dataSource: zero
+      iteration: 1
+    allowUninstallWithVolumes: false
+  mon:
+    count: 3
+    allowMultiplePerNode: false
+  mgr:
+    count: 1
+    allowMultiplePerNode: false
+    modules:
+      - name: rook
+        enabled: true
+  dashboard:
+    enabled: false
+    ssl: true
+  crashCollector:
+    disable: false
+  logCollector:
+    enabled: true
+    periodicity: daily
+    maxLogSize: 100M
+  removeOSDsIfOutAndSafeToRemove: false
+  priorityClassNames:
+    mon: system-cluster-critical
+    osd: system-node-critical
+    mgr: system-cluster-critical
+  storage:
+    useAllNodes: false
+    useAllDevices: false
+    config:
+      osdsPerDevice: "1"
+    nodes:
+      - name: playbox-worker0
+        devices:
+          - name: /dev/disk/by-id/ata-SAMSUNG_SSD_PM851_2.5_7mm_128GB_S1CTNSBG213209
+      - name: playbox-worker1
+        devices:
+          - name: /dev/disk/by-id/ata-SK_hynix_SC210_2.5_7MM_128GB_ES56N595310906I5U
+      - name: playbox-worker2
+        devices:
+          - name: /dev/disk/by-id/ata-SK_hynix_SC210_2.5_7MM_128GB_ES56N595310906I45
+  disruptionManagement:
+    managePodBudgets: true
+    osdMaintenanceTimeout: 30
+    pgHealthCheckTimeout: 0
+cephBlockPools:
+  - name: playbox-block
+    spec:
+      failureDomain: host
+      replicated:
+        size: 3
+        requireSafeReplicaSize: true
+      parameters:
+        compression_mode: none
+    storageClass:
+      enabled: true
+      name: playbox-ceph-block
+      isDefault: false
+      reclaimPolicy: Delete
+      allowVolumeExpansion: true
+      volumeBindingMode: Immediate
+      mountOptions:
+        - discard
+      parameters:
+        imageFormat: "2"
+        imageFeatures: layering,exclusive-lock,object-map,fast-diff,deep-flatten
+        csi.storage.k8s.io/fstype: ext4
+        csi.storage.k8s.io/provisioner-secret-name: rook-csi-rbd-provisioner
+        csi.storage.k8s.io/provisioner-secret-namespace: rook-ceph
+        csi.storage.k8s.io/controller-expand-secret-name: rook-csi-rbd-provisioner
+        csi.storage.k8s.io/controller-expand-secret-namespace: rook-ceph
+        csi.storage.k8s.io/controller-publish-secret-name: rook-csi-rbd-provisioner
+        csi.storage.k8s.io/controller-publish-secret-namespace: rook-ceph
+        csi.storage.k8s.io/node-stage-secret-name: rook-csi-rbd-node
+        csi.storage.k8s.io/node-stage-secret-namespace: rook-ceph
+cephFileSystems: []
+cephObjectStores: []
+cephBlockPoolsVolumeSnapshotClass:
+  enabled: false
+cephFileSystemVolumeSnapshotClass:
+  enabled: false
