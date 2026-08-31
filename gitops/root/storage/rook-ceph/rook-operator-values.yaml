@@ -13,6 +13,12 @@ allowLoopDevices: false
 enableDiscoveryDaemon: false
 monitoring:
   enabled: true
+ceph-csi-operator:
+  controllerManager:
+    manager:
+      env:
+        csiServiceAccountPrefix: ""
+        watchNamespace: rook-ceph
 csi:
   installCsiOperator: true
   cephcsi:
