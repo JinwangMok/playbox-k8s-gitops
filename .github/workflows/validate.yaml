@@ -31,8 +31,8 @@ jobs:
           chmod 0700 "$RUNNER_TEMP/kubectl"
           test "$(sha256sum gitops/root/argocd/install.yaml | cut -d' ' -f1)" = 9a87f2b3e14c278f12501eb0ef5c3955b27cf05370ca425381c6a908cf85a5c5
           "$RUNNER_TEMP/kubectl" kustomize gitops/root > "$RUNNER_TEMP/root.yaml"
-          test "$(sha256sum "$RUNNER_TEMP/root.yaml" | cut -d' ' -f1)" = 79a966d755f3e6a1d6f9e1261be13ccf9bb8b36ca318c49b9b334622b567287c
-          test "$(python -c 'import json; x=json.load(open("gitops/root/inventory.json")); print(x["resourceCount"] if len(x["resources"]) == x["resourceCount"] else "invalid")')" = 277
+          test "$(sha256sum "$RUNNER_TEMP/root.yaml" | cut -d' ' -f1)" = e103ec790af7bd9d33f57dacdf4e3d73b06d7647815d9e5d999db340df6322aa
+          test "$(python -c 'import json; x=json.load(open("gitops/root/inventory.json")); print(x["resourceCount"] if len(x["resources"]) == x["resourceCount"] else "invalid")')" = 297
           sops_url=https://github.com/getsops/sops/releases/download/v3.13.3/sops-v3.13.3.linux.amd64
           sops_sha=e5bec3346a873ae91d871550f3e698c1aad962aff462a080e40f25fde17fef6b
           curl --fail --silent --show-error --location "$sops_url" --output "$RUNNER_TEMP/sops"

@@ -1,5 +1,5 @@
 {
-  "resourceCount": 277,
+  "resourceCount": 297,
   "resources": [
     {
       "apiVersion": "v1",
@@ -439,6 +439,34 @@
       "apiVersion": "v1",
       "kind": "ServiceAccount",
       "namespace": "rook-ceph",
+      "name": "ceph-csi-cephfs-ctrlplugin-sa",
+      "pruneFalse": true
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "ServiceAccount",
+      "namespace": "rook-ceph",
+      "name": "ceph-csi-cephfs-nodeplugin-sa",
+      "pruneFalse": true
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "ServiceAccount",
+      "namespace": "rook-ceph",
+      "name": "ceph-csi-rbd-ctrlplugin-sa",
+      "pruneFalse": true
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "ServiceAccount",
+      "namespace": "rook-ceph",
+      "name": "ceph-csi-rbd-nodeplugin-sa",
+      "pruneFalse": true
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "ServiceAccount",
+      "namespace": "rook-ceph",
       "name": "objectstorage-provisioner",
       "pruneFalse": false
     },
@@ -558,8 +586,36 @@
       "apiVersion": "rbac.authorization.k8s.io/v1",
       "kind": "Role",
       "namespace": "rook-ceph",
+      "name": "ceph-csi-cephfs-ctrlplugin-r",
+      "pruneFalse": true
+    },
+    {
+      "apiVersion": "rbac.authorization.k8s.io/v1",
+      "kind": "Role",
+      "namespace": "rook-ceph",
+      "name": "ceph-csi-cephfs-nodeplugin-r",
+      "pruneFalse": true
+    },
+    {
+      "apiVersion": "rbac.authorization.k8s.io/v1",
+      "kind": "Role",
+      "namespace": "rook-ceph",
       "name": "ceph-csi-leader-election-role",
       "pruneFalse": false
+    },
+    {
+      "apiVersion": "rbac.authorization.k8s.io/v1",
+      "kind": "Role",
+      "namespace": "rook-ceph",
+      "name": "ceph-csi-rbd-ctrlplugin-r",
+      "pruneFalse": true
+    },
+    {
+      "apiVersion": "rbac.authorization.k8s.io/v1",
+      "kind": "Role",
+      "namespace": "rook-ceph",
+      "name": "ceph-csi-rbd-nodeplugin-r",
+      "pruneFalse": true
     },
     {
       "apiVersion": "rbac.authorization.k8s.io/v1",
@@ -656,6 +712,20 @@
       "apiVersion": "rbac.authorization.k8s.io/v1",
       "kind": "ClusterRole",
       "namespace": "",
+      "name": "ceph-csi-cephfs-ctrlplugin-cr",
+      "pruneFalse": true
+    },
+    {
+      "apiVersion": "rbac.authorization.k8s.io/v1",
+      "kind": "ClusterRole",
+      "namespace": "",
+      "name": "ceph-csi-cephfs-nodeplugin-cr",
+      "pruneFalse": true
+    },
+    {
+      "apiVersion": "rbac.authorization.k8s.io/v1",
+      "kind": "ClusterRole",
+      "namespace": "",
       "name": "ceph-csi-clientprofile-viewer-role",
       "pruneFalse": false
     },
@@ -728,6 +798,20 @@
       "namespace": "",
       "name": "ceph-csi-operatorconfig-viewer-role",
       "pruneFalse": false
+    },
+    {
+      "apiVersion": "rbac.authorization.k8s.io/v1",
+      "kind": "ClusterRole",
+      "namespace": "",
+      "name": "ceph-csi-rbd-ctrlplugin-cr",
+      "pruneFalse": true
+    },
+    {
+      "apiVersion": "rbac.authorization.k8s.io/v1",
+      "kind": "ClusterRole",
+      "namespace": "",
+      "name": "ceph-csi-rbd-nodeplugin-cr",
+      "pruneFalse": true
     },
     {
       "apiVersion": "rbac.authorization.k8s.io/v1",
@@ -866,8 +950,36 @@
       "apiVersion": "rbac.authorization.k8s.io/v1",
       "kind": "RoleBinding",
       "namespace": "rook-ceph",
+      "name": "ceph-csi-cephfs-ctrlplugin-rb",
+      "pruneFalse": true
+    },
+    {
+      "apiVersion": "rbac.authorization.k8s.io/v1",
+      "kind": "RoleBinding",
+      "namespace": "rook-ceph",
+      "name": "ceph-csi-cephfs-nodeplugin-rb",
+      "pruneFalse": true
+    },
+    {
+      "apiVersion": "rbac.authorization.k8s.io/v1",
+      "kind": "RoleBinding",
+      "namespace": "rook-ceph",
       "name": "ceph-csi-leader-election-rolebinding",
       "pruneFalse": false
+    },
+    {
+      "apiVersion": "rbac.authorization.k8s.io/v1",
+      "kind": "RoleBinding",
+      "namespace": "rook-ceph",
+      "name": "ceph-csi-rbd-ctrlplugin-rb",
+      "pruneFalse": true
+    },
+    {
+      "apiVersion": "rbac.authorization.k8s.io/v1",
+      "kind": "RoleBinding",
+      "namespace": "rook-ceph",
+      "name": "ceph-csi-rbd-nodeplugin-rb",
+      "pruneFalse": true
     },
     {
       "apiVersion": "rbac.authorization.k8s.io/v1",
@@ -964,6 +1076,20 @@
       "apiVersion": "rbac.authorization.k8s.io/v1",
       "kind": "ClusterRoleBinding",
       "namespace": "",
+      "name": "ceph-csi-cephfs-ctrlplugin-crb",
+      "pruneFalse": true
+    },
+    {
+      "apiVersion": "rbac.authorization.k8s.io/v1",
+      "kind": "ClusterRoleBinding",
+      "namespace": "",
+      "name": "ceph-csi-cephfs-nodeplugin-crb",
+      "pruneFalse": true
+    },
+    {
+      "apiVersion": "rbac.authorization.k8s.io/v1",
+      "kind": "ClusterRoleBinding",
+      "namespace": "",
       "name": "ceph-csi-manager-rolebinding",
       "pruneFalse": false
     },
@@ -973,6 +1099,20 @@
       "namespace": "",
       "name": "ceph-csi-metrics-auth-rolebinding",
       "pruneFalse": false
+    },
+    {
+      "apiVersion": "rbac.authorization.k8s.io/v1",
+      "kind": "ClusterRoleBinding",
+      "namespace": "",
+      "name": "ceph-csi-rbd-ctrlplugin-crb",
+      "pruneFalse": true
+    },
+    {
+      "apiVersion": "rbac.authorization.k8s.io/v1",
+      "kind": "ClusterRoleBinding",
+      "namespace": "",
+      "name": "ceph-csi-rbd-nodeplugin-crb",
+      "pruneFalse": true
     },
     {
       "apiVersion": "rbac.authorization.k8s.io/v1",

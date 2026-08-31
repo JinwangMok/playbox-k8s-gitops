@@ -17,7 +17,7 @@ ceph-csi-operator:
   controllerManager:
     manager:
       env:
-        csiServiceAccountPrefix: ""
+        csiServiceAccountPrefix: ceph-csi-
         watchNamespace: rook-ceph
 csi:
   installCsiOperator: true
