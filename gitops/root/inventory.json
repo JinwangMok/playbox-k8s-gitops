@@ -1,11 +1,32 @@
 {
-  "resourceCount": 312,
+  "resourceCount": 408,
   "resources": [
     {
       "apiVersion": "v1",
       "kind": "Namespace",
       "namespace": "",
       "name": "argocd",
+      "pruneFalse": true
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Namespace",
+      "namespace": "",
+      "name": "cert-manager",
+      "pruneFalse": true
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Namespace",
+      "namespace": "",
+      "name": "cnpg-system",
+      "pruneFalse": true
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Namespace",
+      "namespace": "",
+      "name": "database",
       "pruneFalse": true
     },
     {
@@ -90,6 +111,13 @@
       "kind": "CustomResourceDefinition",
       "namespace": "",
       "name": "appprojects.argoproj.io",
+      "pruneFalse": true
+    },
+    {
+      "apiVersion": "apiextensions.k8s.io/v1",
+      "kind": "CustomResourceDefinition",
+      "namespace": "",
+      "name": "backups.postgresql.cnpg.io",
       "pruneFalse": true
     },
     {
@@ -236,6 +264,27 @@
       "apiVersion": "apiextensions.k8s.io/v1",
       "kind": "CustomResourceDefinition",
       "namespace": "",
+      "name": "certificaterequests.cert-manager.io",
+      "pruneFalse": true
+    },
+    {
+      "apiVersion": "apiextensions.k8s.io/v1",
+      "kind": "CustomResourceDefinition",
+      "namespace": "",
+      "name": "certificates.cert-manager.io",
+      "pruneFalse": true
+    },
+    {
+      "apiVersion": "apiextensions.k8s.io/v1",
+      "kind": "CustomResourceDefinition",
+      "namespace": "",
+      "name": "challenges.acme.cert-manager.io",
+      "pruneFalse": true
+    },
+    {
+      "apiVersion": "apiextensions.k8s.io/v1",
+      "kind": "CustomResourceDefinition",
+      "namespace": "",
       "name": "clientprofilemappings.csi.ceph.io",
       "pruneFalse": true
     },
@@ -250,6 +299,41 @@
       "apiVersion": "apiextensions.k8s.io/v1",
       "kind": "CustomResourceDefinition",
       "namespace": "",
+      "name": "clusterimagecatalogs.postgresql.cnpg.io",
+      "pruneFalse": true
+    },
+    {
+      "apiVersion": "apiextensions.k8s.io/v1",
+      "kind": "CustomResourceDefinition",
+      "namespace": "",
+      "name": "clusterissuers.cert-manager.io",
+      "pruneFalse": true
+    },
+    {
+      "apiVersion": "apiextensions.k8s.io/v1",
+      "kind": "CustomResourceDefinition",
+      "namespace": "",
+      "name": "clusters.postgresql.cnpg.io",
+      "pruneFalse": true
+    },
+    {
+      "apiVersion": "apiextensions.k8s.io/v1",
+      "kind": "CustomResourceDefinition",
+      "namespace": "",
+      "name": "databaseroles.postgresql.cnpg.io",
+      "pruneFalse": true
+    },
+    {
+      "apiVersion": "apiextensions.k8s.io/v1",
+      "kind": "CustomResourceDefinition",
+      "namespace": "",
+      "name": "databases.postgresql.cnpg.io",
+      "pruneFalse": true
+    },
+    {
+      "apiVersion": "apiextensions.k8s.io/v1",
+      "kind": "CustomResourceDefinition",
+      "namespace": "",
       "name": "drivers.csi.ceph.io",
       "pruneFalse": true
     },
@@ -257,7 +341,28 @@
       "apiVersion": "apiextensions.k8s.io/v1",
       "kind": "CustomResourceDefinition",
       "namespace": "",
+      "name": "failoverquorums.postgresql.cnpg.io",
+      "pruneFalse": true
+    },
+    {
+      "apiVersion": "apiextensions.k8s.io/v1",
+      "kind": "CustomResourceDefinition",
+      "namespace": "",
       "name": "globalsopssecrets.addons.projectcapsule.dev",
+      "pruneFalse": true
+    },
+    {
+      "apiVersion": "apiextensions.k8s.io/v1",
+      "kind": "CustomResourceDefinition",
+      "namespace": "",
+      "name": "imagecatalogs.postgresql.cnpg.io",
+      "pruneFalse": true
+    },
+    {
+      "apiVersion": "apiextensions.k8s.io/v1",
+      "kind": "CustomResourceDefinition",
+      "namespace": "",
+      "name": "issuers.cert-manager.io",
       "pruneFalse": true
     },
     {
@@ -278,6 +383,13 @@
       "apiVersion": "apiextensions.k8s.io/v1",
       "kind": "CustomResourceDefinition",
       "namespace": "",
+      "name": "objectstores.barmancloud.cnpg.io",
+      "pruneFalse": true
+    },
+    {
+      "apiVersion": "apiextensions.k8s.io/v1",
+      "kind": "CustomResourceDefinition",
+      "namespace": "",
       "name": "operatorconfigs.csi.ceph.io",
       "pruneFalse": true
     },
@@ -285,7 +397,21 @@
       "apiVersion": "apiextensions.k8s.io/v1",
       "kind": "CustomResourceDefinition",
       "namespace": "",
+      "name": "orders.acme.cert-manager.io",
+      "pruneFalse": true
+    },
+    {
+      "apiVersion": "apiextensions.k8s.io/v1",
+      "kind": "CustomResourceDefinition",
+      "namespace": "",
       "name": "podmonitors.monitoring.coreos.com",
+      "pruneFalse": true
+    },
+    {
+      "apiVersion": "apiextensions.k8s.io/v1",
+      "kind": "CustomResourceDefinition",
+      "namespace": "",
+      "name": "poolers.postgresql.cnpg.io",
       "pruneFalse": true
     },
     {
@@ -320,6 +446,20 @@
       "apiVersion": "apiextensions.k8s.io/v1",
       "kind": "CustomResourceDefinition",
       "namespace": "",
+      "name": "publications.postgresql.cnpg.io",
+      "pruneFalse": true
+    },
+    {
+      "apiVersion": "apiextensions.k8s.io/v1",
+      "kind": "CustomResourceDefinition",
+      "namespace": "",
+      "name": "scheduledbackups.postgresql.cnpg.io",
+      "pruneFalse": true
+    },
+    {
+      "apiVersion": "apiextensions.k8s.io/v1",
+      "kind": "CustomResourceDefinition",
+      "namespace": "",
       "name": "scrapeconfigs.monitoring.coreos.com",
       "pruneFalse": true
     },
@@ -342,6 +482,13 @@
       "kind": "CustomResourceDefinition",
       "namespace": "",
       "name": "sopssecrets.addons.projectcapsule.dev",
+      "pruneFalse": true
+    },
+    {
+      "apiVersion": "apiextensions.k8s.io/v1",
+      "kind": "CustomResourceDefinition",
+      "namespace": "",
+      "name": "subscriptions.postgresql.cnpg.io",
       "pruneFalse": true
     },
     {
@@ -399,6 +546,41 @@
       "namespace": "argocd",
       "name": "argocd-server",
       "pruneFalse": true
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "ServiceAccount",
+      "namespace": "cert-manager",
+      "name": "cert-manager",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "ServiceAccount",
+      "namespace": "cert-manager",
+      "name": "cert-manager-cainjector",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "ServiceAccount",
+      "namespace": "cert-manager",
+      "name": "cert-manager-webhook",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "ServiceAccount",
+      "namespace": "cnpg-system",
+      "name": "cnpg-manager",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "ServiceAccount",
+      "namespace": "cnpg-system",
+      "name": "plugin-barman-cloud",
+      "pruneFalse": false
     },
     {
       "apiVersion": "v1",
@@ -599,6 +781,34 @@
     {
       "apiVersion": "rbac.authorization.k8s.io/v1",
       "kind": "Role",
+      "namespace": "cert-manager",
+      "name": "cert-manager-webhook:dynamic-serving",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "rbac.authorization.k8s.io/v1",
+      "kind": "Role",
+      "namespace": "cnpg-system",
+      "name": "barman-plugin-leader-election-role",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "rbac.authorization.k8s.io/v1",
+      "kind": "Role",
+      "namespace": "kube-system",
+      "name": "cert-manager-cainjector:leaderelection",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "rbac.authorization.k8s.io/v1",
+      "kind": "Role",
+      "namespace": "kube-system",
+      "name": "cert-manager:leaderelection",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "rbac.authorization.k8s.io/v1",
+      "kind": "Role",
       "namespace": "monitoring",
       "name": "playbox-monitoring-grafana",
       "pruneFalse": false
@@ -714,6 +924,34 @@
       "namespace": "",
       "name": "argocd-server",
       "pruneFalse": true
+    },
+    {
+      "apiVersion": "rbac.authorization.k8s.io/v1",
+      "kind": "ClusterRole",
+      "namespace": "",
+      "name": "barman-plugin-metrics-auth-role",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "rbac.authorization.k8s.io/v1",
+      "kind": "ClusterRole",
+      "namespace": "",
+      "name": "barman-plugin-metrics-reader",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "rbac.authorization.k8s.io/v1",
+      "kind": "ClusterRole",
+      "namespace": "",
+      "name": "barman-plugin-objectstore-editor-role",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "rbac.authorization.k8s.io/v1",
+      "kind": "ClusterRole",
+      "namespace": "",
+      "name": "barman-plugin-objectstore-viewer-role",
+      "pruneFalse": false
     },
     {
       "apiVersion": "rbac.authorization.k8s.io/v1",
@@ -838,6 +1076,146 @@
       "apiVersion": "rbac.authorization.k8s.io/v1",
       "kind": "ClusterRole",
       "namespace": "",
+      "name": "cert-manager-cainjector",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "rbac.authorization.k8s.io/v1",
+      "kind": "ClusterRole",
+      "namespace": "",
+      "name": "cert-manager-cluster-view",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "rbac.authorization.k8s.io/v1",
+      "kind": "ClusterRole",
+      "namespace": "",
+      "name": "cert-manager-controller-approve:cert-manager-io",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "rbac.authorization.k8s.io/v1",
+      "kind": "ClusterRole",
+      "namespace": "",
+      "name": "cert-manager-controller-certificates",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "rbac.authorization.k8s.io/v1",
+      "kind": "ClusterRole",
+      "namespace": "",
+      "name": "cert-manager-controller-certificatesigningrequests",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "rbac.authorization.k8s.io/v1",
+      "kind": "ClusterRole",
+      "namespace": "",
+      "name": "cert-manager-controller-challenges",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "rbac.authorization.k8s.io/v1",
+      "kind": "ClusterRole",
+      "namespace": "",
+      "name": "cert-manager-controller-clusterissuers",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "rbac.authorization.k8s.io/v1",
+      "kind": "ClusterRole",
+      "namespace": "",
+      "name": "cert-manager-controller-ingress-shim",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "rbac.authorization.k8s.io/v1",
+      "kind": "ClusterRole",
+      "namespace": "",
+      "name": "cert-manager-controller-issuers",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "rbac.authorization.k8s.io/v1",
+      "kind": "ClusterRole",
+      "namespace": "",
+      "name": "cert-manager-controller-orders",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "rbac.authorization.k8s.io/v1",
+      "kind": "ClusterRole",
+      "namespace": "",
+      "name": "cert-manager-edit",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "rbac.authorization.k8s.io/v1",
+      "kind": "ClusterRole",
+      "namespace": "",
+      "name": "cert-manager-view",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "rbac.authorization.k8s.io/v1",
+      "kind": "ClusterRole",
+      "namespace": "",
+      "name": "cert-manager-webhook:subjectaccessreviews",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "rbac.authorization.k8s.io/v1",
+      "kind": "ClusterRole",
+      "namespace": "",
+      "name": "cnpg-database-editor-role",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "rbac.authorization.k8s.io/v1",
+      "kind": "ClusterRole",
+      "namespace": "",
+      "name": "cnpg-database-viewer-role",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "rbac.authorization.k8s.io/v1",
+      "kind": "ClusterRole",
+      "namespace": "",
+      "name": "cnpg-manager",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "rbac.authorization.k8s.io/v1",
+      "kind": "ClusterRole",
+      "namespace": "",
+      "name": "cnpg-publication-editor-role",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "rbac.authorization.k8s.io/v1",
+      "kind": "ClusterRole",
+      "namespace": "",
+      "name": "cnpg-publication-viewer-role",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "rbac.authorization.k8s.io/v1",
+      "kind": "ClusterRole",
+      "namespace": "",
+      "name": "cnpg-subscription-editor-role",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "rbac.authorization.k8s.io/v1",
+      "kind": "ClusterRole",
+      "namespace": "",
+      "name": "cnpg-subscription-viewer-role",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "rbac.authorization.k8s.io/v1",
+      "kind": "ClusterRole",
+      "namespace": "",
       "name": "objectstorage-provisioner-role",
       "pruneFalse": false
     },
@@ -860,6 +1238,13 @@
       "kind": "ClusterRole",
       "namespace": "",
       "name": "playbox-monitoring-prometheus",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "rbac.authorization.k8s.io/v1",
+      "kind": "ClusterRole",
+      "namespace": "",
+      "name": "plugin-barman-cloud",
       "pruneFalse": false
     },
     {
@@ -959,6 +1344,34 @@
       "namespace": "argocd",
       "name": "argocd-server",
       "pruneFalse": true
+    },
+    {
+      "apiVersion": "rbac.authorization.k8s.io/v1",
+      "kind": "RoleBinding",
+      "namespace": "cert-manager",
+      "name": "cert-manager-webhook:dynamic-serving",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "rbac.authorization.k8s.io/v1",
+      "kind": "RoleBinding",
+      "namespace": "cnpg-system",
+      "name": "barman-plugin-leader-election-rolebinding",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "rbac.authorization.k8s.io/v1",
+      "kind": "RoleBinding",
+      "namespace": "kube-system",
+      "name": "cert-manager-cainjector:leaderelection",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "rbac.authorization.k8s.io/v1",
+      "kind": "RoleBinding",
+      "namespace": "kube-system",
+      "name": "cert-manager:leaderelection",
+      "pruneFalse": false
     },
     {
       "apiVersion": "rbac.authorization.k8s.io/v1",
@@ -1097,6 +1510,13 @@
       "apiVersion": "rbac.authorization.k8s.io/v1",
       "kind": "ClusterRoleBinding",
       "namespace": "",
+      "name": "barman-plugin-metrics-auth-rolebinding",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "rbac.authorization.k8s.io/v1",
+      "kind": "ClusterRoleBinding",
+      "namespace": "",
       "name": "ceph-csi-cephfs-ctrlplugin-crb",
       "pruneFalse": true
     },
@@ -1139,6 +1559,83 @@
       "apiVersion": "rbac.authorization.k8s.io/v1",
       "kind": "ClusterRoleBinding",
       "namespace": "",
+      "name": "cert-manager-cainjector",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "rbac.authorization.k8s.io/v1",
+      "kind": "ClusterRoleBinding",
+      "namespace": "",
+      "name": "cert-manager-controller-approve:cert-manager-io",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "rbac.authorization.k8s.io/v1",
+      "kind": "ClusterRoleBinding",
+      "namespace": "",
+      "name": "cert-manager-controller-certificates",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "rbac.authorization.k8s.io/v1",
+      "kind": "ClusterRoleBinding",
+      "namespace": "",
+      "name": "cert-manager-controller-certificatesigningrequests",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "rbac.authorization.k8s.io/v1",
+      "kind": "ClusterRoleBinding",
+      "namespace": "",
+      "name": "cert-manager-controller-challenges",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "rbac.authorization.k8s.io/v1",
+      "kind": "ClusterRoleBinding",
+      "namespace": "",
+      "name": "cert-manager-controller-clusterissuers",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "rbac.authorization.k8s.io/v1",
+      "kind": "ClusterRoleBinding",
+      "namespace": "",
+      "name": "cert-manager-controller-ingress-shim",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "rbac.authorization.k8s.io/v1",
+      "kind": "ClusterRoleBinding",
+      "namespace": "",
+      "name": "cert-manager-controller-issuers",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "rbac.authorization.k8s.io/v1",
+      "kind": "ClusterRoleBinding",
+      "namespace": "",
+      "name": "cert-manager-controller-orders",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "rbac.authorization.k8s.io/v1",
+      "kind": "ClusterRoleBinding",
+      "namespace": "",
+      "name": "cert-manager-webhook:subjectaccessreviews",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "rbac.authorization.k8s.io/v1",
+      "kind": "ClusterRoleBinding",
+      "namespace": "",
+      "name": "cnpg-manager-rolebinding",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "rbac.authorization.k8s.io/v1",
+      "kind": "ClusterRoleBinding",
+      "namespace": "",
       "name": "objectstorage-provisioner-role-binding",
       "pruneFalse": false
     },
@@ -1161,6 +1658,13 @@
       "kind": "ClusterRoleBinding",
       "namespace": "",
       "name": "playbox-monitoring-prometheus",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "rbac.authorization.k8s.io/v1",
+      "kind": "ClusterRoleBinding",
+      "namespace": "",
+      "name": "plugin-barman-cloud-binding",
       "pruneFalse": false
     },
     {
@@ -1253,6 +1757,13 @@
       "namespace": "argocd",
       "name": "argocd-tls-certs-cm",
       "pruneFalse": true
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "ConfigMap",
+      "namespace": "cnpg-system",
+      "name": "cnpg-default-monitoring",
+      "pruneFalse": false
     },
     {
       "apiVersion": "v1",
@@ -1508,6 +2019,13 @@
     },
     {
       "apiVersion": "v1",
+      "kind": "Secret",
+      "namespace": "cnpg-system",
+      "name": "plugin-barman-cloud-f998mh5292",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "v1",
       "kind": "Service",
       "namespace": "argocd",
       "name": "argocd-applicationset-controller",
@@ -1561,6 +2079,41 @@
       "namespace": "argocd",
       "name": "argocd-server-metrics",
       "pruneFalse": true
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Service",
+      "namespace": "cert-manager",
+      "name": "cert-manager",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Service",
+      "namespace": "cert-manager",
+      "name": "cert-manager-cainjector",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Service",
+      "namespace": "cert-manager",
+      "name": "cert-manager-webhook",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Service",
+      "namespace": "cnpg-system",
+      "name": "barman-cloud",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Service",
+      "namespace": "cnpg-system",
+      "name": "cnpg-webhook-service",
+      "pruneFalse": false
     },
     {
       "apiVersion": "v1",
@@ -1705,6 +2258,41 @@
     {
       "apiVersion": "apps/v1",
       "kind": "Deployment",
+      "namespace": "cert-manager",
+      "name": "cert-manager",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "apps/v1",
+      "kind": "Deployment",
+      "namespace": "cert-manager",
+      "name": "cert-manager-cainjector",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "apps/v1",
+      "kind": "Deployment",
+      "namespace": "cert-manager",
+      "name": "cert-manager-webhook",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "apps/v1",
+      "kind": "Deployment",
+      "namespace": "cnpg-system",
+      "name": "barman-cloud",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "apps/v1",
+      "kind": "Deployment",
+      "namespace": "cnpg-system",
+      "name": "cnpg-controller-manager",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "apps/v1",
+      "kind": "Deployment",
       "namespace": "monitoring",
       "name": "playbox-monitoring-kube-state-metrics",
       "pruneFalse": false
@@ -1775,6 +2363,13 @@
     {
       "apiVersion": "addons.projectcapsule.dev/v1alpha1",
       "kind": "SopsSecret",
+      "namespace": "database",
+      "name": "playbox-postgres-backup",
+      "pruneFalse": true
+    },
+    {
+      "apiVersion": "addons.projectcapsule.dev/v1alpha1",
+      "kind": "SopsSecret",
       "namespace": "monitoring",
       "name": "monitoring-grafana-admin",
       "pruneFalse": false
@@ -1801,6 +2396,13 @@
       "pruneFalse": true
     },
     {
+      "apiVersion": "barmancloud.cnpg.io/v1",
+      "kind": "ObjectStore",
+      "namespace": "database",
+      "name": "playbox-postgres-backup",
+      "pruneFalse": true
+    },
+    {
       "apiVersion": "ceph.rook.io/v1",
       "kind": "CephBlockPool",
       "namespace": "rook-ceph",
@@ -1813,6 +2415,27 @@
       "namespace": "rook-ceph",
       "name": "rook-ceph",
       "pruneFalse": true
+    },
+    {
+      "apiVersion": "cert-manager.io/v1",
+      "kind": "Certificate",
+      "namespace": "cnpg-system",
+      "name": "barman-cloud-client",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "cert-manager.io/v1",
+      "kind": "Certificate",
+      "namespace": "cnpg-system",
+      "name": "barman-cloud-server",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "cert-manager.io/v1",
+      "kind": "Issuer",
+      "namespace": "cnpg-system",
+      "name": "selfsigned-issuer",
+      "pruneFalse": false
     },
     {
       "apiVersion": "cilium.io/v2",
@@ -1841,6 +2464,13 @@
       "namespace": "rook-ceph",
       "name": "ceph-csi-operator-config",
       "pruneFalse": true
+    },
+    {
+      "apiVersion": "monitoring.coreos.com/v1",
+      "kind": "PodMonitor",
+      "namespace": "database",
+      "name": "playbox-postgres",
+      "pruneFalse": false
     },
     {
       "apiVersion": "monitoring.coreos.com/v1",
@@ -2184,6 +2814,48 @@
       "namespace": "argocd",
       "name": "argocd-server-network-policy",
       "pruneFalse": true
+    },
+    {
+      "apiVersion": "postgresql.cnpg.io/v1",
+      "kind": "Cluster",
+      "namespace": "database",
+      "name": "playbox-postgres",
+      "pruneFalse": true
+    },
+    {
+      "apiVersion": "postgresql.cnpg.io/v1",
+      "kind": "ScheduledBackup",
+      "namespace": "database",
+      "name": "playbox-postgres-daily",
+      "pruneFalse": true
+    },
+    {
+      "apiVersion": "admissionregistration.k8s.io/v1",
+      "kind": "MutatingWebhookConfiguration",
+      "namespace": "",
+      "name": "cert-manager-webhook",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "admissionregistration.k8s.io/v1",
+      "kind": "MutatingWebhookConfiguration",
+      "namespace": "",
+      "name": "cnpg-mutating-webhook-configuration",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "admissionregistration.k8s.io/v1",
+      "kind": "ValidatingWebhookConfiguration",
+      "namespace": "",
+      "name": "cert-manager-webhook",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "admissionregistration.k8s.io/v1",
+      "kind": "ValidatingWebhookConfiguration",
+      "namespace": "",
+      "name": "cnpg-validating-webhook-configuration",
+      "pruneFalse": false
     }
   ],
   "workloadImages": {
@@ -2191,12 +2863,17 @@
     "docker.io/grafana/grafana:13.2.0": 1,
     "docker.io/grafana/loki:3.7.7": 1,
     "docker.io/rook/ceph:v1.20.6": 1,
+    "ghcr.io/cloudnative-pg/cloudnative-pg:1.30.0": 1,
+    "ghcr.io/cloudnative-pg/plugin-barman-cloud:v0.14.0": 1,
     "ghcr.io/dexidp/dex:v2.45.1": 1,
     "ghcr.io/peak-scale/sops-operator:0.10.1@sha256:1da9b716b79210f51b1c757b4d5c3bab57df9fdc74e67f2fa274d33603492fd4": 1,
     "public.ecr.aws/docker/library/redis:8.2.3-alpine": 1,
     "quay.io/argoproj/argocd:v3.5.2": 5,
     "quay.io/ceph/ceph:v20.2.4-20260818": 1,
     "quay.io/cephcsi/ceph-csi-operator:v1.0.4": 1,
+    "quay.io/jetstack/cert-manager-cainjector:v1.21.1": 1,
+    "quay.io/jetstack/cert-manager-controller:v1.21.1": 1,
+    "quay.io/jetstack/cert-manager-webhook:v1.21.1": 1,
     "quay.io/kiwigrid/k8s-sidecar:2.10.1": 2,
     "quay.io/prometheus-operator/prometheus-config-reloader:v0.91.0@sha256:7d9e4eea5f1139e602508871f422b0116c60e87c662f3dcd234d5ab60cd0d8c1": 1,
     "quay.io/prometheus-operator/prometheus-operator:v0.93.1": 1,
@@ -2220,6 +2897,13 @@
       "initImages": {
         "quay.io/prometheus-operator/prometheus-config-reloader:v0.93.1": 1
       }
+    },
+    {
+      "owner": "postgresql.cnpg.io/Cluster/database/playbox-postgres",
+      "images": [
+        "ghcr.io/cloudnative-pg/postgresql:18.6",
+        "ghcr.io/cloudnative-pg/plugin-barman-cloud-sidecar:v0.14.0"
+      ]
     }
   ],
   "marker": {
