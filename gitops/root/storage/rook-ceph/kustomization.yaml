@@ -5,4 +5,5 @@ resources:
   - rook-crds-a.yaml
   - rook-crds-b.yaml
   - rook-operator.yaml
+  - rook-csi-drivers.yaml
   - rook-cluster.yaml
