@@ -12,6 +12,35 @@ spec:
   destination:
     server: https://kubernetes.default.svc
     namespace: argocd
+  ignoreDifferences:
+    - group: postgresql.cnpg.io
+      kind: Cluster
+      name: playbox-postgres
+      namespace: database
+      jsonPointers:
+        - /spec/affinity
+        - /spec/bootstrap/initdb/localeCType
+        - /spec/bootstrap/initdb/localeCollate
+        - /spec/enablePDB
+        - /spec/failoverDelay
+        - /spec/logLevel
+        - /spec/maxSyncReplicas
+        - /spec/minSyncReplicas
+        - /spec/monitoring
+        - /spec/postgresGID
+        - /spec/postgresUID
+        - /spec/postgresql/syncReplicaElectionConstraint
+        - /spec/primaryUpdateMethod
+        - /spec/probes
+        - /spec/replicationSlots
+        - /spec/smartShutdownTimeout
+        - /spec/startDelay
+        - /spec/stopDelay
+        - /spec/storage/resizeInUseVolumes
+        - /spec/switchoverDelay
+      jqPathExpressions:
+        - '.spec.plugins[] | select(.name == "barman-cloud.cloudnative-pg.io").enabled'
+        - '.spec.postgresql.parameters | to_entries[] | select(.key != "max_connections" and .key != "shared_buffers").value'
   syncPolicy:
     automated:
       prune: true
@@ -19,3 +48,4 @@ spec:
     syncOptions:
       - ServerSideApply=true
       - FailOnSharedResource=true
+      - RespectIgnoreDifferences=true
