@@ -1,0 +1,34 @@
+apiVersion: addons.projectcapsule.dev/v1alpha1
+kind: SopsSecret
+metadata:
+    name: monitoring-grafana-admin
+    namespace: monitoring
+    annotations:
+        argocd.argoproj.io/sync-wave: "-2"
+    labels:
+        app.kubernetes.io/part-of: playbox-platform
+        playbox.dev/sops-domain: platform
+spec:
+    secrets:
+        - name: monitoring-grafana-admin
+          labels:
+            app.kubernetes.io/part-of: playbox-platform
+          stringData:
+            admin-user: ENC[AES256_GCM,data:3A8HEFA=,iv:oFesG0LbjVZYbZydg75+xMdeWKpK1B2aE4vq3B426ZI=,tag:ws8RMwjRRd1u+1X/yXYPzw==,type:str]
+            admin-password: ENC[AES256_GCM,data:Iy9hKqkEn61EbhBdX9DGt/UDDeMiJk48moTcV0S4OklA9LliGL5Dh3bq7hBY3tNL,iv:n8NcB77kp1b8d/MgLN/M/7YEGjfUgT0TNPxKy/TCCUY=,tag:8FVImAHOVjtw6H3AOFkFiQ==,type:str]
+sops:
+    age:
+        - enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSA5OWV4YUZuYXllemhmTEM0
+            TlB1REZPczlNMzh3SnZKREJkK2RSdjA3SlJBCktRMHJzaHd1REFvN0ZRMFkxQ1hT
+            aFIyRGx3TFQyMGhwMkZyTE9lWHFGOVUKLS0tIEhNTkdQNXAwZWdZcXorU214UWNv
+            TW16MHBmMFRHVUFnMTRWdkJLdFAwd0EKLrTPwKYpeG1ekraPHgDsEFKfX7jNNfAV
+            NCPn2yu2ZApksjFE2IaFDxAfFsgaQyvo9Som+EMBniil8+e5DAUTbQ==
+            -----END AGE ENCRYPTED FILE-----
+          recipient: age1jt0q594ve7543n5n6k24l8egq5cx9swx2n9zj9dvj544txh5dcvqrkj77u
+    encrypted_regex: ^(data|stringData)$
+    lastmodified: "2026-08-31T16:16:28Z"
+    mac: ENC[AES256_GCM,data:B9tadmJivFTVWAeJ4ni8DfLVeXpiSH3rfavjel+Ns5obXHJKNw3RI+g20ew/qyP7wWASjzrbjKBczvimFcaw2pBzLBIBSuYo/rAJ2OLxlt0K4FfxAmRr36/bVQW+dPEaqEiCOyK5VAWVlvVzgQw+4QpV5Z08YDmY0S8T8jJlax0=,iv:HjTEHDqxreexg1vUNoWL7Dqt8NP70RcL8cTVWc+76Gk=,tag:Rj+4EOCmf3zDj+GuT7fQZQ==,type:str]
+    mac_only_encrypted: true
+    version: 3.13.3

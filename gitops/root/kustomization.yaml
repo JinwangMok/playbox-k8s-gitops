@@ -5,3 +5,4 @@ resources:
   - root-marker.yaml
   - argocd
   - network
+  - platform/sops-diagnostics
