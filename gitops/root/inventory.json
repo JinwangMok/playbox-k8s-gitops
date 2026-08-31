@@ -34,7 +34,7 @@
       "kind": "StorageClass",
       "namespace": "",
       "name": "playbox-worker3-local",
-      "pruneFalse": false
+      "pruneFalse": true
     },
     {
       "apiVersion": "apiextensions.k8s.io/v1",
@@ -825,14 +825,14 @@
       "kind": "PersistentVolume",
       "namespace": "",
       "name": "playbox-monitoring-grafana",
-      "pruneFalse": false
+      "pruneFalse": true
     },
     {
       "apiVersion": "v1",
       "kind": "PersistentVolume",
       "namespace": "",
       "name": "playbox-monitoring-prometheus",
-      "pruneFalse": false
+      "pruneFalse": true
     },
     {
       "apiVersion": "apps/v1",
