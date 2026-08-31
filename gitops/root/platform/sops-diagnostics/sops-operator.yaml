@@ -42,22 +42,18 @@ spec:
         description: GlobalSopsSecret is the Schema for the globalsopssecrets API.
         properties:
           apiVersion:
-            description: 'APIVersion defines the versioned schema of this representation
-              of an object.
+            description: 'APIVersion defines the versioned schema of this representation of an object.
 
-              Servers should convert recognized schemas to the latest internal value,
-              and
+              Servers should convert recognized schemas to the latest internal value, and
 
               may reject unrecognized values.
 
               More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources'
             type: string
           kind:
-            description: 'Kind is a string value representing the REST resource this
-              object represents.
+            description: 'Kind is a string value representing the REST resource this object represents.
 
-              Servers may infer this from the endpoint the client submits requests
-              to.
+              Servers may infer this from the endpoint the client submits requests to.
 
               Cannot be updated.
 
@@ -68,14 +64,11 @@ spec:
           metadata:
             type: object
           sops:
-            description: 'Metadata is stored in SOPS encrypted files, and it contains
-              the information necessary to decrypt the file.
+            description: 'Metadata is stored in SOPS encrypted files, and it contains the information necessary to decrypt the file.
 
-              This struct is just used for serialization, and SOPS uses another struct
-              internally, sops.Metadata. It exists
+              This struct is just used for serialization, and SOPS uses another struct internally, sops.Metadata. It exists
 
-              in order to allow the binary format to stay backwards compatible over
-              time, but at the same time allow the internal
+              in order to allow the binary format to stay backwards compatible over time, but at the same time allow the internal
 
               representation SOPS uses to change over time.'
             properties:
@@ -379,11 +372,9 @@ spec:
                     annotations:
                       additionalProperties:
                         type: string
-                      description: 'Map of string keys and values that can be used
-                        to organize and categorize
+                      description: 'Map of string keys and values that can be used to organize and categorize
 
-                        (scope and select) objects. May match selectors of replication
-                        controllers
+                        (scope and select) objects. May match selectors of replication controllers
 
                         and services.
 
@@ -392,14 +383,12 @@ spec:
                     data:
                       additionalProperties:
                         type: string
-                      description: 'Data map to use in Kubernetes secret (equivalent
-                        to Kubernetes Secret object data, please see for more
+                      description: 'Data map to use in Kubernetes secret (equivalent to Kubernetes Secret object data, please see for more
 
                         information: https://kubernetes.io/docs/concepts/configuration/secret/#overview-of-secrets)'
                       type: object
                     immutable:
-                      description: 'Immutable, if set to true, ensures that data stored
-                        in the Secret cannot
+                      description: 'Immutable, if set to true, ensures that data stored in the Secret cannot
 
                         be updated (only object metadata can be modified).
 
@@ -410,25 +399,20 @@ spec:
                     labels:
                       additionalProperties:
                         type: string
-                      description: 'Map of string keys and values that can be used
-                        to organize and categorize
+                      description: 'Map of string keys and values that can be used to organize and categorize
 
-                        (scope and select) objects. May match selectors of replication
-                        controllers
+                        (scope and select) objects. May match selectors of replication controllers
 
                         and services.
 
                         More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/labels'
                       type: object
                     name:
-                      description: 'Name must be unique within a namespace. Is required
-                        when creating resources, although
+                      description: 'Name must be unique within a namespace. Is required when creating resources, although
 
-                        some resources may allow a client to request the generation
-                        of an appropriate name
+                        some resources may allow a client to request the generation of an appropriate name
 
-                        automatically. Name is primarily intended for creation idempotence
-                        and configuration
+                        automatically. Name is primarily intended for creation idempotence and configuration
 
                         definition.
 
@@ -437,14 +421,12 @@ spec:
                         More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names#names'
                       type: string
                     namespace:
-                      description: Namespace must be declared since this is a cluster
-                        scoped resource
+                      description: Namespace must be declared since this is a cluster scoped resource
                       type: string
                     stringData:
                       additionalProperties:
                         type: string
-                      description: 'stringData map to use in Kubernetes secret (equivalent
-                        to Kubernetes Secret object stringData, please see for more
+                      description: 'stringData map to use in Kubernetes secret (equivalent to Kubernetes Secret object stringData, please see for more
 
                         information: https://kubernetes.io/docs/concepts/configuration/secret/#overview-of-secrets)'
                       type: object
@@ -495,43 +477,33 @@ spec:
                 description: 'Deprecated: use conditions as list
 
 
-                  Conditions represent the latest available observations of an instances
-                  state'
+                  Conditions represent the latest available observations of an instances state'
                 properties:
                   lastTransitionTime:
-                    description: 'lastTransitionTime is the last time the condition
-                      transitioned from one status to another.
+                    description: 'lastTransitionTime is the last time the condition transitioned from one status to another.
 
-                      This should be when the underlying condition changed.  If that
-                      is not known, then using the time when the API field changed
-                      is acceptable.'
+                      This should be when the underlying condition changed.  If that is not known, then using the time when the API field changed is acceptable.'
                     format: date-time
                     type: string
                   message:
-                    description: 'message is a human readable message indicating details
-                      about the transition.
+                    description: 'message is a human readable message indicating details about the transition.
 
                       This may be an empty string.'
                     maxLength: 32768
                     type: string
                   observedGeneration:
-                    description: 'observedGeneration represents the .metadata.generation
-                      that the condition was set based upon.
+                    description: 'observedGeneration represents the .metadata.generation that the condition was set based upon.
 
-                      For instance, if .metadata.generation is currently 12, but the
-                      .status.conditions[x].observedGeneration is 9, the condition
-                      is out of date
+                      For instance, if .metadata.generation is currently 12, but the .status.conditions[x].observedGeneration is 9, the condition is out of date
 
                       with respect to the current state of the instance.'
                     format: int64
                     minimum: 0
                     type: integer
                   reason:
-                    description: 'reason contains a programmatic identifier indicating
-                      the reason for the condition''s last transition.
+                    description: 'reason contains a programmatic identifier indicating the reason for the condition''s last transition.
 
-                      Producers of specific condition types may define expected values
-                      and meanings for this field,
+                      Producers of specific condition types may define expected values and meanings for this field,
 
                       and whether the values are considered a guaranteed API.
 
@@ -564,43 +536,33 @@ spec:
               conditions:
                 description: Conditions
                 items:
-                  description: Condition contains details for one aspect of the current
-                    state of this API Resource.
+                  description: Condition contains details for one aspect of the current state of this API Resource.
                   properties:
                     lastTransitionTime:
-                      description: 'lastTransitionTime is the last time the condition
-                        transitioned from one status to another.
+                      description: 'lastTransitionTime is the last time the condition transitioned from one status to another.
 
-                        This should be when the underlying condition changed.  If
-                        that is not known, then using the time when the API field
-                        changed is acceptable.'
+                        This should be when the underlying condition changed.  If that is not known, then using the time when the API field changed is acceptable.'
                       format: date-time
                       type: string
                     message:
-                      description: 'message is a human readable message indicating
-                        details about the transition.
+                      description: 'message is a human readable message indicating details about the transition.
 
                         This may be an empty string.'
                       maxLength: 32768
                       type: string
                     observedGeneration:
-                      description: 'observedGeneration represents the .metadata.generation
-                        that the condition was set based upon.
+                      description: 'observedGeneration represents the .metadata.generation that the condition was set based upon.
 
-                        For instance, if .metadata.generation is currently 12, but
-                        the .status.conditions[x].observedGeneration is 9, the condition
-                        is out of date
+                        For instance, if .metadata.generation is currently 12, but the .status.conditions[x].observedGeneration is 9, the condition is out of date
 
                         with respect to the current state of the instance.'
                       format: int64
                       minimum: 0
                       type: integer
                     reason:
-                      description: 'reason contains a programmatic identifier indicating
-                        the reason for the condition''s last transition.
+                      description: 'reason contains a programmatic identifier indicating the reason for the condition''s last transition.
 
-                        Producers of specific condition types may define expected
-                        values and meanings for this field,
+                        Producers of specific condition types may define expected values and meanings for this field,
 
                         and whether the values are considered a guaranteed API.
 
@@ -632,8 +594,7 @@ spec:
                   type: object
                 type: array
               observedGeneration:
-                description: ObservedGeneration is the most recent generation the
-                  controller has observed.
+                description: ObservedGeneration is the most recent generation the controller has observed.
                 format: int64
                 type: integer
               providers:
@@ -658,43 +619,33 @@ spec:
                 items:
                   properties:
                     condition:
-                      description: Condition contains details for one aspect of the
-                        current state of this API Resource.
+                      description: Condition contains details for one aspect of the current state of this API Resource.
                       properties:
                         lastTransitionTime:
-                          description: 'lastTransitionTime is the last time the condition
-                            transitioned from one status to another.
+                          description: 'lastTransitionTime is the last time the condition transitioned from one status to another.
 
-                            This should be when the underlying condition changed.  If
-                            that is not known, then using the time when the API field
-                            changed is acceptable.'
+                            This should be when the underlying condition changed.  If that is not known, then using the time when the API field changed is acceptable.'
                           format: date-time
                           type: string
                         message:
-                          description: 'message is a human readable message indicating
-                            details about the transition.
+                          description: 'message is a human readable message indicating details about the transition.
 
                             This may be an empty string.'
                           maxLength: 32768
                           type: string
                         observedGeneration:
-                          description: 'observedGeneration represents the .metadata.generation
-                            that the condition was set based upon.
+                          description: 'observedGeneration represents the .metadata.generation that the condition was set based upon.
 
-                            For instance, if .metadata.generation is currently 12,
-                            but the .status.conditions[x].observedGeneration is 9,
-                            the condition is out of date
+                            For instance, if .metadata.generation is currently 12, but the .status.conditions[x].observedGeneration is 9, the condition is out of date
 
                             with respect to the current state of the instance.'
                           format: int64
                           minimum: 0
                           type: integer
                         reason:
-                          description: 'reason contains a programmatic identifier
-                            indicating the reason for the condition''s last transition.
+                          description: 'reason contains a programmatic identifier indicating the reason for the condition''s last transition.
 
-                            Producers of specific condition types may define expected
-                            values and meanings for this field,
+                            Producers of specific condition types may define expected values and meanings for this field,
 
                             and whether the values are considered a guaranteed API.
 
@@ -706,8 +657,7 @@ spec:
                           pattern: ^[A-Za-z]([A-Za-z0-9_,:]*[A-Za-z0-9_])?$
                           type: string
                         status:
-                          description: status of the condition, one of True, False,
-                            Unknown.
+                          description: status of the condition, one of True, False, Unknown.
                           enum:
                           - 'True'
                           - 'False'
@@ -730,14 +680,11 @@ spec:
                     namespace:
                       type: string
                     uid:
-                      description: 'UID is a type that holds unique ID values, including
-                        UUIDs.  Because we
+                      description: 'UID is a type that holds unique ID values, including UUIDs.  Because we
 
-                        don''t ONLY use UUIDs, this is an alias to string.  Being
-                        a type captures
+                        don''t ONLY use UUIDs, this is an alias to string.  Being a type captures
 
-                        intent and helps make sure that UIDs and names do not get
-                        conflated.'
+                        intent and helps make sure that UIDs and names do not get conflated.'
                       type: string
                   required:
                   - condition
@@ -800,22 +747,18 @@ spec:
         description: SopsProvider is the Schema for the sopsproviders API.
         properties:
           apiVersion:
-            description: 'APIVersion defines the versioned schema of this representation
-              of an object.
+            description: 'APIVersion defines the versioned schema of this representation of an object.
 
-              Servers should convert recognized schemas to the latest internal value,
-              and
+              Servers should convert recognized schemas to the latest internal value, and
 
               may reject unrecognized values.
 
               More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources'
             type: string
           kind:
-            description: 'Kind is a string value representing the REST resource this
-              object represents.
+            description: 'Kind is a string value representing the REST resource this object represents.
 
-              Servers may infer this from the endpoint the client submits requests
-              to.
+              Servers may infer this from the endpoint the client submits requests to.
 
               Cannot be updated.
 
@@ -829,42 +772,33 @@ spec:
             description: SopsProviderSpec defines the desired state of SopsProvider.
             properties:
               keys:
-                description: 'Select namespaces or secrets where decryption information
-                  for this
+                description: 'Select namespaces or secrets where decryption information for this
 
                   provider can be sourced from'
                 items:
-                  description: Selector for resources and their labels or selecting
-                    origin namespaces
+                  description: Selector for resources and their labels or selecting origin namespaces
                   properties:
                     matchExpressions:
-                      description: matchExpressions is a list of label selector requirements.
-                        The requirements are ANDed.
+                      description: matchExpressions is a list of label selector requirements. The requirements are ANDed.
                       items:
-                        description: 'A label selector requirement is a selector that
-                          contains values, a key, and an operator that
+                        description: 'A label selector requirement is a selector that contains values, a key, and an operator that
 
                           relates the key and values.'
                         properties:
                           key:
-                            description: key is the label key that the selector applies
-                              to.
+                            description: key is the label key that the selector applies to.
                             type: string
                           operator:
-                            description: 'operator represents a key''s relationship
-                              to a set of values.
+                            description: 'operator represents a key''s relationship to a set of values.
 
                               Valid operators are In, NotIn, Exists and DoesNotExist.'
                             type: string
                           values:
-                            description: 'values is an array of string values. If
-                              the operator is In or NotIn,
+                            description: 'values is an array of string values. If the operator is In or NotIn,
 
-                              the values array must be non-empty. If the operator
-                              is Exists or DoesNotExist,
+                              the values array must be non-empty. If the operator is Exists or DoesNotExist,
 
-                              the values array must be empty. This array is replaced
-                              during a strategic
+                              the values array must be empty. This array is replaced during a strategic
 
                               merge patch.'
                             items:
@@ -880,47 +814,36 @@ spec:
                     matchLabels:
                       additionalProperties:
                         type: string
-                      description: 'matchLabels is a map of {key,value} pairs. A single
-                        {key,value} in the matchLabels
+                      description: 'matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels
 
-                        map is equivalent to an element of matchExpressions, whose
-                        key field is "key", the
+                        map is equivalent to an element of matchExpressions, whose key field is "key", the
 
-                        operator is "In", and the values array contains only "value".
-                        The requirements are ANDed.'
+                        operator is "In", and the values array contains only "value". The requirements are ANDed.'
                       type: object
                     namespaceSelector:
-                      description: NamespaceSelector for filtering namespaces by labels
-                        where items can be located in
+                      description: NamespaceSelector for filtering namespaces by labels where items can be located in
                       properties:
                         matchExpressions:
-                          description: matchExpressions is a list of label selector
-                            requirements. The requirements are ANDed.
+                          description: matchExpressions is a list of label selector requirements. The requirements are ANDed.
                           items:
-                            description: 'A label selector requirement is a selector
-                              that contains values, a key, and an operator that
+                            description: 'A label selector requirement is a selector that contains values, a key, and an operator that
 
                               relates the key and values.'
                             properties:
                               key:
-                                description: key is the label key that the selector
-                                  applies to.
+                                description: key is the label key that the selector applies to.
                                 type: string
                               operator:
-                                description: 'operator represents a key''s relationship
-                                  to a set of values.
+                                description: 'operator represents a key''s relationship to a set of values.
 
                                   Valid operators are In, NotIn, Exists and DoesNotExist.'
                                 type: string
                               values:
-                                description: 'values is an array of string values.
-                                  If the operator is In or NotIn,
+                                description: 'values is an array of string values. If the operator is In or NotIn,
 
-                                  the values array must be non-empty. If the operator
-                                  is Exists or DoesNotExist,
+                                  the values array must be non-empty. If the operator is Exists or DoesNotExist,
 
-                                  the values array must be empty. This array is replaced
-                                  during a strategic
+                                  the values array must be empty. This array is replaced during a strategic
 
                                   merge patch.'
                                 items:
@@ -936,14 +859,11 @@ spec:
                         matchLabels:
                           additionalProperties:
                             type: string
-                          description: 'matchLabels is a map of {key,value} pairs.
-                            A single {key,value} in the matchLabels
+                          description: 'matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels
 
-                            map is equivalent to an element of matchExpressions, whose
-                            key field is "key", the
+                            map is equivalent to an element of matchExpressions, whose key field is "key", the
 
-                            operator is "In", and the values array contains only "value".
-                            The requirements are ANDed.'
+                            operator is "In", and the values array contains only "value". The requirements are ANDed.'
                           type: object
                       type: object
                       x-kubernetes-map-type: atomic
@@ -951,42 +871,33 @@ spec:
                   x-kubernetes-map-type: atomic
                 type: array
               sops:
-                description: 'Selector Referencing which Secrets can be encrypted
-                  by this provider
+                description: 'Selector Referencing which Secrets can be encrypted by this provider
 
                   This selects effective SOPS Secrets'
                 items:
-                  description: Selector for resources and their labels or selecting
-                    origin namespaces
+                  description: Selector for resources and their labels or selecting origin namespaces
                   properties:
                     matchExpressions:
-                      description: matchExpressions is a list of label selector requirements.
-                        The requirements are ANDed.
+                      description: matchExpressions is a list of label selector requirements. The requirements are ANDed.
                       items:
-                        description: 'A label selector requirement is a selector that
-                          contains values, a key, and an operator that
+                        description: 'A label selector requirement is a selector that contains values, a key, and an operator that
 
                           relates the key and values.'
                         properties:
                           key:
-                            description: key is the label key that the selector applies
-                              to.
+                            description: key is the label key that the selector applies to.
                             type: string
                           operator:
-                            description: 'operator represents a key''s relationship
-                              to a set of values.
+                            description: 'operator represents a key''s relationship to a set of values.
 
                               Valid operators are In, NotIn, Exists and DoesNotExist.'
                             type: string
                           values:
-                            description: 'values is an array of string values. If
-                              the operator is In or NotIn,
+                            description: 'values is an array of string values. If the operator is In or NotIn,
 
-                              the values array must be non-empty. If the operator
-                              is Exists or DoesNotExist,
+                              the values array must be non-empty. If the operator is Exists or DoesNotExist,
 
-                              the values array must be empty. This array is replaced
-                              during a strategic
+                              the values array must be empty. This array is replaced during a strategic
 
                               merge patch.'
                             items:
@@ -1002,47 +913,36 @@ spec:
                     matchLabels:
                       additionalProperties:
                         type: string
-                      description: 'matchLabels is a map of {key,value} pairs. A single
-                        {key,value} in the matchLabels
+                      description: 'matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels
 
-                        map is equivalent to an element of matchExpressions, whose
-                        key field is "key", the
+                        map is equivalent to an element of matchExpressions, whose key field is "key", the
 
-                        operator is "In", and the values array contains only "value".
-                        The requirements are ANDed.'
+                        operator is "In", and the values array contains only "value". The requirements are ANDed.'
                       type: object
                     namespaceSelector:
-                      description: NamespaceSelector for filtering namespaces by labels
-                        where items can be located in
+                      description: NamespaceSelector for filtering namespaces by labels where items can be located in
                       properties:
                         matchExpressions:
-                          description: matchExpressions is a list of label selector
-                            requirements. The requirements are ANDed.
+                          description: matchExpressions is a list of label selector requirements. The requirements are ANDed.
                           items:
-                            description: 'A label selector requirement is a selector
-                              that contains values, a key, and an operator that
+                            description: 'A label selector requirement is a selector that contains values, a key, and an operator that
 
                               relates the key and values.'
                             properties:
                               key:
-                                description: key is the label key that the selector
-                                  applies to.
+                                description: key is the label key that the selector applies to.
                                 type: string
                               operator:
-                                description: 'operator represents a key''s relationship
-                                  to a set of values.
+                                description: 'operator represents a key''s relationship to a set of values.
 
                                   Valid operators are In, NotIn, Exists and DoesNotExist.'
                                 type: string
                               values:
-                                description: 'values is an array of string values.
-                                  If the operator is In or NotIn,
+                                description: 'values is an array of string values. If the operator is In or NotIn,
 
-                                  the values array must be non-empty. If the operator
-                                  is Exists or DoesNotExist,
+                                  the values array must be non-empty. If the operator is Exists or DoesNotExist,
 
-                                  the values array must be empty. This array is replaced
-                                  during a strategic
+                                  the values array must be empty. This array is replaced during a strategic
 
                                   merge patch.'
                                 items:
@@ -1058,14 +958,11 @@ spec:
                         matchLabels:
                           additionalProperties:
                             type: string
-                          description: 'matchLabels is a map of {key,value} pairs.
-                            A single {key,value} in the matchLabels
+                          description: 'matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels
 
-                            map is equivalent to an element of matchExpressions, whose
-                            key field is "key", the
+                            map is equivalent to an element of matchExpressions, whose key field is "key", the
 
-                            operator is "In", and the values array contains only "value".
-                            The requirements are ANDed.'
+                            operator is "In", and the values array contains only "value". The requirements are ANDed.'
                           type: object
                       type: object
                       x-kubernetes-map-type: atomic
@@ -1083,43 +980,33 @@ spec:
                 description: 'Deprecated: use conditions as list
 
 
-                  Conditions represent the latest available observations of an instances
-                  state'
+                  Conditions represent the latest available observations of an instances state'
                 properties:
                   lastTransitionTime:
-                    description: 'lastTransitionTime is the last time the condition
-                      transitioned from one status to another.
+                    description: 'lastTransitionTime is the last time the condition transitioned from one status to another.
 
-                      This should be when the underlying condition changed.  If that
-                      is not known, then using the time when the API field changed
-                      is acceptable.'
+                      This should be when the underlying condition changed.  If that is not known, then using the time when the API field changed is acceptable.'
                     format: date-time
                     type: string
                   message:
-                    description: 'message is a human readable message indicating details
-                      about the transition.
+                    description: 'message is a human readable message indicating details about the transition.
 
                       This may be an empty string.'
                     maxLength: 32768
                     type: string
                   observedGeneration:
-                    description: 'observedGeneration represents the .metadata.generation
-                      that the condition was set based upon.
+                    description: 'observedGeneration represents the .metadata.generation that the condition was set based upon.
 
-                      For instance, if .metadata.generation is currently 12, but the
-                      .status.conditions[x].observedGeneration is 9, the condition
-                      is out of date
+                      For instance, if .metadata.generation is currently 12, but the .status.conditions[x].observedGeneration is 9, the condition is out of date
 
                       with respect to the current state of the instance.'
                     format: int64
                     minimum: 0
                     type: integer
                   reason:
-                    description: 'reason contains a programmatic identifier indicating
-                      the reason for the condition''s last transition.
+                    description: 'reason contains a programmatic identifier indicating the reason for the condition''s last transition.
 
-                      Producers of specific condition types may define expected values
-                      and meanings for this field,
+                      Producers of specific condition types may define expected values and meanings for this field,
 
                       and whether the values are considered a guaranteed API.
 
@@ -1152,43 +1039,33 @@ spec:
               conditions:
                 description: Conditions
                 items:
-                  description: Condition contains details for one aspect of the current
-                    state of this API Resource.
+                  description: Condition contains details for one aspect of the current state of this API Resource.
                   properties:
                     lastTransitionTime:
-                      description: 'lastTransitionTime is the last time the condition
-                        transitioned from one status to another.
+                      description: 'lastTransitionTime is the last time the condition transitioned from one status to another.
 
-                        This should be when the underlying condition changed.  If
-                        that is not known, then using the time when the API field
-                        changed is acceptable.'
+                        This should be when the underlying condition changed.  If that is not known, then using the time when the API field changed is acceptable.'
                       format: date-time
                       type: string
                     message:
-                      description: 'message is a human readable message indicating
-                        details about the transition.
+                      description: 'message is a human readable message indicating details about the transition.
 
                         This may be an empty string.'
                       maxLength: 32768
                       type: string
                     observedGeneration:
-                      description: 'observedGeneration represents the .metadata.generation
-                        that the condition was set based upon.
+                      description: 'observedGeneration represents the .metadata.generation that the condition was set based upon.
 
-                        For instance, if .metadata.generation is currently 12, but
-                        the .status.conditions[x].observedGeneration is 9, the condition
-                        is out of date
+                        For instance, if .metadata.generation is currently 12, but the .status.conditions[x].observedGeneration is 9, the condition is out of date
 
                         with respect to the current state of the instance.'
                       format: int64
                       minimum: 0
                       type: integer
                     reason:
-                      description: 'reason contains a programmatic identifier indicating
-                        the reason for the condition''s last transition.
+                      description: 'reason contains a programmatic identifier indicating the reason for the condition''s last transition.
 
-                        Producers of specific condition types may define expected
-                        values and meanings for this field,
+                        Producers of specific condition types may define expected values and meanings for this field,
 
                         and whether the values are considered a guaranteed API.
 
@@ -1220,8 +1097,7 @@ spec:
                   type: object
                 type: array
               observedGeneration:
-                description: ObservedGeneration is the most recent generation the
-                  controller has observed.
+                description: ObservedGeneration is the most recent generation the controller has observed.
                 format: int64
                 type: integer
               providers:
@@ -1229,43 +1105,33 @@ spec:
                 items:
                   properties:
                     condition:
-                      description: Conditions represent the latest available observations
-                        of an instances state
+                      description: Conditions represent the latest available observations of an instances state
                       properties:
                         lastTransitionTime:
-                          description: 'lastTransitionTime is the last time the condition
-                            transitioned from one status to another.
+                          description: 'lastTransitionTime is the last time the condition transitioned from one status to another.
 
-                            This should be when the underlying condition changed.  If
-                            that is not known, then using the time when the API field
-                            changed is acceptable.'
+                            This should be when the underlying condition changed.  If that is not known, then using the time when the API field changed is acceptable.'
                           format: date-time
                           type: string
                         message:
-                          description: 'message is a human readable message indicating
-                            details about the transition.
+                          description: 'message is a human readable message indicating details about the transition.
 
                             This may be an empty string.'
                           maxLength: 32768
                           type: string
                         observedGeneration:
-                          description: 'observedGeneration represents the .metadata.generation
-                            that the condition was set based upon.
+                          description: 'observedGeneration represents the .metadata.generation that the condition was set based upon.
 
-                            For instance, if .metadata.generation is currently 12,
-                            but the .status.conditions[x].observedGeneration is 9,
-                            the condition is out of date
+                            For instance, if .metadata.generation is currently 12, but the .status.conditions[x].observedGeneration is 9, the condition is out of date
 
                             with respect to the current state of the instance.'
                           format: int64
                           minimum: 0
                           type: integer
                         reason:
-                          description: 'reason contains a programmatic identifier
-                            indicating the reason for the condition''s last transition.
+                          description: 'reason contains a programmatic identifier indicating the reason for the condition''s last transition.
 
-                            Producers of specific condition types may define expected
-                            values and meanings for this field,
+                            Producers of specific condition types may define expected values and meanings for this field,
 
                             and whether the values are considered a guaranteed API.
 
@@ -1277,8 +1143,7 @@ spec:
                           pattern: ^[A-Za-z]([A-Za-z0-9_,:]*[A-Za-z0-9_])?$
                           type: string
                         status:
-                          description: status of the condition, one of True, False,
-                            Unknown.
+                          description: status of the condition, one of True, False, Unknown.
                           enum:
                           - 'True'
                           - 'False'
@@ -1367,22 +1232,18 @@ spec:
         description: SopsSecret is the Schema for the sopssecrets API.
         properties:
           apiVersion:
-            description: 'APIVersion defines the versioned schema of this representation
-              of an object.
+            description: 'APIVersion defines the versioned schema of this representation of an object.
 
-              Servers should convert recognized schemas to the latest internal value,
-              and
+              Servers should convert recognized schemas to the latest internal value, and
 
               may reject unrecognized values.
 
               More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources'
             type: string
           kind:
-            description: 'Kind is a string value representing the REST resource this
-              object represents.
+            description: 'Kind is a string value representing the REST resource this object represents.
 
-              Servers may infer this from the endpoint the client submits requests
-              to.
+              Servers may infer this from the endpoint the client submits requests to.
 
               Cannot be updated.
 
@@ -1393,14 +1254,11 @@ spec:
           metadata:
             type: object
           sops:
-            description: 'Metadata is stored in SOPS encrypted files, and it contains
-              the information necessary to decrypt the file.
+            description: 'Metadata is stored in SOPS encrypted files, and it contains the information necessary to decrypt the file.
 
-              This struct is just used for serialization, and SOPS uses another struct
-              internally, sops.Metadata. It exists
+              This struct is just used for serialization, and SOPS uses another struct internally, sops.Metadata. It exists
 
-              in order to allow the binary format to stay backwards compatible over
-              time, but at the same time allow the internal
+              in order to allow the binary format to stay backwards compatible over time, but at the same time allow the internal
 
               representation SOPS uses to change over time.'
             properties:
@@ -1704,11 +1562,9 @@ spec:
                     annotations:
                       additionalProperties:
                         type: string
-                      description: 'Map of string keys and values that can be used
-                        to organize and categorize
+                      description: 'Map of string keys and values that can be used to organize and categorize
 
-                        (scope and select) objects. May match selectors of replication
-                        controllers
+                        (scope and select) objects. May match selectors of replication controllers
 
                         and services.
 
@@ -1717,14 +1573,12 @@ spec:
                     data:
                       additionalProperties:
                         type: string
-                      description: 'Data map to use in Kubernetes secret (equivalent
-                        to Kubernetes Secret object data, please see for more
+                      description: 'Data map to use in Kubernetes secret (equivalent to Kubernetes Secret object data, please see for more
 
                         information: https://kubernetes.io/docs/concepts/configuration/secret/#overview-of-secrets)'
                       type: object
                     immutable:
-                      description: 'Immutable, if set to true, ensures that data stored
-                        in the Secret cannot
+                      description: 'Immutable, if set to true, ensures that data stored in the Secret cannot
 
                         be updated (only object metadata can be modified).
 
@@ -1735,25 +1589,20 @@ spec:
                     labels:
                       additionalProperties:
                         type: string
-                      description: 'Map of string keys and values that can be used
-                        to organize and categorize
+                      description: 'Map of string keys and values that can be used to organize and categorize
 
-                        (scope and select) objects. May match selectors of replication
-                        controllers
+                        (scope and select) objects. May match selectors of replication controllers
 
                         and services.
 
                         More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/labels'
                       type: object
                     name:
-                      description: 'Name must be unique within a namespace. Is required
-                        when creating resources, although
+                      description: 'Name must be unique within a namespace. Is required when creating resources, although
 
-                        some resources may allow a client to request the generation
-                        of an appropriate name
+                        some resources may allow a client to request the generation of an appropriate name
 
-                        automatically. Name is primarily intended for creation idempotence
-                        and configuration
+                        automatically. Name is primarily intended for creation idempotence and configuration
 
                         definition.
 
@@ -1764,8 +1613,7 @@ spec:
                     stringData:
                       additionalProperties:
                         type: string
-                      description: 'stringData map to use in Kubernetes secret (equivalent
-                        to Kubernetes Secret object stringData, please see for more
+                      description: 'stringData map to use in Kubernetes secret (equivalent to Kubernetes Secret object stringData, please see for more
 
                         information: https://kubernetes.io/docs/concepts/configuration/secret/#overview-of-secrets)'
                       type: object
@@ -1815,43 +1663,33 @@ spec:
                 description: 'Deprecated: use conditions as list
 
 
-                  Conditions represent the latest available observations of an instances
-                  state'
+                  Conditions represent the latest available observations of an instances state'
                 properties:
                   lastTransitionTime:
-                    description: 'lastTransitionTime is the last time the condition
-                      transitioned from one status to another.
+                    description: 'lastTransitionTime is the last time the condition transitioned from one status to another.
 
-                      This should be when the underlying condition changed.  If that
-                      is not known, then using the time when the API field changed
-                      is acceptable.'
+                      This should be when the underlying condition changed.  If that is not known, then using the time when the API field changed is acceptable.'
                     format: date-time
                     type: string
                   message:
-                    description: 'message is a human readable message indicating details
-                      about the transition.
+                    description: 'message is a human readable message indicating details about the transition.
 
                       This may be an empty string.'
                     maxLength: 32768
                     type: string
                   observedGeneration:
-                    description: 'observedGeneration represents the .metadata.generation
-                      that the condition was set based upon.
+                    description: 'observedGeneration represents the .metadata.generation that the condition was set based upon.
 
-                      For instance, if .metadata.generation is currently 12, but the
-                      .status.conditions[x].observedGeneration is 9, the condition
-                      is out of date
+                      For instance, if .metadata.generation is currently 12, but the .status.conditions[x].observedGeneration is 9, the condition is out of date
 
                       with respect to the current state of the instance.'
                     format: int64
                     minimum: 0
                     type: integer
                   reason:
-                    description: 'reason contains a programmatic identifier indicating
-                      the reason for the condition''s last transition.
+                    description: 'reason contains a programmatic identifier indicating the reason for the condition''s last transition.
 
-                      Producers of specific condition types may define expected values
-                      and meanings for this field,
+                      Producers of specific condition types may define expected values and meanings for this field,
 
                       and whether the values are considered a guaranteed API.
 
@@ -1884,43 +1722,33 @@ spec:
               conditions:
                 description: Conditions
                 items:
-                  description: Condition contains details for one aspect of the current
-                    state of this API Resource.
+                  description: Condition contains details for one aspect of the current state of this API Resource.
                   properties:
                     lastTransitionTime:
-                      description: 'lastTransitionTime is the last time the condition
-                        transitioned from one status to another.
+                      description: 'lastTransitionTime is the last time the condition transitioned from one status to another.
 
-                        This should be when the underlying condition changed.  If
-                        that is not known, then using the time when the API field
-                        changed is acceptable.'
+                        This should be when the underlying condition changed.  If that is not known, then using the time when the API field changed is acceptable.'
                       format: date-time
                       type: string
                     message:
-                      description: 'message is a human readable message indicating
-                        details about the transition.
+                      description: 'message is a human readable message indicating details about the transition.
 
                         This may be an empty string.'
                       maxLength: 32768
                       type: string
                     observedGeneration:
-                      description: 'observedGeneration represents the .metadata.generation
-                        that the condition was set based upon.
+                      description: 'observedGeneration represents the .metadata.generation that the condition was set based upon.
 
-                        For instance, if .metadata.generation is currently 12, but
-                        the .status.conditions[x].observedGeneration is 9, the condition
-                        is out of date
+                        For instance, if .metadata.generation is currently 12, but the .status.conditions[x].observedGeneration is 9, the condition is out of date
 
                         with respect to the current state of the instance.'
                       format: int64
                       minimum: 0
                       type: integer
                     reason:
-                      description: 'reason contains a programmatic identifier indicating
-                        the reason for the condition''s last transition.
+                      description: 'reason contains a programmatic identifier indicating the reason for the condition''s last transition.
 
-                        Producers of specific condition types may define expected
-                        values and meanings for this field,
+                        Producers of specific condition types may define expected values and meanings for this field,
 
                         and whether the values are considered a guaranteed API.
 
@@ -1952,8 +1780,7 @@ spec:
                   type: object
                 type: array
               observedGeneration:
-                description: ObservedGeneration is the most recent generation the
-                  controller has observed.
+                description: ObservedGeneration is the most recent generation the controller has observed.
                 format: int64
                 type: integer
               providers:
@@ -1978,43 +1805,33 @@ spec:
                 items:
                   properties:
                     condition:
-                      description: Condition contains details for one aspect of the
-                        current state of this API Resource.
+                      description: Condition contains details for one aspect of the current state of this API Resource.
                       properties:
                         lastTransitionTime:
-                          description: 'lastTransitionTime is the last time the condition
-                            transitioned from one status to another.
+                          description: 'lastTransitionTime is the last time the condition transitioned from one status to another.
 
-                            This should be when the underlying condition changed.  If
-                            that is not known, then using the time when the API field
-                            changed is acceptable.'
+                            This should be when the underlying condition changed.  If that is not known, then using the time when the API field changed is acceptable.'
                           format: date-time
                           type: string
                         message:
-                          description: 'message is a human readable message indicating
-                            details about the transition.
+                          description: 'message is a human readable message indicating details about the transition.
 
                             This may be an empty string.'
                           maxLength: 32768
                           type: string
                         observedGeneration:
-                          description: 'observedGeneration represents the .metadata.generation
-                            that the condition was set based upon.
+                          description: 'observedGeneration represents the .metadata.generation that the condition was set based upon.
 
-                            For instance, if .metadata.generation is currently 12,
-                            but the .status.conditions[x].observedGeneration is 9,
-                            the condition is out of date
+                            For instance, if .metadata.generation is currently 12, but the .status.conditions[x].observedGeneration is 9, the condition is out of date
 
                             with respect to the current state of the instance.'
                           format: int64
                           minimum: 0
                           type: integer
                         reason:
-                          description: 'reason contains a programmatic identifier
-                            indicating the reason for the condition''s last transition.
+                          description: 'reason contains a programmatic identifier indicating the reason for the condition''s last transition.
 
-                            Producers of specific condition types may define expected
-                            values and meanings for this field,
+                            Producers of specific condition types may define expected values and meanings for this field,
 
                             and whether the values are considered a guaranteed API.
 
@@ -2026,8 +1843,7 @@ spec:
                           pattern: ^[A-Za-z]([A-Za-z0-9_,:]*[A-Za-z0-9_])?$
                           type: string
                         status:
-                          description: status of the condition, one of True, False,
-                            Unknown.
+                          description: status of the condition, one of True, False, Unknown.
                           enum:
                           - 'True'
                           - 'False'
@@ -2050,14 +1866,11 @@ spec:
                     namespace:
                       type: string
                     uid:
-                      description: 'UID is a type that holds unique ID values, including
-                        UUIDs.  Because we
+                      description: 'UID is a type that holds unique ID values, including UUIDs.  Because we
 
-                        don''t ONLY use UUIDs, this is an alias to string.  Being
-                        a type captures
+                        don''t ONLY use UUIDs, this is an alias to string.  Being a type captures
 
-                        intent and helps make sure that UIDs and names do not get
-                        conflated.'
+                        intent and helps make sure that UIDs and names do not get conflated.'
                       type: string
                   required:
                   - condition
@@ -2094,6 +1907,7 @@ metadata:
     app.kubernetes.io/part-of: playbox-platform
   annotations:
     argocd.argoproj.io/sync-wave: '-8'
+  namespace: sops-system
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
@@ -2179,6 +1993,7 @@ metadata:
     app.kubernetes.io/part-of: playbox-platform
   annotations:
     argocd.argoproj.io/sync-wave: '-8'
+  namespace: sops-system
 rules:
 - apiGroups:
   - ''
@@ -2241,6 +2056,7 @@ metadata:
     app.kubernetes.io/part-of: playbox-platform
   annotations:
     argocd.argoproj.io/sync-wave: '-8'
+  namespace: sops-system
 spec:
   type: ClusterIP
   ports:
@@ -2265,6 +2081,7 @@ metadata:
     app.kubernetes.io/part-of: playbox-platform
   annotations:
     argocd.argoproj.io/sync-wave: '-8'
+  namespace: sops-system
 spec:
   replicas: 1
   selector:

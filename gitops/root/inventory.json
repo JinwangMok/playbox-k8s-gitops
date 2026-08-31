@@ -235,7 +235,7 @@
     {
       "apiVersion": "v1",
       "kind": "ServiceAccount",
-      "namespace": "",
+      "namespace": "sops-system",
       "name": "sops-operator",
       "pruneFalse": false
     },
@@ -284,7 +284,14 @@
     {
       "apiVersion": "rbac.authorization.k8s.io/v1",
       "kind": "Role",
-      "namespace": "",
+      "namespace": "monitoring",
+      "name": "playbox-monitoring-grafana",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "rbac.authorization.k8s.io/v1",
+      "kind": "Role",
+      "namespace": "sops-system",
       "name": "sops-operator",
       "pruneFalse": false
     },
@@ -308,13 +315,6 @@
       "namespace": "",
       "name": "argocd-server",
       "pruneFalse": true
-    },
-    {
-      "apiVersion": "rbac.authorization.k8s.io/v1",
-      "kind": "ClusterRole",
-      "namespace": "",
-      "name": "playbox-monitoring-grafana-clusterrole",
-      "pruneFalse": false
     },
     {
       "apiVersion": "rbac.authorization.k8s.io/v1",
@@ -389,6 +389,13 @@
     {
       "apiVersion": "rbac.authorization.k8s.io/v1",
       "kind": "RoleBinding",
+      "namespace": "monitoring",
+      "name": "playbox-monitoring-grafana",
+      "pruneFalse": false
+    },
+    {
+      "apiVersion": "rbac.authorization.k8s.io/v1",
+      "kind": "RoleBinding",
       "namespace": "sops-system",
       "name": "sops-operator",
       "pruneFalse": false
@@ -413,13 +420,6 @@
       "namespace": "",
       "name": "argocd-server",
       "pruneFalse": true
-    },
-    {
-      "apiVersion": "rbac.authorization.k8s.io/v1",
-      "kind": "ClusterRoleBinding",
-      "namespace": "",
-      "name": "playbox-monitoring-grafana-clusterrolebinding",
-      "pruneFalse": false
     },
     {
       "apiVersion": "rbac.authorization.k8s.io/v1",
@@ -816,7 +816,7 @@
     {
       "apiVersion": "v1",
       "kind": "Service",
-      "namespace": "",
+      "namespace": "sops-system",
       "name": "sops-operator-metrics",
       "pruneFalse": false
     },
@@ -893,7 +893,7 @@
     {
       "apiVersion": "apps/v1",
       "kind": "Deployment",
-      "namespace": "",
+      "namespace": "sops-system",
       "name": "sops-operator",
       "pruneFalse": false
     },
@@ -1284,6 +1284,21 @@
   "initImages": {
     "quay.io/argoproj/argocd:v3.5.2": 3
   },
+  "operatorManagedWorkloads": [
+    {
+      "apiVersion": "apps/v1",
+      "kind": "StatefulSet",
+      "namespace": "monitoring",
+      "name": "prometheus-playbox-monitoring",
+      "workloadImages": {
+        "quay.io/prometheus-operator/prometheus-config-reloader:v0.93.1": 1,
+        "quay.io/prometheus/prometheus:v3.14.0-distroless": 1
+      },
+      "initImages": {
+        "quay.io/prometheus-operator/prometheus-config-reloader:v0.93.1": 1
+      }
+    }
+  ],
   "marker": {
     "namespace": "playbox-system",
     "name": "playbox-gitops-root",

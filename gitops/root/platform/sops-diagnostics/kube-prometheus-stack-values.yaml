@@ -78,6 +78,8 @@ prometheus:
               storage: 20Gi
 grafana:
   enabled: true
+  rbac:
+    namespaced: true
   initChownData:
     enabled: false
   admin:
@@ -111,8 +113,12 @@ grafana:
   sidecar:
     dashboards:
       enabled: true
+      resource: configmap
+      searchNamespace: monitoring
     datasources:
       enabled: true
+      resource: configmap
+      searchNamespace: monitoring
       alertmanager:
         enabled: false
   defaultDashboardsEnabled: true
