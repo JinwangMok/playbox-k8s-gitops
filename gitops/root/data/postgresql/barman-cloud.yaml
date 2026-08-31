@@ -5,7 +5,7 @@ metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.21.0
     argocd.argoproj.io/sync-wave: '-5'
-    argocd.argoproj.io/tracking-id: playbox-root:apiextensions.k8s.io/CustomResourceDefinition:/objectstores.barmancloud.cnpg.io
+    argocd.argoproj.io/tracking-id: playbox-root:apiextensions.k8s.io/CustomResourceDefinition:argocd/objectstores.barmancloud.cnpg.io
     argocd.argoproj.io/sync-options: Prune=false
   name: objectstores.barmancloud.cnpg.io
   labels:
@@ -853,7 +853,7 @@ metadata:
   name: barman-plugin-metrics-auth-role
   annotations:
     argocd.argoproj.io/sync-wave: '-4'
-    argocd.argoproj.io/tracking-id: playbox-root:rbac.authorization.k8s.io/ClusterRole:/barman-plugin-metrics-auth-role
+    argocd.argoproj.io/tracking-id: playbox-root:rbac.authorization.k8s.io/ClusterRole:argocd/barman-plugin-metrics-auth-role
   labels:
     app.kubernetes.io/part-of: playbox-platform
 rules:
@@ -876,7 +876,7 @@ metadata:
   name: barman-plugin-metrics-reader
   annotations:
     argocd.argoproj.io/sync-wave: '-4'
-    argocd.argoproj.io/tracking-id: playbox-root:rbac.authorization.k8s.io/ClusterRole:/barman-plugin-metrics-reader
+    argocd.argoproj.io/tracking-id: playbox-root:rbac.authorization.k8s.io/ClusterRole:argocd/barman-plugin-metrics-reader
   labels:
     app.kubernetes.io/part-of: playbox-platform
 rules:
@@ -895,7 +895,7 @@ metadata:
   name: barman-plugin-objectstore-editor-role
   annotations:
     argocd.argoproj.io/sync-wave: '-4'
-    argocd.argoproj.io/tracking-id: playbox-root:rbac.authorization.k8s.io/ClusterRole:/barman-plugin-objectstore-editor-role
+    argocd.argoproj.io/tracking-id: playbox-root:rbac.authorization.k8s.io/ClusterRole:argocd/barman-plugin-objectstore-editor-role
 rules:
 - apiGroups:
   - barmancloud.cnpg.io
@@ -926,7 +926,7 @@ metadata:
   name: barman-plugin-objectstore-viewer-role
   annotations:
     argocd.argoproj.io/sync-wave: '-4'
-    argocd.argoproj.io/tracking-id: playbox-root:rbac.authorization.k8s.io/ClusterRole:/barman-plugin-objectstore-viewer-role
+    argocd.argoproj.io/tracking-id: playbox-root:rbac.authorization.k8s.io/ClusterRole:argocd/barman-plugin-objectstore-viewer-role
 rules:
 - apiGroups:
   - barmancloud.cnpg.io
@@ -949,7 +949,7 @@ metadata:
   name: plugin-barman-cloud
   annotations:
     argocd.argoproj.io/sync-wave: '-4'
-    argocd.argoproj.io/tracking-id: playbox-root:rbac.authorization.k8s.io/ClusterRole:/plugin-barman-cloud
+    argocd.argoproj.io/tracking-id: playbox-root:rbac.authorization.k8s.io/ClusterRole:argocd/plugin-barman-cloud
   labels:
     app.kubernetes.io/part-of: playbox-platform
 rules:
@@ -1043,7 +1043,7 @@ metadata:
   name: barman-plugin-metrics-auth-rolebinding
   annotations:
     argocd.argoproj.io/sync-wave: '-4'
-    argocd.argoproj.io/tracking-id: playbox-root:rbac.authorization.k8s.io/ClusterRoleBinding:/barman-plugin-metrics-auth-rolebinding
+    argocd.argoproj.io/tracking-id: playbox-root:rbac.authorization.k8s.io/ClusterRoleBinding:argocd/barman-plugin-metrics-auth-rolebinding
   labels:
     app.kubernetes.io/part-of: playbox-platform
 roleRef:
@@ -1065,7 +1065,7 @@ metadata:
   name: plugin-barman-cloud-binding
   annotations:
     argocd.argoproj.io/sync-wave: '-4'
-    argocd.argoproj.io/tracking-id: playbox-root:rbac.authorization.k8s.io/ClusterRoleBinding:/plugin-barman-cloud-binding
+    argocd.argoproj.io/tracking-id: playbox-root:rbac.authorization.k8s.io/ClusterRoleBinding:argocd/plugin-barman-cloud-binding
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole

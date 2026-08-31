@@ -5,7 +5,7 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "-3"
     argocd.argoproj.io/sync-options: Prune=false
-    argocd.argoproj.io/tracking-id: playbox-root:/Namespace:/database
+    argocd.argoproj.io/tracking-id: playbox-root:/Namespace:argocd/database
   labels:
     app.kubernetes.io/part-of: playbox-platform
     playbox.dev/sops-domain: platform
